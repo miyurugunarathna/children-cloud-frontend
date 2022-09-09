@@ -4,7 +4,7 @@ import EmployeeReg from "./pages/employeeReg.jsx";
 import EmployeeUpdt from "./pages/employeeUpdate.jsx";
 import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
-import Bill from "./pages/Bill/bill.jsx"
+import Bill from "./pages/Bill/bill.jsx";
 
 function App() {
   return (
