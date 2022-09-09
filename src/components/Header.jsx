@@ -34,8 +34,9 @@ function Header(prop) {
             navbarScroll>
             <Nav.Link href="http://127.0.0.1:5173/employee">Home</Nav.Link>
             <Nav.Link href="http://127.0.0.1:5173/update">Employees</Nav.Link>
-            <Nav.Link href="#">Attendance</Nav.Link>
-            <Nav.Link href="#">Report</Nav.Link>
+            <Nav.Link href="/bill">Bill Item</Nav.Link>
+            <Nav.Link href="/payment">Payment</Nav.Link>
+            <Nav.Link href="/bill-cal">Bill</Nav.Link>
             {/* disabled */}
             <Nav.Link
               onClick={() => {

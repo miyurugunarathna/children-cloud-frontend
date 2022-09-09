@@ -75,6 +75,8 @@ const BillItem = () => {
           unitPrice: "",
           status: false,
         });
+
+        fetchItems();
       })
       .catch((error) => {
         console.log(error.Response);
@@ -118,7 +120,7 @@ const BillItem = () => {
   const deleteBillItem = (billItem) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Do you want to delete this Student?",
+      text: "Do you want to delete this Bill Item?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

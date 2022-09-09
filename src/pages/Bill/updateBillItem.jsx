@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 
 const App = (props) => {
   const { id } = useParams();
-  const [billItem, setBillItem] = useState([]);
 
   const [state, setState] = useState({
     itemName: "",
@@ -51,12 +50,10 @@ const App = (props) => {
           status,
         });
         //show success alert
-        // alert(`Staff Member ${firstName} is Updated`);
         Swal.fire(`Bill Item is Updated`, "Click Ok to continue", "success");
       })
       .catch((error) => {
         console.log(error.Response);
-        // alert(error.response.data.error)
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -82,8 +79,6 @@ const App = (props) => {
           unitPrice,
           status,
         });
-
-        console.log(billItem);
 
         console.table({
           itemName,
