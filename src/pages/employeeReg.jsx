@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/Header.jsx";
 import logo from "../assets/img/logo.png";
 import Footer from "../components/Footer.jsx";
+import Swal from "sweetalert2";
 
 function employeeReg() {
   const [empID, setEmpID] = useState("");
@@ -15,12 +16,12 @@ function employeeReg() {
   const [phoneNo, setPhoneNo] = useState("");
   const [dob, setDob] = useState("");
   const [recruitDate, setRecruitDate] = useState("");
-  const [image, setImage] = useState("");
+  //const [image, setImage] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:5000/employee/add", {
+      await axios.post("http://localhost:5000/api/employee/add", {
         empID: empID,
         fullName: fullName,
         address: address,
@@ -28,7 +29,7 @@ function employeeReg() {
         phoneNo: phoneNo,
         dob: dob,
         recruitDate: recruitDate,
-        image: image,
+        //image: image,
       });
       setEmpID("");
       setFullName("");
@@ -37,14 +38,14 @@ function employeeReg() {
       setPhoneNo("");
       setDob("");
       setRecruitDate("");
-      setImage("");
-
-      const Swal = require("sweetalert2");
+      //setImage("");
       Swal.fire({
         title: "Success!",
         text: "Profile Created Successfully",
         icon: "success",
-        confirmButtonText: "Cool",
+        confirmButtonText: "OK",
+      }).then(function () {
+        location.reload();
       });
     } catch (err) {
       alert("Employee Registration Failed");
@@ -114,7 +115,21 @@ function employeeReg() {
                             setAddress(event.target.value);
                           }}
                         />
-                        <label htmlFor="floatingInput">Contact number</label>
+                        <label htmlFor="floatingInput">Address</label>
+                      </div>
+
+                      <div className="form-floating mb-3">
+                        <input
+                          type="text"
+                          className={"form-control "}
+                          id="floatingInput"
+                          name="nic"
+                          placeholder="nic"
+                          onChange={(event) => {
+                            setNic(event.target.value);
+                          }}
+                        />
+                        <label htmlFor="floatingInput">NIC</label>
                       </div>
 
                       <div className="form-floating mb-3">
@@ -164,7 +179,7 @@ function employeeReg() {
                         <Form.Control
                           type="file"
                           onChange={(event) => {
-                            setImage(event.target.value);
+                            //setImage(event.target.value);
                           }}
                         />
                       </Form.Group>

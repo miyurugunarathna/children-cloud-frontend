@@ -11,51 +11,22 @@ import Dropdown from "react-bootstrap/Dropdown";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-function employeeUpdate() {
+const employeeUpdate = (props) => {
   const navigate = useNavigate();
 
-  const [empID, setEmpID] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [address, setAddress] = useState("");
-  const [nic, setNic] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [dob, setDob] = useState("");
-  const [recruitDate, setRecruitDate] = useState("");
-  const [image, setImage] = useState("");
+  const { id } = useParams();
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/employee/add", {
-        empID: empID,
-        fullName: fullName,
-        address: address,
-        nic: nic,
-        phoneNo: phoneNo,
-        dob: dob,
-        recruitDate: recruitDate,
-        image: image,
-      });
-      setEmpID("");
-      setFullName("");
-      setAddress("");
-      setNic("");
-      setPhoneNo("");
-      setDob("");
-      setRecruitDate("");
-      setImage("");
+  const [state, setState] = useState({
+    empID: "",
+    fullName: "",
+    address: "",
+    nic: "",
+    phoneNo: "",
+    dob: "",
+    recruitDate: "",
+  });
 
-      const Swal = require("sweetalert2");
-      Swal.fire({
-        title: "Success!",
-        text: "Profile Created Successfully",
-        icon: "success",
-        confirmButtonText: "Cool",
-      });
-    } catch (err) {
-      alert("Employee Registration Failed");
-    }
-  }
+  const { empID, fullName, address, nic, phoneNo, dob, recruitDate } = state;
 
   //search
   const [myOptions, setMyOptions] = useState([]);
@@ -63,16 +34,69 @@ function employeeUpdate() {
   const getDataFromAPI = () => {
     console.log("Options Fetched from API");
 
-    fetch("http://dummy.restapiexample.com/api/v1/employees")
+    fetch("http://localhost:5000/api/employee/")
       .then((response) => {
         return response.json();
       })
       .then((res) => {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
-          myOptions.push(res.data[i].employee_name);
+          myOptions.push(res.data[i].empID + "->" + res.data[i].fullName);
         }
         setMyOptions(myOptions);
+      });
+  };
+
+  // Handle Change for Input Fields
+  function handleChange(name) {
+    return function (event) {
+      setState({ ...state, [name]: event.target.value });
+    };
+  }
+
+  // Handle Submit
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.table({ empID, fullName, address, nic, phoneNo, dob, recruitDate });
+    axios
+      .put(
+        `http://localhost:5000/api/employee/${id}`,
+        { empID, fullName, address, nic, phoneNo, dob, recruitDate },
+        {},
+      )
+      .then((response) => {
+        console.log(response);
+        const { empID, fullName, address, nic, phoneNo, dob, recruitDate } =
+          response.data;
+
+        //empty state
+        setState({
+          ...state,
+          empID,
+          fullName,
+          address,
+          nic,
+          phoneNo,
+          dob,
+          recruitDate,
+        });
+        //show success alert
+        // alert(`Staff Member ${firstName} is Updated`);
+        Swal.fire(
+          `Staff Member ${firstName} is Updated`,
+          "Click Ok to continue",
+          "success",
+        );
+      })
+      .catch((error) => {
+        console.log(error.Response);
+        // alert(error.response.data.error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.response.data.error}`,
+          footer: "Please try again",
+        });
       });
   };
 
@@ -85,16 +109,15 @@ function employeeUpdate() {
             <div style={{ marginLeft: "20%", marginTop: "110px" }}>
               <Autocomplete
                 style={{ width: 500 }}
-                freeSolo
-                autoComplete
-                autoHighlight
+                disablePortal
+                id="combo-box-demo"
                 options={myOptions}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     onChange={getDataFromAPI}
                     variant="outlined"
-                    label="Search Box"
+                    label="Search Employee"
                   />
                 )}
               />
@@ -115,9 +138,8 @@ function employeeUpdate() {
                           id="floatingInput"
                           name="empID"
                           placeholder="emp1012"
-                          onChange={(event) => {
-                            setEmpID(event.target.value);
-                          }}
+                          onChange={handleChange("empID")}
+                          value={empID}
                         />
                         <label htmlFor="floatingInput">Employee ID</label>
                       </div>
@@ -215,6 +237,6 @@ function employeeUpdate() {
       <Footer />
     </div>
   );
-}
+};
 
 export default employeeUpdate;

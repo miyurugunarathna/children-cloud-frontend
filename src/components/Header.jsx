@@ -33,8 +33,10 @@ function Header(prop) {
             style={{ maxHeight: "100px" }}
             navbarScroll>
             <Nav.Link href="http://127.0.0.1:5173/employee">Home</Nav.Link>
-            <Nav.Link href="http://127.0.0.1:5173/update">Employees</Nav.Link>
-            <Nav.Link href="#">Attendance</Nav.Link>
+            <Nav.Link href="http://127.0.0.1:5173/list">Employees</Nav.Link>
+            <Nav.Link href="http://127.0.0.1:5173/attendance">
+              Attendance
+            </Nav.Link>
             <Nav.Link href="#">Report</Nav.Link>
             {/* disabled */}
             <Nav.Link
