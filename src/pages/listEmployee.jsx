@@ -41,25 +41,25 @@ export default class listEmployee extends Component {
         <div className="container">
           <h2>Employee List</h2>
           <br />
-          <p>
-            <button className="btn btn-primary">
-              <a
-                href="/employeeReg.jsx"
-                className="text-decoration-none text-white">
-                Add Employee
-              </a>
-            </button>
 
-            <div
-              className="float-end"
-              style={{ marginTop: "-30px", marginLeft: "190px" }}>
-              <input
-                className="form-control"
-                type="search"
-                placeholder="Search here"
-                name="searchQuery"></input>
-            </div>
-          </p>
+          <button className="btn btn-primary">
+            <a
+              href="/employeeReg.jsx"
+              className="text-decoration-none text-white">
+              Add Employee
+            </a>
+          </button>
+
+          <div
+            className="float-end"
+            style={{ marginTop: "-30px", marginLeft: "190px" }}>
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search here"
+              name="searchQuery"></input>
+          </div>
+
           <Table id="table" className="table">
             <thead>
               <tr>

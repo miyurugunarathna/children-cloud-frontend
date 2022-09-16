@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 export default class tableEmployee extends Component {
   constructor(props) {
     super(props);
+    this.deleteEmployee = this.deleteEmployee.bind(this);
     // this.deletepm= this.deletepm.bind(this);
   }
   deleteEmployee() {
@@ -23,10 +24,12 @@ export default class tableEmployee extends Component {
       .catch((error) => {
         console.log(error);
       });
-    this.props.history.push("/listEmployee");
+    this.props.history.push("http://127.0.0.1:5173/list");
   }
   eventClick = () => {
-    //this.props.history.push("/edit-submission/" + this.props.obj._id)
+    this.props.history.push(
+      "http://127.0.0.1:5173/update/" + this.props.obj._id,
+    );
   };
   render() {
     return (
@@ -38,7 +41,7 @@ export default class tableEmployee extends Component {
         <td>
           <a
             className="btn btn-warning text-decoration-none text-white"
-            href={"/updateEmployee" + this.props.obj._id}>
+            href={"http://127.0.0.1:5173/update/" + this.props.obj._id}>
             <i className="fas fa-edit"></i>&nbsp;Edit
           </a>
           &nbsp;
