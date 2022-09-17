@@ -1,0 +1,12 @@
+.page-footer {
+  background-color: #0c141c;
+  color: #8eaccb;
+  bottom: 0;
+  width: 100%;
+  margin-top: 5rem;
+}
+
+.footer-content {
+  text-decoration: none;
+  list-style: none;
+}
