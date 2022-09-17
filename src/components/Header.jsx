@@ -38,6 +38,9 @@ function Header(prop) {
               Attendance
             </Nav.Link>
             <Nav.Link href="#">Report</Nav.Link>
+            <Nav.Link href="/bill">Bill Item</Nav.Link>
+            <Nav.Link href="/payment">Payment</Nav.Link>
+            <Nav.Link href="/bill-cal">Bill</Nav.Link>
             {/* disabled */}
             <Nav.Link
               onClick={() => {
