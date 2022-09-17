@@ -6,100 +6,127 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/Header.jsx";
 import logo from "../assets/img/logo.png";
 import Footer from "../components/Footer.jsx";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Swal from "sweetalert2";
 
-function employeeUpdate() {
-  const navigate = useNavigate();
+const employeeUpdate = (props) => {
+  const { id } = useParams();
+  const [employee, setEmp] = useState([]);
 
-  const [empID, setEmpID] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [address, setAddress] = useState("");
-  const [nic, setNic] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [dob, setDob] = useState("");
-  const [recruitDate, setRecruitDate] = useState("");
-  const [image, setImage] = useState("");
+  const [state, setState] = useState({
+    empID: "",
+    fullName: "",
+    address: "",
+    nic: "",
+    phoneNo: "",
+    dob: "",
+    recruitDate: "",
+  });
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/employee/add", {
-        empID: empID,
-        fullName: fullName,
-        address: address,
-        nic: nic,
-        phoneNo: phoneNo,
-        dob: dob,
-        recruitDate: recruitDate,
-        image: image,
-      });
-      setEmpID("");
-      setFullName("");
-      setAddress("");
-      setNic("");
-      setPhoneNo("");
-      setDob("");
-      setRecruitDate("");
-      setImage("");
+  const { empID, fullName, address, nic, phoneNo, dob, recruitDate } = state;
 
-      const Swal = require("sweetalert2");
-      Swal.fire({
-        title: "Success!",
-        text: "Profile Created Successfully",
-        icon: "success",
-        confirmButtonText: "Cool",
-      });
-    } catch (err) {
-      alert("Employee Registration Failed");
-    }
+  function handleChange(name) {
+    return function (event) {
+      setState({ ...state, [name]: event.target.value });
+    };
   }
 
-  //search
-  const [myOptions, setMyOptions] = useState([]);
-
-  const getDataFromAPI = () => {
-    console.log("Options Fetched from API");
-
-    fetch("http://dummy.restapiexample.com/api/v1/employees")
+  const fetchEmp = () => {
+    console.log("WORKING");
+    axios
+      .get(`http://localhost:5000/api/employee/`)
       .then((response) => {
-        return response.json();
+        // console.log("All", response);
+        setEmp(response.data);
       })
-      .then((res) => {
-        console.log(res.data);
-        for (var i = 0; i < res.data.length; i++) {
-          myOptions.push(res.data[i].employee_name);
-        }
-        setMyOptions(myOptions);
+      .catch((error) => {
+        console.log(error);
       });
   };
 
+  useEffect(() => {
+    fetchEmp();
+    axios
+      .get(`http://localhost:5000/api/employee/${id}`)
+      .then((response) => {
+        const { empID, fullName, address, nic, phoneNo, dob, recruitDate } =
+          response.data;
+        setState({
+          ...state,
+          empID,
+          fullName,
+          address,
+          nic,
+          phoneNo,
+          dob,
+          recruitDate,
+        });
+      })
+      .catch((error) => console.log("Error loading update employee: " + error));
+  }, []);
+
+  function handleChange(name) {
+    return function (event) {
+      setState({ ...state, [name]: event.target.value });
+    };
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.table({
+      empID,
+      fullName,
+      address,
+      nic,
+      phoneNo,
+      dob,
+      recruitDate,
+    });
+    axios
+      .put(`http://localhost:5000/api/employee/${id}`, {
+        empID,
+        fullName,
+        address,
+        nic,
+        phoneNo,
+        dob,
+        recruitDate,
+      })
+      .then((response) => {
+        const { empID, fullName, address, nic, phoneNo, dob, recruitDate } =
+          response.data;
+
+        setState({
+          ...state,
+          empID,
+          fullName,
+          address,
+          nic,
+          phoneNo,
+          dob,
+          recruitDate,
+        });
+
+        Swal.fire(`Submission Updated`, "Click Ok to continue", "success");
+        setTimeout(() => {
+          window.location.href = "http://127.0.0.1:5173/list";
+        }, 1000);
+      })
+      .catch((error) => {
+        console.log(error.Response);
+        // alert(error.response.data.error)
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.response.data.error}`,
+          footer: "Please try again",
+        });
+      });
+  };
   return (
     <div className="App">
       <Header tab="Children Cloud" />
       <div className="container-fluid ps-md-0">
         <div className="row g-0">
-          <div className="d-none d-md-flex col-md-4 col-lg-6">
-            <div style={{ marginLeft: "20%", marginTop: "110px" }}>
-              <Autocomplete
-                style={{ width: 500 }}
-                freeSolo
-                autoComplete
-                autoHighlight
-                options={myOptions}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    onChange={getDataFromAPI}
-                    variant="outlined"
-                    label="Search Box"
-                  />
-                )}
-              />
-            </div>
-          </div>
           <div className="col-md-8 col-lg-6">
             <div className="login d-flex align-items-center py-5">
               <div className="container">
@@ -115,9 +142,8 @@ function employeeUpdate() {
                           id="floatingInput"
                           name="empID"
                           placeholder="emp1012"
-                          onChange={(event) => {
-                            setEmpID(event.target.value);
-                          }}
+                          onChange={handleChange("empID")}
+                          value={empID}
                         />
                         <label htmlFor="floatingInput">Employee ID</label>
                       </div>
@@ -128,10 +154,11 @@ function employeeUpdate() {
                           className={"form-control "}
                           id="floatingInput"
                           name="fullName"
+                          pattern="[A-Za-z]+"
+                          title="Characters can only be A-Z and a-z."
                           placeholder="employee name"
-                          onChange={(event) => {
-                            setFullName(event.target.value);
-                          }}
+                          onChange={handleChange("fullName")}
+                          value={fullName}
                         />
                         <label htmlFor="floatingInput">
                           Employee Full Name
@@ -145,11 +172,12 @@ function employeeUpdate() {
                           id="floatingInput"
                           name="address"
                           placeholder="address"
-                          onChange={(event) => {
-                            setAddress(event.target.value);
-                          }}
+                          pattern="[A-Za-z]+"
+                          title="Characters can only be A-Z and a-z."
+                          onChange={handleChange("address")}
+                          value={address}
                         />
-                        <label htmlFor="floatingInput">Contact number</label>
+                        <label htmlFor="floatingInput">Address</label>
                       </div>
 
                       <div className="form-floating mb-3">
@@ -159,9 +187,8 @@ function employeeUpdate() {
                           id="floatingInput"
                           name="phoneNo"
                           placeholder="071xxxxxxxx"
-                          onChange={(event) => {
-                            setPhoneNo(event.target.value);
-                          }}
+                          onChange={handleChange("phoneNo")}
+                          value={phoneNo}
                         />
                         <label htmlFor="floatingInput">Phone Number</label>
                       </div>
@@ -173,9 +200,8 @@ function employeeUpdate() {
                           id="floatingPassword"
                           name="dob"
                           placeholder="dob"
-                          onChange={(event) => {
-                            setDob(event.target.value);
-                          }}
+                          onChange={handleChange("dob")}
+                          value={dob}
                         />
                         <label htmlFor="floatingPassword">Date Of Birth</label>
                       </div>
@@ -187,9 +213,8 @@ function employeeUpdate() {
                           id="floatingPassword"
                           name="recruiteDate"
                           placeholder="recruiteDate"
-                          onChange={(event) => {
-                            setRecruitDate(event.target.value);
-                          }}
+                          onChange={handleChange("recruitDate")}
+                          value={recruitDate}
                         />
                         <label htmlFor="floatingPassword">Recruite Date</label>
                       </div>
@@ -215,6 +240,5 @@ function employeeUpdate() {
       <Footer />
     </div>
   );
-}
-
+};
 export default employeeUpdate;
