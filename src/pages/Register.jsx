@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { login } from "../store/User";
 import { Link } from "react-router-dom";
 import Cover from "../assets/images/cover.jpg";
@@ -20,10 +19,10 @@ export const Register = () => {
 
   useEffect(() => {
     if (state.isLoggedIn && !state.error) {
-      toast.success("Login Successful!");
+      // toast.success("Login Successful!");
     }
     if (!state.isLoggedIn && state.error) {
-      toast.error("Login failed!");
+      // toast.error("Login failed!");
     }
   }, [state.isLoggedIn, state.error]);
 
@@ -35,7 +34,7 @@ export const Register = () => {
         password: e.target.password.value,
       }),
     );
-    toast.success("Login Successful!");
+    // toast.success("Login Successful!");
   };
 
   return (
@@ -108,7 +107,7 @@ export const Register = () => {
                 {` `}
                 <Link
                   className="text-sm font-medium text-purple-600 hover:underline"
-                  to="/login">
+                  to="/">
                   Login
                 </Link>
               </p>

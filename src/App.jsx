@@ -21,7 +21,7 @@ function App() {
         <Route path="/bill-item-update/:id" element={<BillItemUpdate />} />
         <Route path="/bill-cal" element={<Bill />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
