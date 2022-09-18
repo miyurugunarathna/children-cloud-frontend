@@ -7,6 +7,7 @@ import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
+import { Login, Register } from "./pages";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/bill-item-update/:id" element={<BillItemUpdate />} />
         <Route path="/bill-cal" element={<Bill />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
