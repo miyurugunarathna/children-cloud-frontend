@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "./User";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    user: userReducer,
+  },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
