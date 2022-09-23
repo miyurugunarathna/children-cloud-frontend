@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import TableEmployee from "./tableEmployee.jsx";
 import "jspdf-autotable";
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
+import Header from "../../components/Header.jsx";
+import Footer from "../../components/Footer.jsx";
+import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 export default class listEmployee extends Component {
   constructor(props) {
@@ -39,7 +42,14 @@ export default class listEmployee extends Component {
       <div>
         <Header tab="Children Cloud" />
         <div className="container">
-          <h2>Employee List</h2>
+          <br />
+          <Card style={{ width: "15rem", height: "4rem" }} border="primary">
+            {" "}
+            <Card.Body>
+              {" "}
+              <h4 className="login-heading mb-9">Employee List</h4>
+            </Card.Body>
+          </Card>
           <br />
 
           <button className="btn btn-primary">
@@ -49,7 +59,15 @@ export default class listEmployee extends Component {
               Add Employee
             </a>
           </button>
-
+          <div style={{ marginTop: "-38px", marginLeft: "230px" }}>
+            <ReactHTMLTableToExcel
+              className="btn btn-outline-success"
+              table="table"
+              filename="Employee Details"
+              sheet="Sheet"
+              buttonText="Generate Sheet"
+            />
+          </div>
           <div
             className="float-end"
             style={{ marginTop: "-30px", marginLeft: "190px" }}>
@@ -71,6 +89,9 @@ export default class listEmployee extends Component {
             </thead>
             <tbody>{this.DataTable()}</tbody>
           </Table>
+          <p>
+            <b>Employee count: {this.state.employees.length}</b>
+          </p>
         </div>
         <Footer />
       </div>

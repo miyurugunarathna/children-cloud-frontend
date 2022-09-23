@@ -9,22 +9,36 @@ export default class tableEmployee extends Component {
     this.deleteEmployee = this.deleteEmployee.bind(this);
     // this.deletepm= this.deletepm.bind(this);
   }
+
   deleteEmployee() {
-    axios
-      .delete("http://localhost:5000/api/employee/" + this.props.obj._id)
-      .then((res) => {
-        const Swal = require("sweetalert2");
-        Swal.fire({
-          title: "Success!",
-          text: "Submission Type Deleted Successfully",
-          icon: "Danger",
-          confirmButtonText: "Close",
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    this.props.history.push("http://127.0.0.1:5173/list");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this Employee?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete("http://localhost:5000/api/employee/" + this.props.obj._id)
+          .then((res) => {
+            Swal.fire({
+              title: "Success!",
+              text: "Submission Type Deleted Successfully",
+              icon: "Danger",
+              confirmButtonText: "Close",
+            }).then(function () {
+              location.reload();
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      this.props.history.push("http://127.0.0.1:5173/list");
+    });
   }
   eventClick = () => {
     this.props.history.push(
@@ -47,7 +61,7 @@ export default class tableEmployee extends Component {
           &nbsp;
           <a
             className="btn btn-danger text-decoration-none text-white"
-            onClick={this.deletepm}>
+            onClick={this.deleteEmployee}>
             <i className="far fa-trash-alt"></i>&nbsp;Delete
           </a>
         </td>

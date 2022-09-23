@@ -1,16 +1,14 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Modal, Form, Container, Row, Card } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "../components/Header.jsx";
-import logo from "../assets/img/logo.png";
-import Footer from "../components/Footer.jsx";
+import Header from "../../components/Header.jsx";
+import Footer from "../../components/Footer.jsx";
 import Swal from "sweetalert2";
+import { Button, Modal, Form } from "react-bootstrap";
 
-const employeeUpdate = (props) => {
+const App = (props) => {
   const { id } = useParams();
-  const [employee, setEmp] = useState([]);
 
   const [state, setState] = useState({
     empID: "",
@@ -20,55 +18,11 @@ const employeeUpdate = (props) => {
     phoneNo: "",
     dob: "",
     recruitDate: "",
+    type: "",
   });
 
-  const { empID, fullName, address, nic, phoneNo, dob, recruitDate } = state;
-
-  function handleChange(name) {
-    return function (event) {
-      setState({ ...state, [name]: event.target.value });
-    };
-  }
-
-  const fetchEmp = () => {
-    console.log("WORKING");
-    axios
-      .get(`http://localhost:5000/api/employee/`)
-      .then((response) => {
-        // console.log("All", response);
-        setEmp(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    fetchEmp();
-    axios
-      .get(`http://localhost:5000/api/employee/${id}`)
-      .then((response) => {
-        const { empID, fullName, address, nic, phoneNo, dob, recruitDate } =
-          response.data;
-        setState({
-          ...state,
-          empID,
-          fullName,
-          address,
-          nic,
-          phoneNo,
-          dob,
-          recruitDate,
-        });
-      })
-      .catch((error) => console.log("Error loading update employee: " + error));
-  }, []);
-
-  function handleChange(name) {
-    return function (event) {
-      setState({ ...state, [name]: event.target.value });
-    };
-  }
+  const { empID, fullName, address, nic, phoneNo, dob, recruitDate, type } =
+    state;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -80,6 +34,7 @@ const employeeUpdate = (props) => {
       phoneNo,
       dob,
       recruitDate,
+      type,
     });
     axios
       .put(`http://localhost:5000/api/employee/${id}`, {
@@ -90,10 +45,19 @@ const employeeUpdate = (props) => {
         phoneNo,
         dob,
         recruitDate,
+        type,
       })
       .then((response) => {
-        const { empID, fullName, address, nic, phoneNo, dob, recruitDate } =
-          response.data;
+        const {
+          empID,
+          fullName,
+          address,
+          nic,
+          phoneNo,
+          dob,
+          recruitDate,
+          type,
+        } = response.data;
 
         setState({
           ...state,
@@ -104,12 +68,13 @@ const employeeUpdate = (props) => {
           phoneNo,
           dob,
           recruitDate,
+          type,
         });
 
         Swal.fire(`Submission Updated`, "Click Ok to continue", "success");
-        setTimeout(() => {
-          window.location.href = "http://127.0.0.1:5173/list";
-        }, 1000);
+        // setTimeout(() => {
+        //   window.location.href = "http://127.0.0.1:5173/list";
+        // }, 1000);
       })
       .catch((error) => {
         console.log(error.Response);
@@ -122,8 +87,57 @@ const employeeUpdate = (props) => {
         });
       });
   };
+  const fetchEmp = () => {
+    axios
+      .get(`http://localhost:5000/api/employee/${id}`)
+      .then((response) => {
+        console.log(response);
+        const {
+          empID,
+          fullName,
+          address,
+          nic,
+          phoneNo,
+          dob,
+          recruitDate,
+          type,
+        } = response.data;
+        setState({
+          ...state,
+          empID,
+          fullName,
+          address,
+          nic,
+          phoneNo,
+          dob,
+          recruitDate,
+          type,
+        });
+        console.table({
+          empID,
+          fullName,
+          address,
+          nic,
+          dob,
+          recruitDate,
+          type,
+        });
+      })
+      .catch((error) => console.log("Error loading update employee: " + error));
+  };
+
+  function handleChange(name) {
+    return function (event) {
+      setState({ ...state, [name]: event.target.value });
+    };
+  }
+
+  useEffect(() => {
+    fetchEmp();
+  }, []);
+
   return (
-    <div className="App">
+    <div>
       <Header tab="Children Cloud" />
       <div className="container-fluid ps-md-0">
         <div className="row g-0">
@@ -139,20 +153,20 @@ const employeeUpdate = (props) => {
                         <input
                           type="text"
                           className={"form-control "}
-                          id="floatingInput"
+                          //id="floatingInput"
                           name="empID"
                           placeholder="emp1012"
                           onChange={handleChange("empID")}
                           value={empID}
                         />
-                        <label htmlFor="floatingInput">Employee ID</label>
+                        <label>Employee ID</label>
                       </div>
 
                       <div className="form-floating mb-3">
                         <input
                           type="text"
                           className={"form-control "}
-                          id="floatingInput"
+                          //id="floatingInput"
                           name="fullName"
                           pattern="[A-Za-z]+"
                           title="Characters can only be A-Z and a-z."
@@ -160,16 +174,14 @@ const employeeUpdate = (props) => {
                           onChange={handleChange("fullName")}
                           value={fullName}
                         />
-                        <label htmlFor="floatingInput">
-                          Employee Full Name
-                        </label>
+                        <label>Employee Full Name</label>
                       </div>
 
                       <div className="form-floating mb-3">
                         <input
                           type="text"
                           className={"form-control "}
-                          id="floatingInput"
+                          //id="floatingInput"
                           name="address"
                           placeholder="address"
                           pattern="[A-Za-z]+"
@@ -177,48 +189,61 @@ const employeeUpdate = (props) => {
                           onChange={handleChange("address")}
                           value={address}
                         />
-                        <label htmlFor="floatingInput">Address</label>
+                        <label>Address</label>
                       </div>
 
                       <div className="form-floating mb-3">
                         <input
                           type="number"
                           className={"form-control "}
-                          id="floatingInput"
+                          // id="floatingInput"
                           name="phoneNo"
                           placeholder="071xxxxxxxx"
                           onChange={handleChange("phoneNo")}
                           value={phoneNo}
                         />
-                        <label htmlFor="floatingInput">Phone Number</label>
+                        <label>Phone Number</label>
                       </div>
 
                       <div className="form-floating mb-3">
                         <input
                           type="date"
                           className={"form-control "}
-                          id="floatingPassword"
+                          // id="floatingPassword"
                           name="dob"
                           placeholder="dob"
                           onChange={handleChange("dob")}
                           value={dob}
                         />
-                        <label htmlFor="floatingPassword">Date Of Birth</label>
+                        <label>Date Of Birth</label>
                       </div>
 
                       <div className="form-floating mb-3">
                         <input
                           type="date"
                           className={"form-control "}
-                          id="floatingPassword"
+                          // id="floatingPassword"
                           name="recruiteDate"
                           placeholder="recruiteDate"
                           onChange={handleChange("recruitDate")}
                           value={recruitDate}
                         />
-                        <label htmlFor="floatingPassword">Recruite Date</label>
+                        <label>Recruite Date</label>
                       </div>
-
+                      <Form.Select
+                        aria-label="Default select example"
+                        type="text"
+                        required
+                        value={type}
+                        onChange={(event) => {
+                          handleChange(event.target.value);
+                        }}>
+                        <option>Employee Type</option>
+                        <option value="BabySitter">BabySitter</option>
+                        <option value="Clerk">Clerk</option>
+                        <option value="Manager">Manager</option>
+                      </Form.Select>
+                      <br />
                       <div className="d-grid">
                         <button
                           className="btn btn-sm btn btn-warning btn-login text-uppercase fw-bold mb-2"
@@ -241,4 +266,4 @@ const employeeUpdate = (props) => {
     </div>
   );
 };
-export default employeeUpdate;
+export default App;

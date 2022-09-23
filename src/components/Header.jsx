@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../assets/img/logo.png";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+
 import {
   Navbar,
   Nav,
@@ -9,6 +11,7 @@ import {
   Form,
   FormControl,
   Button,
+  NavDropdown,
 } from "react-bootstrap";
 
 function Header(prop) {
@@ -32,22 +35,35 @@ function Header(prop) {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll>
-            <Nav.Link href="http://127.0.0.1:5173/employee">Home</Nav.Link>
-            <Nav.Link href="http://127.0.0.1:5173/list">Employees</Nav.Link>
-            <Nav.Link href="http://127.0.0.1:5173/attendance">
-              Attendance
-            </Nav.Link>
+            <Nav.Link href="#">Home</Nav.Link>
+            <NavDropdown title="Employee" id="nav-dropdown">
+              <NavDropdown.Item
+                eventKey="Basic Pricing"
+                href="http://127.0.0.1:5173/employee">
+                Registration
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                eventKey="Corporate Pricing"
+                href="http://127.0.0.1:5173/list">
+                List
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                eventKey="Corporate Pricing"
+                href="http://127.0.0.1:5173/attendance">
+                Attendance
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="Corporate Pricing" href="#">
+                Report
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+            </NavDropdown>
+
             <Nav.Link href="#">Report</Nav.Link>
             <Nav.Link href="/bill">Bill Item</Nav.Link>
             <Nav.Link href="/payment">Payment</Nav.Link>
             <Nav.Link href="/bill-cal">Bill</Nav.Link>
             {/* disabled */}
-            <Nav.Link
-              onClick={() => {
-                navigate(`#`);
-              }}>
-              Children Allocation
-            </Nav.Link>
+            <Nav.Link href="/allocate"> Children Allocation </Nav.Link>
           </Nav>
 
           {
