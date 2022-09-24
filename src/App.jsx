@@ -7,7 +7,7 @@ import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
-import { Login, Register } from "./pages";
+import { Login, Register, ChildProfile } from "./pages";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/kidos" element={<ChildProfile />} />
       </Routes>
     </Router>
   );
