@@ -1,33 +1,40 @@
 import apiInstance from "../apiInstance";
 
-const addUser = (user) => {
-  return apiInstance.post(`/api/user/`, user);
+const addUser = async (user) => {
+  try {
+    const response = await apiInstance.post(`api/user/`, user);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
 };
-const getAllUsers = () => {
-  return apiInstance
-    .get(`/api/user/`)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error;
-    });
+const getAllUsers = async () => {
+  try {
+    const response = await apiInstance.get(`api/user/`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
 };
 
-const login = (loginCredentials) => {
-  return apiInstance
-    .post(`api/user/login/`, loginCredentials)
-    .then((response) => {
-      if (response.data.data.token) {
-        localStorage.setItem("token", JSON.stringify(response.data.data.token));
-      }
-      return response.data;
-    });
+const login = async (loginCredentials) => {
+  try {
+    const response = await apiInstance.post(
+      `api/user/login/`,
+      loginCredentials,
+    );
+    if (response.data.data.token) {
+      localStorage.setItem("token", JSON.stringify(response.data.data.token));
+    }
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
 };
 
 const logout = () => {
   localStorage.removeItem("token");
-  window.location.href = "/login";
+  window.location.href = "/";
 };
 
 const authHeader = () => {
@@ -38,15 +45,22 @@ const authHeader = () => {
   return {};
 };
 
-const getOneUser = (userID) => {
-  return apiInstance
-    .get(`/api/user/${userID}`)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error;
-    });
+const viewProfile = async () => {
+  try {
+    const response = await apiInstance.get(`api/user/me`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+const getOneUser = async (userID) => {
+  try {
+    const response = await apiInstance.post(`api/user/${userID}`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
 };
 
 const userRequest = {
@@ -56,6 +70,7 @@ const userRequest = {
   login,
   logout,
   authHeader,
+  viewProfile,
 };
 
 export default userRequest;
