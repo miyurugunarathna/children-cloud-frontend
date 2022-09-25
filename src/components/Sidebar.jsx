@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -11,8 +12,8 @@ const Sidebar = () => {
             </div>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/kidos"
               class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -31,11 +32,11 @@ const Sidebar = () => {
               <span class="ml-2 text-sm tracking-wide truncate">
                 Child Profile
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/medicalDetails"
               class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -54,11 +55,11 @@ const Sidebar = () => {
               <span class="ml-2 text-sm tracking-wide truncate">
                 Medicine Details
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/medicalReport"
               class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -77,11 +78,11 @@ const Sidebar = () => {
               <span class="ml-2 text-sm tracking-wide truncate">
                 Medicine Report
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/tution"
               class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -100,12 +101,12 @@ const Sidebar = () => {
               <span class="ml-2 text-sm tracking-wide truncate">
                 Tution Schedule
               </span>
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a
-              href="#"
+            <Link
+              to="/events"
               class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -122,7 +123,7 @@ const Sidebar = () => {
                 </svg>
               </span>
               <span class="ml-2 text-sm tracking-wide truncate">Events</span>
-            </a>
+            </Link>
           </li>
         </ul>
         <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">

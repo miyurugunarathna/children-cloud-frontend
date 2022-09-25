@@ -8,6 +8,10 @@ import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
 import { Login, Register, ChildProfile } from "./pages";
+import Events from "./pages/Child/Events";
+import MedicineDetails from "./pages/Child/MedicineDetails";
+import MedicineReport from "./pages/Child/MedicineReport";
+import TutionSchedule from "./pages/Child/TutionSchedule";
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/kidos" element={<ChildProfile />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/medicalDetails" element={<MedicineDetails />} />
+        <Route path="/medicalReport" element={<MedicineReport />} />
+        <Route path="/tution" element={<TutionSchedule />} />
       </Routes>
     </Router>
   );
