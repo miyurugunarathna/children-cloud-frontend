@@ -5,7 +5,7 @@ import { BiCategory } from "react-icons/bi";
 
 import userRequest from "../api/User/user.request";
 import useFetchUserProfile from "../hooks/useFetchUserProfile";
-import { ROLE_PARENT, ROLE_ADMIN } from "../constants";
+import { ROLE_PARENT, ROLE_ADMIN ,ROLE_STAFF} from "../constants";
 
 const Header = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -54,6 +54,26 @@ const Header = () => {
       name: "Payments",
       url: "/payments",
       role: [ROLE_PARENT, ROLE_ADMIN],
+    },
+    {
+      name: "Staff Home",
+      url: "/StaffHome",
+      role: [ROLE_STAFF],
+    },
+    {
+      name: "Staff",
+      url: "/Staff",
+      role: [ROLE_STAFF],
+    },
+    {
+      name: "Assign Staff",
+      url: "/AssignStaff",
+      role: [ROLE_ADMIN],
+    },
+    {
+      name: "Event",
+      url: "/events",
+      role: [ROLE_ADMIN],
     },
   ];
 

@@ -4,6 +4,7 @@ import { getChildStore } from "../../store/Child";
 import childRequest from "../../api/Child/child.request";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import SingleChild from "./SingleChild";
 
 export const ChildProfile = () => {
   const childs = useSelector((state) => state.child);
@@ -16,7 +17,8 @@ export const ChildProfile = () => {
 
   useEffect(() => {
     childRequest.getChildsOfParent().then((res) => {
-      console.log(res);
+      console.log(res.data);
+      setchilds(res.data);
     });
   }, []);
   return (
@@ -25,9 +27,24 @@ export const ChildProfile = () => {
         <Header />
         <Sidebar />
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-          <p>Hello</p>
+        {!childprofile.length ? (
+          <div>
+            <div>
+              <h4>No Child Added !</h4>
+              <p>No Childs Were Found.</p>
+            </div>
+          </div>
+        ) : (
+          childprofile.map((chi) => (
+            <div key={chi._id} className="mt-6">
+              <SingleChild chi={chi} />
+            </div>
+          ))
+        )}
+        
+        </div>
         </div>
       </div>
-    </div>
+  
   );
 };
