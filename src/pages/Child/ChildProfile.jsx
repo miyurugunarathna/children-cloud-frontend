@@ -27,24 +27,22 @@ export const ChildProfile = () => {
         <Header />
         <Sidebar />
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-        {!childprofile.length ? (
-          <div>
+          {!childprofile.length ? (
             <div>
-              <h4>No Child Added !</h4>
-              <p>No Childs Were Found.</p>
+              <div>
+                <h4>No Child Added !</h4>
+                <p>No Childs Were Found.</p>
+              </div>
             </div>
-          </div>
-        ) : (
-          childprofile.map((chi) => (
-            <div key={chi._id} className="mt-6">
-              <SingleChild chi={chi} />
-            </div>
-          ))
-        )}
-        
-        </div>
+          ) : (
+            childprofile.map((chi) => (
+              <div key={chi._id} className="mt-6">
+                <SingleChild chi={chi} />
+              </div>
+            ))
+          )}
         </div>
       </div>
-  
+    </div>
   );
 };

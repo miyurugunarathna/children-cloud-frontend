@@ -1,11 +1,10 @@
-import React from 'react'
-import UpdateProfile from '../../components/model/child/UpdateProfile'
+import React from "react";
+import UpdateProfile from "../../components/model/child/UpdateProfile";
 
-const SingleChild = ({chi}) => {
+const SingleChild = ({ chi }) => {
   return (
-    <div class=' overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl'>
-    
-    <div style={{ display: "flex" }}>
+    <div class=" overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl">
+      <div style={{ display: "flex" }}>
         <div>
           <p>Name : {chi.name} </p>
           <br />
@@ -33,8 +32,8 @@ const SingleChild = ({chi}) => {
         </div>
       </div>
       <UpdateProfile />
-</div>
-  )
-}
+    </div>
+  );
+};
 
-export default SingleChild
+export default SingleChild;
