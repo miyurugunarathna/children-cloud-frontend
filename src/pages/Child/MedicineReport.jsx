@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import SingleMedicalReport from "./SingleMedicalReport";
 
 const MedicineReport = () => {
   return (
@@ -9,7 +10,9 @@ const MedicineReport = () => {
         <Header />
         <Sidebar />
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-          <p>Medicine Report</p>
+          <div className="mt-6">
+            <SingleMedicalReport />
+          </div>
         </div>
       </div>
     </div>

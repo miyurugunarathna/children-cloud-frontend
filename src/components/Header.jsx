@@ -67,12 +67,12 @@ const Header = () => {
     },
     {
       name: "Assign Staff",
-      url: "/AssignStaff",
+      url: "/assignStaff",
       role: [ROLE_ADMIN],
     },
     {
       name: "Event",
-      url: "/events",
+      url: "/createEvents",
       role: [ROLE_ADMIN],
     },
   ];

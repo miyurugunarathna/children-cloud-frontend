@@ -12,6 +12,8 @@ import Events from "./pages/Child/Events";
 import MedicineDetails from "./pages/Child/MedicineDetails";
 import MedicineReport from "./pages/Child/MedicineReport";
 import TutionSchedule from "./pages/Child/TutionSchedule";
+import AssignStaff from "./pages/Admin/AssignStaff";
+import CreateEvents from "./pages/Admin/Events";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path="/medicalDetails" element={<MedicineDetails />} />
         <Route path="/medicalReport" element={<MedicineReport />} />
         <Route path="/tution" element={<TutionSchedule />} />
+        <Route path="/assignStaff" element={<AssignStaff />} />
+        <Route path="/createEvents" element={<CreateEvents />} />
       </Routes>
     </Router>
   );
