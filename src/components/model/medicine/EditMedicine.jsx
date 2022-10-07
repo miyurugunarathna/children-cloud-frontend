@@ -1,26 +1,36 @@
+import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
+import FileBase from "react-file-base64";
 
-const AddMedicineDetails = () => {
+const EditMedicine = () => {
   const [showModal, setShowModal] = React.useState(false);
-
-  //max-w-3xl  max-w-[200rem]
+  const [img, setimg] = useState("");
   return (
     <>
-      <button
-        className=" text-black  font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 max-w-[20rem]"
-        type="button"
-        onClick={() => setShowModal(true)}
-        style={{ marginLeft: "850px" }}>
-        Open regular modal
-      </button>
+      <div
+        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+        onClick={() => setShowModal(true)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          />
+        </svg>
+      </div>
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
-            <div className="relative w-auto my-5  min-w-500 mx-auto ">
+            <div>
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t min-w-500">
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">Modal Title</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -119,10 +129,11 @@ const AddMedicineDetails = () => {
               </div>
             </div>
           </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>
   );
 };
 
-export default AddMedicineDetails;
+export default EditMedicine;

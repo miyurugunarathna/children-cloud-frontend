@@ -35,7 +35,9 @@ const AddScheduleDetails = () => {
                 <div class="flex items-center justify-center p-12">
                   <div class="mx-auto w-full max-w-[550px]  ">
                     <form>
-                      <div class="w-full px-3 sm:w-1/2"></div>
+                      <div
+                        class="w-full px-3 "
+                        style={{ width: "500px" }}></div>
                       <div class="w-full">
                         <div class="mb-5">
                           <label

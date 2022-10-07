@@ -1,22 +1,32 @@
+import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 
-const UpdateProfile = () => {
+const EditEvent = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [img, setimg] = useState("");
-  //max-w-3xl
   return (
     <>
-      <button
-        className=" text-black  font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 max-w-[20rem]"
-        type="button"
+      <div
+        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
         onClick={() => setShowModal(true)}>
-        Open regular modal
-      </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          />
+        </svg>
+      </div>
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
-            <div className="relative w-auto my-5 mx-auto max-w-[90rem]">
+            <div>
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
@@ -36,7 +46,7 @@ const UpdateProfile = () => {
                   <div class="mx-auto w-full max-w-[550px]">
                     <form action="https://formbold.com/s/FORM_ID" method="POST">
                       <div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 sm:w-1/2">
+                        <div class="w-full px-3 " style={{ width: "500px" }}>
                           <div class="mb-1">
                             <label
                               for="fName"
@@ -48,22 +58,6 @@ const UpdateProfile = () => {
                               name="fName"
                               id="fName"
                               placeholder="First Name"
-                              class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                            />
-                          </div>
-                        </div>
-                        <div class="w-full px-3 sm:w-1/2">
-                          <div class="mb-1">
-                            <label
-                              for="lName"
-                              class="mb-3 block text-base font-medium text-[#07074D]">
-                              Age
-                            </label>
-                            <input
-                              type="number"
-                              name="lName"
-                              id="lName"
-                              placeholder="Last Name"
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             />
                           </div>
@@ -176,4 +170,4 @@ const UpdateProfile = () => {
   );
 };
 
-export default UpdateProfile;
+export default EditEvent;
