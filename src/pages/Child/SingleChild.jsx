@@ -31,7 +31,7 @@ const SingleChild = ({ chi }) => {
           />
         </div>
       </div>
-      <UpdateProfile />
+      <UpdateProfile chi={chi} />
     </div>
   );
 };

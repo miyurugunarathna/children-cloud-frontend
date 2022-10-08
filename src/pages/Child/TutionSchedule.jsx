@@ -37,7 +37,7 @@ const TutionSchedule = () => {
           ) : (
             childprofile.map((chi) => (
               <div key={chi._id} className="mt-6">
-                <SingleSchedule />
+                <SingleSchedule chi={chi} />
               </div>
             ))
           )}

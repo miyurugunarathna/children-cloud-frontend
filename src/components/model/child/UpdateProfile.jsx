@@ -1,9 +1,51 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import childRequest from "../../../api/Child/child.request";
+import { useDispatch } from "react-redux";
 
-const UpdateProfile = () => {
+const UpdateProfile = ({ chi }) => {
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(false);
-  const [img, setimg] = useState("");
+
+  const [name, setname] = useState("");
+  const [age, setage] = useState(0);
+  const [gender, setgender] = useState("");
+  const [dateOfBirth, setdob] = useState("");
+  const [image, setimage] = useState("");
+  const [school, setschool] = useState("");
+  const [hobby, sethobby] = useState("");
+
+  useEffect(() => {
+    if ({ chi }) {
+      setname(chi.name);
+      setage(chi.age);
+      setgender(chi.gender);
+      setdob(chi.dateOfBirth);
+      setimage(chi.image);
+      setschool(chi.school);
+      sethobby(chi.hobby);
+    }
+  }, [chi]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    childRequest
+      .updateChild(
+        { name, age, gender, dateOfBirth, image, school, hobby },
+        chi._id,
+      )
+      .then((res) => {
+        console.log(res);
+        alert("Event Added Successfull !!");
+      });
+
+    clear();
+    setShowModal(false);
+  };
+  const clear = () => {
+    //style={{marginLeft: "1400px" , marginBottom: "10px"}}
+  };
   //max-w-3xl
   return (
     <>
@@ -34,7 +76,7 @@ const UpdateProfile = () => {
 
                 <div class="flex items-center justify-center p-12">
                   <div class="mx-auto w-full max-w-[550px]">
-                    <form action="https://formbold.com/s/FORM_ID" method="POST">
+                    <form onSubmit={handleSubmit}>
                       <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
                           <div class="mb-1">
@@ -49,6 +91,8 @@ const UpdateProfile = () => {
                               id="fName"
                               placeholder="First Name"
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                              value={name}
+                              onChange={(e) => setname(e.target.value)}
                             />
                           </div>
                         </div>
@@ -65,6 +109,8 @@ const UpdateProfile = () => {
                               id="lName"
                               placeholder="Last Name"
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                              value={age}
+                              onChange={(e) => setage(e.target.value)}
                             />
                           </div>
                         </div>
@@ -77,10 +123,11 @@ const UpdateProfile = () => {
                         </label>
                         <select
                           id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>select a Gender</option>
-                          <option value="US">Male</option>
-                          <option value="CA">Female</option>
+                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          onChange={(e) => setgender(e.target.value)}>
+                          <option value="Select Gender">select a Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
                         </select>
                       </div>
 
@@ -96,6 +143,8 @@ const UpdateProfile = () => {
                             name="date"
                             id="date"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={dateOfBirth}
+                            onChange={(e) => setdob(e.target.value)}
                           />
                         </div>
                       </div>
@@ -112,6 +161,8 @@ const UpdateProfile = () => {
                             name="school"
                             id="school"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={school}
+                            onChange={(e) => setschool(e.target.value)}
                           />
                         </div>
                       </div>
@@ -128,6 +179,8 @@ const UpdateProfile = () => {
                             name="hobby"
                             id="hobby"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={hobby}
+                            onChange={(e) => sethobby(e.target.value)}
                           />
                         </div>
                       </div>
@@ -144,14 +197,16 @@ const UpdateProfile = () => {
                             type="file"
                             id="img"
                             multiple={false}
-                            onDone={({ base64 }) => setimg(base64)}
+                            onDone={({ base64 }) => setimage(base64)}
                           />
                           <br />
                         </div>
                       </div>
 
                       <div className="flex">
-                        <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        <button
+                          class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                          type="submit">
                           Submit
                         </button>
 

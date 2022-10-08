@@ -37,7 +37,7 @@ const MedicineDetails = () => {
           ) : (
             childprofile.map((chi) => (
               <div key={chi._id} className="mt-6">
-                <SingleMedicineDetails />
+                <SingleMedicineDetails chi={chi} />
               </div>
             ))
           )}
