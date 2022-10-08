@@ -51,7 +51,7 @@ const EditEvent = () => {
                             <label
                               for="fName"
                               class="mb-3 block text-base font-medium text-[#07074D]">
-                              Name
+                              Title
                             </label>
                             <input
                               type="text"
@@ -65,19 +65,17 @@ const EditEvent = () => {
                       </div>
                       <div class="mb-1">
                         <label
-                          for="guest"
+                          for="fName"
                           class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
+                          Description
                         </label>
-                        <select
-                          id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
-                        </select>
+                        <input
+                          type="text"
+                          name="fName"
+                          id="fName"
+                          placeholder="First Name"
+                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        />
                       </div>
 
                       <div class="w-full">
@@ -97,35 +95,50 @@ const EditEvent = () => {
                       </div>
 
                       <div class="w-full">
-                        <div class="mb-1">
+                        <div class="mb-3">
                           <label
-                            for="school"
+                            for="hobby"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            School
+                            Start Time
                           </label>
                           <input
-                            type="text"
-                            name="school"
-                            id="school"
+                            type="time"
+                            name="hobby"
+                            id="hobby"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           />
                         </div>
                       </div>
 
                       <div class="w-full">
-                        <div class="mb-1">
+                        <div class="mb-3">
                           <label
                             for="hobby"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            Hobby
+                            End Time
                           </label>
                           <input
-                            type="text"
+                            type="time"
                             name="hobby"
                             id="hobby"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           />
                         </div>
+                      </div>
+
+                      <div class="mb-1">
+                        <label
+                          for="fName"
+                          class="mb-3 block text-base font-medium text-[#07074D]">
+                          Tag
+                        </label>
+                        <input
+                          type="text"
+                          name="fName"
+                          id="fName"
+                          placeholder="First Name"
+                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        />
                       </div>
 
                       <div class="w-full">

@@ -35,106 +35,43 @@ const AssignStaffModel = () => {
                 <div class="flex items-center justify-center p-12">
                   <div class="mx-auto w-full max-w-[550px]">
                     <form action="https://formbold.com/s/FORM_ID" method="POST">
-                      <div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 " style={{ width: "500px" }}>
-                          <div class="mb-1">
-                            <label
-                              for="fName"
-                              class="mb-3 block text-base font-medium text-[#07074D]">
-                              Name
-                            </label>
-                            <input
-                              type="text"
-                              name="fName"
-                              id="fName"
-                              placeholder="First Name"
-                              class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-1">
-                        <label
-                          for="guest"
-                          class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
-                        </label>
-                        <select
-                          id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
-                        </select>
-                      </div>
-
-                      <div class="w-full">
+                      <div class="w-full px-3 " style={{ width: "500px" }}>
                         <div class="mb-1">
                           <label
-                            for="date"
+                            for="guest"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            Date
+                            Child ID
                           </label>
-                          <input
-                            type="date"
-                            name="date"
-                            id="date"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
+                          <select
+                            id="countries"
+                            class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Select Child ID</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-1">
+                          <label
+                            for="guest"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            Staff ID
+                          </label>
+                          <select
+                            id="countries"
+                            class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Select Staff ID</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                          </select>
                         </div>
                       </div>
 
-                      <div class="w-full">
-                        <div class="mb-1">
-                          <label
-                            for="school"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
-                            School
-                          </label>
-                          <input
-                            type="text"
-                            name="school"
-                            id="school"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="w-full">
-                        <div class="mb-1">
-                          <label
-                            for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
-                            Hobby
-                          </label>
-                          <input
-                            type="text"
-                            name="hobby"
-                            id="hobby"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="w-full">
-                        <div class="mb-1">
-                          <label
-                            for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
-                            Image
-                          </label>
-                          <br />
-                          <FileBase
-                            type="file"
-                            id="img"
-                            multiple={false}
-                            onDone={({ base64 }) => setimg(base64)}
-                          />
-                          <br />
-                        </div>
-                      </div>
+                      <br />
 
                       <div className="flex">
                         <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
