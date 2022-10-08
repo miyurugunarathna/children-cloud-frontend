@@ -45,12 +45,42 @@ const getAllChilds = async () => {
   }
 };
 
+const getAllStaffs = async () => {
+  try {
+    const response = await apiInstance.get(`/api/child/allStaff/`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+const getSingleChild = async (childID) => {
+  try {
+    const response = await apiInstance.get(`/api/child/${childID}`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+const AssignStaffforChild = async (data) => {
+  try {
+    const response = await apiInstance.post(`/api/assign/`, data);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const childRequest = {
   saveChild,
   updateChild,
   deleteChild,
   getAllChilds,
   getChildsOfParent,
+  getAllStaffs,
+  getSingleChild,
+  AssignStaffforChild,
 };
 
 export default childRequest;
