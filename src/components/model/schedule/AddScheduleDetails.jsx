@@ -11,7 +11,7 @@ const AddScheduleDetails = () => {
         type="button"
         onClick={() => setShowModal(true)}
         style={{ marginLeft: "850px" }}>
-        Open regular modal
+        Add Schedule
       </button>
       {showModal ? (
         <>
@@ -21,7 +21,9 @@ const AddScheduleDetails = () => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t min-w-500">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  <h3 className="text-3xl font-semibold">
+                    Add Schedule Details
+                  </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}>
@@ -39,11 +41,11 @@ const AddScheduleDetails = () => {
                         class="w-full px-3 "
                         style={{ width: "500px" }}></div>
                       <div class="w-full">
-                        <div class="mb-5">
+                        <div class="mb-3">
                           <label
                             for="hobby"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            Hobby
+                            Teachers Name
                           </label>
                           <input
                             type="text"
@@ -54,55 +56,88 @@ const AddScheduleDetails = () => {
                         </div>
                       </div>
 
-                      <div class="mb-5">
+                      <div class="w-full">
+                        <div class="mb-3">
+                          <label
+                            for="hobby"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            Subject Name
+                          </label>
+                          <input
+                            type="text"
+                            name="hobby"
+                            id="hobby"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="mb-3">
                         <label
                           for="guest"
                           class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
+                          Tution Scheduled Day
                         </label>
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
+                          <option selected>Select </option>
+                          <option value="US">MonDay</option>
+                          <option value="CA">TuesDay</option>
+                          <option value="FR">WednesDay</option>
+                          <option value="DE">ThursDay</option>
+                          <option value="DE">FriDay</option>
+                          <option value="DE">SaturDay</option>
+                          <option value="DE">SunDay</option>
                         </select>
                       </div>
 
-                      <div class="mb-5">
-                        <label
-                          for="guest"
-                          class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
-                        </label>
-                        <select
-                          id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
-                        </select>
+                      <div class="w-full">
+                        <div class="mb-3">
+                          <label
+                            for="hobby"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            Start Time
+                          </label>
+                          <input
+                            type="time"
+                            name="hobby"
+                            id="hobby"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          />
+                        </div>
                       </div>
 
-                      <div class="mb-5">
-                        <label
-                          for="guest"
-                          class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
-                        </label>
-                        <select
-                          id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
-                        </select>
+                      <div class="w-full">
+                        <div class="mb-3">
+                          <label
+                            for="hobby"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            End Time
+                          </label>
+                          <input
+                            type="time"
+                            name="hobby"
+                            id="hobby"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="w-full">
+                        <div class="mb-3">
+                          <label
+                            for="hobby"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            Address
+                          </label>
+                          <input
+                            type="text"
+                            name="hobby"
+                            id="hobby"
+                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          />
+                        </div>
                       </div>
 
                       <div className="flex">
