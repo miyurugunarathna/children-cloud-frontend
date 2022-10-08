@@ -75,6 +75,11 @@ const Header = () => {
       url: "/createEvents",
       role: [ROLE_ADMIN],
     },
+    {
+      name: "AssignedKids",
+      url: "/assignedKids",
+      role: [ROLE_STAFF],
+    },
   ];
 
   const logout = () => userRequest.logout();

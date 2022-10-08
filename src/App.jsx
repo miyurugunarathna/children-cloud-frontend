@@ -14,6 +14,9 @@ import MedicineReport from "./pages/Child/MedicineReport";
 import TutionSchedule from "./pages/Child/TutionSchedule";
 import AssignStaff from "./pages/Admin/AssignStaff";
 import CreateEvents from "./pages/Admin/Events";
+import AssignedKids from "./pages/Staff/AssignedKids";
+import MedicalStatus from "./pages/Staff/MedicalStatus";
+import ScheduleStatus from "./pages/Staff/ScheduleStatus";
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
         <Route path="/tution" element={<TutionSchedule />} />
         <Route path="/assignStaff" element={<AssignStaff />} />
         <Route path="/createEvents" element={<CreateEvents />} />
+        <Route path="/assignedKids" element={<AssignedKids />} />
+        <Route path="/addMedical" element={<MedicalStatus />} />
+        <Route path="/addSchedule" element={<ScheduleStatus />} />
       </Routes>
     </Router>
   );
