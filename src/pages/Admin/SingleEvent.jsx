@@ -50,8 +50,8 @@ const SingleEvent = ({ eve }) => {
       <div
         class="flex item-center justify-center"
         style={{ marginLeft: "1200px" }}>
-        <EditEvent />
-        <DeleteEvent />
+        <EditEvent eve={eve} />
+        <DeleteEvent eve={eve} />
       </div>
     </div>
   );

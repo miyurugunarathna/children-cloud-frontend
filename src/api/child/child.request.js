@@ -90,6 +90,15 @@ const getAssignedKidsForStaff = async () => {
   }
 };
 
+const updateAssignedStaff = async (staff, ID) => {
+  try {
+    const response = await apiInstance.put(`/api/assign/${ID}`, staff);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const childRequest = {
   saveChild,
   updateChild,
@@ -101,6 +110,7 @@ const childRequest = {
   AssignStaffforChild,
   getAssignedKidsForStaff,
   getAllAssignStaffforChild,
+  updateAssignedStaff,
 };
 
 export default childRequest;
