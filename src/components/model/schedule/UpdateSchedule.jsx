@@ -1,8 +1,9 @@
 import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import scheduleRequest from "../../../api/Schedule/schedule.request";
 
-const UpdateSchedule = () => {
+const UpdateSchedule = ({ chi }) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const [subject, setsubject] = useState("");
@@ -11,39 +12,42 @@ const UpdateSchedule = () => {
   const [endingTime, setendingTime] = useState("");
   const [day, setday] = useState("");
   const [teacherName, setteacherName] = useState("");
-  const [childName, setchildName] = useState("");
-  const [childID, setchildID] = useState("");
-  /*
-    useEffect(() => {
-      if (chi) {
-        setchildID(chi._id);
-        setchildName(chi.name);
-      }
-    }, [chi]);*/
+
+  useEffect(() => {
+    if ({ chi }) {
+      setsubject(chi.subject);
+      setaddress(chi.address);
+      setstartingTime(chi.startingTime);
+      setendingTime(chi.endingTime);
+      setday(chi.day);
+      setteacherName(chi.teacherName);
+    }
+  }, [chi]);
 
   const handleSubmit = (e) => {
-    /* e.preventDefault();
-      scheduleRequest
-        .saveSchedule({
-          childID,
-          childName,
+    e.preventDefault();
+    scheduleRequest
+      .updateSchedule(
+        {
           subject,
           address,
           startingTime,
           endingTime,
           day,
           teacherName,
-        })
-        .then((res) => {
-          console.log(res);
-          alert("Event Added Successfull !!");
-        })
-        .catch((err) => {
-          alert("something whent wrong!!!");
-        });
-  
-      clear();
-      setShowModal(false);*/
+        },
+        chi._id,
+      )
+      .then((res) => {
+        console.log(res);
+        alert("Event Added Successfull !!");
+      })
+      .catch((err) => {
+        alert("something whent wrong!!!");
+      });
+
+    clear();
+    setShowModal(false);
   };
   const clear = () => {
     //style={{marginLeft: "1400px" , marginBottom: "10px"}}

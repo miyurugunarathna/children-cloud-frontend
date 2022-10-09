@@ -124,8 +124,8 @@ const ScheduleTable = ({ chi }) => {
                           </svg>
                         </div>
 
-                        <UpdateSchedule />
-                        <DeleteSchedule />
+                        <UpdateSchedule chi={chi} />
+                        <DeleteSchedule chi={chi} />
                       </div>
                     </td>
                   </tr>

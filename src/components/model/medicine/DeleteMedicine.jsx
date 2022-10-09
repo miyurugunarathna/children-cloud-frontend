@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteMedicine = () => {
+const DeleteMedicine = ({ chi }) => {
   const [showModal, setShowModal] = React.useState(false);
 
   return (

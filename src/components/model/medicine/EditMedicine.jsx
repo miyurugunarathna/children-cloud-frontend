@@ -1,27 +1,36 @@
 import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import medicineRequest from "../../../api/Medicine/medicine.request";
 
-const EditMedicine = () => {
+const EditMedicine = ({ chi }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [medicineName, setmedicineName] = useState("");
   const [morning, setmorning] = useState("");
   const [evening, setevening] = useState("");
   const [beforAfterMeal, setmeal] = useState("");
-  const [childName, setchildName] = useState("");
-  const [childID, setchildID] = useState("");
+
+  useEffect(() => {
+    if ({ chi }) {
+      setmedicineName(chi.medicineName);
+      setmorning(chi.morning);
+      setevening(chi.evening);
+      setmeal(chi.beforAfterMeal);
+    }
+  }, [chi]);
 
   const handleSubmit = (e) => {
-    /* e.preventDefault();
+    e.preventDefault();
     medicineRequest
-      .saveMedicine({
-        childID,
-        childName,
-        medicineName,
-        morning,
-        evening,
-        beforAfterMeal,
-      })
+      .updateMedicine(
+        {
+          medicineName,
+          morning,
+          evening,
+          beforAfterMeal,
+        },
+        chi._id,
+      )
       .then((res) => {
         console.log(res);
         alert("Event Added Successfull !!");
@@ -31,7 +40,7 @@ const EditMedicine = () => {
       });
 
     clear();
-    setShowModal(false);*/
+    setShowModal(false);
   };
   const clear = () => {
     //style={{marginLeft: "1400px" , marginBottom: "10px"}}

@@ -1,10 +1,60 @@
 import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import scheduleRequest from "../../../api/Schedule/schedule.request";
 
-const UpdateScheduleStatus = () => {
+const UpdateScheduleStatus = ({ chi }) => {
   const [showModal, setShowModal] = React.useState(false);
-  const [img, setimg] = useState("");
+  const [status, setstatus] = useState("");
+  const [description, setdescription] = useState("");
+  const [date, setdate] = useState(
+    new Date().getDate() +
+      "-" +
+      (new Date().getMonth() + 1) +
+      "-" +
+      new Date().getFullYear(),
+  );
+
+  useEffect(() => {
+    if ({ chi }) {
+      setstatus(chi.status);
+      setdescription(chi.description);
+      setdate(
+        new Date().getDate() +
+          "-" +
+          (new Date().getMonth() + 1) +
+          "-" +
+          new Date().getFullYear(),
+      );
+    }
+  }, [chi]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    scheduleRequest
+      .updateSchedule(
+        {
+          status,
+          description,
+          date,
+        },
+        chi._id,
+      )
+      .then((res) => {
+        console.log(res);
+        alert("Event Added Successfull !!");
+      })
+      .catch((err) => {
+        alert("something whent wrong!!!");
+      });
+
+    clear();
+    setShowModal(false);
+  };
+  const clear = () => {
+    //style={{marginLeft: "1400px" , marginBottom: "10px"}}
+  };
   return (
     <>
       <div
@@ -46,7 +96,7 @@ const UpdateScheduleStatus = () => {
 
                 <div class="flex items-center justify-center p-12">
                   <div class="w-full px-3 " style={{ width: "500px" }}>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div class="mb-5">
                         <label
                           for="guest"
@@ -55,7 +105,8 @@ const UpdateScheduleStatus = () => {
                         </label>
                         <select
                           id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          onChange={(e) => setstatus(e.target.value)}>
                           <option selected>Select Status</option>
                           <option value="Pending">Pending</option>
                           <option value="Done">Done</option>
@@ -75,12 +126,16 @@ const UpdateScheduleStatus = () => {
                             name="hobby"
                             id="hobby"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={description}
+                            onChange={(e) => setdescription(e.target.value)}
                           />
                         </div>
                       </div>
 
                       <div className="flex">
-                        <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        <button
+                          class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                          type="submit">
                           Submit
                         </button>
 

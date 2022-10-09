@@ -101,8 +101,8 @@ const MedicineTable = ({ chi }) => {
                             />
                           </svg>
                         </div>
-                        <EditMedicine />
-                        <DeleteMedicine />
+                        <EditMedicine chi={chi} />
+                        <DeleteMedicine chi={chi} />
                       </div>
                     </td>
                   </tr>

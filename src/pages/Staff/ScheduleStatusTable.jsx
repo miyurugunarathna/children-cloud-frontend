@@ -105,12 +105,12 @@ const ScheduleStatusTable = ({ schedules }) => {
 
                     <td class="py-3 px-6 text-center">
                       <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
-                        Active
+                        {chi.status}
                       </span>
                     </td>
                     <td class="py-3 px-6">
                       <div class="flex item-center justify-center">
-                        <UpdateScheduleStatus />
+                        <UpdateScheduleStatus chi={chi} />
                       </div>
                     </td>
                   </tr>
