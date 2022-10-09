@@ -20,9 +20,10 @@ const AssignStaffTable = () => {
           <table class="min-w-max w-full table-auto">
             <thead>
               <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-left">Project</th>
-                <th class="py-3 px-6 text-left">Client</th>
-                <th class="py-3 px-6 text-center">Users</th>
+                <th class="py-3 px-6 text-left">ChildID</th>
+                <th class="py-3 px-6 text-left">ChildName</th>
+                <th class="py-3 px-6 text-center">Age</th>
+                <th class="py-3 px-6 text-center">StaffID</th>
                 <th class="py-3 px-6 text-center">Status</th>
                 <th class="py-3 px-6 text-center">Actions</th>
               </tr>
@@ -41,35 +42,25 @@ const AssignStaffTable = () => {
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="mr-2"></div>
-                        <span class="font-medium">React Project</span>
+                        <span class="font-medium">{chi.childID}</span>
                       </div>
                     </td>
-                    <td class="py-3 px-6 text-left">
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
                       <div class="flex items-center">
-                        <div class="mr-2">
-                          <img
-                            class="w-6 h-6 rounded-full"
-                            src="https://randomuser.me/api/portraits/men/1.jpg"
-                          />
-                        </div>
-                        <span>Eshal Rosas</span>
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.name}</span>
                       </div>
                     </td>
-                    <td class="py-3 px-6 text-center">
-                      <div class="flex items-center justify-center">
-                        <img
-                          class="w-6 h-6 rounded-full border-gray-200 border transform hover:scale-125"
-                          src="https://randomuser.me/api/portraits/men/1.jpg"
-                        />
-                        <img
-                          class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125"
-                          src="https://randomuser.me/api/portraits/women/2.jpg"
-                        />
-
-                        <img
-                          class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125"
-                          src="https://randomuser.me/api/portraits/men/3.jpg"
-                        />
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.age}</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.staff}</span>
                       </div>
                     </td>
                     <td class="py-3 px-6 text-center">

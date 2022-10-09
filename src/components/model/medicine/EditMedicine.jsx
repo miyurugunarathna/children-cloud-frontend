@@ -4,7 +4,39 @@ import FileBase from "react-file-base64";
 
 const EditMedicine = () => {
   const [showModal, setShowModal] = React.useState(false);
-  const [img, setimg] = useState("");
+  const [medicineName, setmedicineName] = useState("");
+  const [morning, setmorning] = useState("");
+  const [evening, setevening] = useState("");
+  const [beforAfterMeal, setmeal] = useState("");
+  const [childName, setchildName] = useState("");
+  const [childID, setchildID] = useState("");
+
+  const handleSubmit = (e) => {
+    /* e.preventDefault();
+    medicineRequest
+      .saveMedicine({
+        childID,
+        childName,
+        medicineName,
+        morning,
+        evening,
+        beforAfterMeal,
+      })
+      .then((res) => {
+        console.log(res);
+        alert("Event Added Successfull !!");
+      })
+      .catch((err) => {
+        alert("something whent wrong!!!");
+      });
+
+    clear();
+    setShowModal(false);*/
+  };
+  const clear = () => {
+    //style={{marginLeft: "1400px" , marginBottom: "10px"}}
+  };
+
   return (
     <>
       <div
@@ -44,19 +76,21 @@ const EditMedicine = () => {
 
                 <div class="flex items-center justify-center p-12">
                   <div class="w-full px-3 " style={{ width: "500px" }}>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div class="w-full">
                         <div class="mb-5">
                           <label
                             for="hobby"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            Hobby
+                            Medicine Name
                           </label>
                           <input
                             type="text"
                             name="hobby"
                             id="hobby"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={medicineName}
+                            onChange={(e) => setmedicineName(e.target.value)}
                           />
                         </div>
                       </div>
@@ -65,16 +99,18 @@ const EditMedicine = () => {
                         <label
                           for="guest"
                           class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
+                          Morning
                         </label>
                         <select
                           id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
+                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          onChange={(e) => setmorning(e.target.value)}>
+                          <option value="Select">Select </option>
+                          <option value="1 table spoon">1 table spoon</option>
+                          <option value="2 table spoon">2 table spoon</option>
+                          <option value="1 tablet">1 tablet</option>
+                          <option value="2 tablet">2 tablet</option>
+                          <option value="none">none</option>
                         </select>
                       </div>
 
@@ -82,16 +118,18 @@ const EditMedicine = () => {
                         <label
                           for="guest"
                           class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
+                          Evening
                         </label>
                         <select
                           id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
+                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          onChange={(e) => setevening(e.target.value)}>
+                          <option value="Select">Select </option>
+                          <option value="1 table spoon">1 table spoon</option>
+                          <option value="2 table spoon">2 table spoon</option>
+                          <option value="1 tablet">1 tablet</option>
+                          <option value="2 tablet">2 tablet</option>
+                          <option value="none">none</option>
                         </select>
                       </div>
 
@@ -99,21 +137,22 @@ const EditMedicine = () => {
                         <label
                           for="guest"
                           class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
+                          Before/After Meal
                         </label>
                         <select
                           id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
+                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          onChange={(e) => setmeal(e.target.value)}>
+                          <option value="Select">Select </option>
+                          <option value="Before">Before</option>
+                          <option value="After">After</option>
                         </select>
                       </div>
 
                       <div className="flex">
-                        <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        <button
+                          class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                          type="submit">
                           Submit
                         </button>
 
