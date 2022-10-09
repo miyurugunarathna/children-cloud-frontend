@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import childRequest from "../../../api/Child/child.request";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const UpdateProfile = ({ chi }) => {
   const dispatch = useDispatch();
@@ -37,7 +38,8 @@ const UpdateProfile = ({ chi }) => {
       )
       .then((res) => {
         console.log(res);
-        alert("Event Added Successfull !!");
+        //alert("Event Added Successfull !!");
+        Swal.fire(`Bill Added!`, "Click Ok to continue", "success");
       });
 
     clear();

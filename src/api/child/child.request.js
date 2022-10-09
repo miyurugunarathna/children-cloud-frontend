@@ -72,6 +72,24 @@ const AssignStaffforChild = async (data) => {
   }
 };
 
+const getAllAssignStaffforChild = async () => {
+  try {
+    const response = await apiInstance.get(`/api/assign/`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+const getAssignedKidsForStaff = async () => {
+  try {
+    const response = await apiInstance.get(`/api/assign/kids`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const childRequest = {
   saveChild,
   updateChild,
@@ -81,6 +99,8 @@ const childRequest = {
   getAllStaffs,
   getSingleChild,
   AssignStaffforChild,
+  getAssignedKidsForStaff,
+  getAllAssignStaffforChild,
 };
 
 export default childRequest;
