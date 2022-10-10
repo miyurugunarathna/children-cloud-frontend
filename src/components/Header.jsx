@@ -22,12 +22,13 @@ function Header(prop) {
   };
 
   return (
-    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding: "10px" }}>
+    <Navbar expand="lg" bg="dark" variant="dark" style={{ padding: "15px" }}>
       <Container fluid>
         <Navbar.Brand></Navbar.Brand>
         <Navbar.Brand
-          style={{ fontWeight: "bold", fontSize: "2rem", color: "#8eaccb	" }}>
+          style={{ fontWeight: "bold", fontSize: "25PX", color: "#FFF" }}>
           {prop.tab}
+          Children Cloud
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

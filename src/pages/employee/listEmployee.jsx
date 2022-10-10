@@ -40,16 +40,15 @@ export default class listEmployee extends Component {
   render() {
     return (
       <div>
-        <Header tab="Children Cloud" />
+        <Header />
+        <Card
+          style={{ width: "100%", height: "3rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <h5>Employee Management</h5>
+          </Card.Body>
+        </Card>
         <div className="container">
-          <br />
-          <Card style={{ width: "15rem", height: "4rem" }} border="primary">
-            {" "}
-            <Card.Body>
-              {" "}
-              <h4 className="login-heading mb-9">Employee List</h4>
-            </Card.Body>
-          </Card>
           <br />
 
           <button className="btn btn-primary">

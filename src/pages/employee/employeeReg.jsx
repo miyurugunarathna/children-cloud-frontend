@@ -7,7 +7,6 @@ import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import Swal from "sweetalert2";
 import Card from "react-bootstrap/Card";
-import { color, positions } from "@mui/system";
 
 function employeeReg() {
   const [empID, setEmpID] = useState("");
@@ -58,7 +57,14 @@ function employeeReg() {
 
   return (
     <div className="App">
-      <Header tab="Children Cloud" />
+      <Header />
+      <Card
+        style={{ width: "100%", height: "4rem" }}
+        className="card text-white bg-success mb-2">
+        <Card.Body>
+          <h4>Employee Management</h4>
+        </Card.Body>
+      </Card>
       <div className="container-fluid ps-md-0">
         <div className="row g-0">
           <div className="col-md-8 col-lg-6">
@@ -66,15 +72,6 @@ function employeeReg() {
               <div className="container">
                 <div className="row">
                   <div className="col-md-10 col-lg-1 mx-auto">
-                    <Card
-                      style={{ width: "50rem", height: "4rem" }}
-                      border="primary">
-                      {" "}
-                      <Card.Body>
-                        <h4>Employee Management</h4>
-                      </Card.Body>
-                    </Card>
-                    <br />
                     <Card style={{ width: "50rem" }}>
                       <Card.Body>
                         <form onSubmit={handleSubmit}>

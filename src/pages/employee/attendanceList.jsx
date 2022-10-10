@@ -41,16 +41,15 @@ export default class listAttendance extends Component {
   render() {
     return (
       <div>
-        <Header tab="Children Cloud" />
+        <Header />
+        <Card
+          style={{ width: "100%", height: "3rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <h5>Employee Attendance</h5>
+          </Card.Body>
+        </Card>
         <div className="container">
-          <br />
-          <Card style={{ width: "25rem", height: "4rem" }}>
-            {" "}
-            <Card.Body>
-              {" "}
-              <h4 className="login-heading mb-9">Employee Attendance</h4>
-            </Card.Body>
-          </Card>
           <br />
           <div>
             <div>
