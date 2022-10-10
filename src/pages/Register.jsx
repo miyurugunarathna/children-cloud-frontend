@@ -1,41 +1,92 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store/User";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
+import userRequest from "../api/User/user.request";
+import useFetchUserProfile from "../hooks/useFetchUserProfile";
+
 import Cover from "../assets/images/cover.jpg";
+import { SUCCESS, ROLE_PARENT } from "../constants";
 
 export const Register = () => {
-  // eslint-disable-next-line
   let navigate = useNavigate();
   const state = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+
+  useFetchUserProfile();
 
   useEffect(() => {
     if (state.isLoggedIn) {
-      navigate("/");
+      navigate("/list");
     }
   }, [state.isLoggedIn]);
 
-  useEffect(() => {
-    if (state.isLoggedIn && !state.error) {
-      // toast.success("Login Successful!");
-    }
-    if (!state.isLoggedIn && state.error) {
-      // toast.error("Login failed!");
-    }
-  }, [state.isLoggedIn, state.error]);
-
-  const handleLogin = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    dispatch(
-      login({
-        userName: e.target.userName.value,
-        password: e.target.password.value,
-      }),
-    );
-    // toast.success("Login Successful!");
+    const res = await userRequest.addUser({
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      email: e.target.email.value,
+      userName: e.target.userName.value,
+      password: e.target.password.value,
+      role: ROLE_PARENT,
+    });
+    if (res?.status === SUCCESS) {
+      Swal.fire({
+        title: "Registration success!",
+        text: "Click okay to login.",
+        confirmButtonText: "Okay",
+        showDenyButton: true,
+        denyButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) navigate("/");
+      });
+    } else {
+      Swal.fire(
+        "Registration failed!",
+        "Something went wrong. Please try again.",
+        "error",
+      );
+    }
   };
+
+  const inputs = [
+    {
+      type: "text",
+      id: "firstName",
+      name: "firstName",
+      required: true,
+      placeholder: "First name",
+    },
+    {
+      type: "text",
+      id: "lastName",
+      name: "lastName",
+      required: true,
+      placeholder: "Last name",
+    },
+    {
+      type: "email",
+      id: "email",
+      name: "email",
+      required: true,
+      placeholder: "Email",
+    },
+    {
+      type: "text",
+      id: "userName",
+      name: "userName",
+      required: true,
+      placeholder: "Username",
+    },
+    {
+      type: "password",
+      id: "password",
+      name: "password",
+      required: true,
+      placeholder: "Password",
+    },
+  ];
 
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50">
@@ -50,53 +101,24 @@ export const Register = () => {
             />
           </div>
           <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-            <form className="w-full" onSubmit={handleLogin}>
+            <form className="w-full" onSubmit={handleRegister}>
               <h1 className="mb-6 text-2xl text-center tracking-tight font-bold text-black">
                 <span className="font-normal">Welcome to</span>
                 <br />
                 The Children Cloud
               </h1>
               <hr className="opacity-10 mb-4" />
-              <input
-                className="mt-1 w-full border rounded py-2 px-3"
-                type="text"
-                id="firstName"
-                name="firstName"
-                required
-                placeholder="First name"
-              />
-              <input
-                className="mt-3 w-full border rounded py-2 px-3"
-                type="text"
-                id="lastName"
-                name="lastName"
-                required
-                placeholder="Last name"
-              />
-              <input
-                className="mt-3 w-full border rounded py-2 px-3"
-                type="email"
-                id="email"
-                name="email"
-                required
-                placeholder="Email"
-              />
-              <input
-                className="mt-3 w-full border rounded py-2 px-3"
-                type="text"
-                id="userName"
-                name="userName"
-                required
-                placeholder="Username"
-              />
-              <input
-                className="mt-3 w-full border rounded py-2 px-3"
-                type="password"
-                id="password"
-                name="password"
-                required
-                placeholder="Password"
-              />
+              {inputs.map((i, key) => (
+                <input
+                  key={key}
+                  className="mt-3 w-full border rounded py-2 px-3"
+                  type={i.type}
+                  id={i.id}
+                  name={i.name}
+                  required={i.required}
+                  placeholder={i.placeholder}
+                />
+              ))}
 
               <button className="mt-8 py-2 rounded text-white btn btn-active btn-primary w-full bg-black">
                 Register

@@ -1,53 +1,50 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import userRequest from "../../api/User/user.request";
+import { createSlice } from "@reduxjs/toolkit";
 
-const token = localStorage.getItem("token");
-
-export const login = createAsyncThunk(
-  "api/user/login",
-  async ({ userName, password }, thunkAPI) => {
-    const data = { userName, password };
-    try {
-      const response = await userRequest.login(data);
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
+const initialState = {
+  user: {
+    id: null,
+    firstName: null,
+    lastName: null,
+    userName: null,
+    email: null,
+    role: null,
   },
-);
+  isLoggedIn: false,
+};
 
-export const logout = createAsyncThunk("auth/logout", async () => {
-  userRequest.logout();
+const mapUserDetails = (data = {}) => ({
+  user: {
+    id: data?._id,
+    firstName: data?.firstName,
+    lastName: data?.lastName,
+    userName: data?.userName,
+    email: data?.email,
+    role: data?.role,
+  },
 });
 
-const initialState = token
-  ? { isLoggedIn: true, token, error: null }
-  : { isLoggedIn: false, token: null, error: null };
-const authSlice = createSlice({
-  name: "auth",
+export const userSlice = createSlice({
+  name: "user",
   initialState,
-  extraReducers: {
-    /* eslint-disable no-param-reassign */
-    [login.fulfilled]: (state, action) => {
-      state.isLoggedIn = true;
-      state.token = action.payload.token;
-      state.error = null;
+  reducers: {
+    setUser(state, action) {
+      return {
+        ...state,
+        ...mapUserDetails(action.payload),
+      };
     },
-    /* eslint-disable no-param-reassign */
-    [login.rejected]: (state, action) => {
-      state.isLoggedIn = false;
-      state.token = null;
-      state.error = action.payload;
+    setIsLoggedIn(state, action) {
+      state.isLoggedIn = action.payload;
     },
-    // eslint-disable-next-line
-    /* eslint-disable no-param-reassign */
-    [logout.fulfilled]: (state) => {
-      state.isLoggedIn = false;
-      state.token = null;
-      state.error = null;
+    resetUser(state) {
+      return {
+        ...state,
+        ...initialState,
+      };
     },
   },
 });
 
-const { reducer } = authSlice;
-export default reducer;
+export const { setUser, setIsLoggedIn, resetUser } = userSlice.actions;
+
+export default userSlice.reducer;

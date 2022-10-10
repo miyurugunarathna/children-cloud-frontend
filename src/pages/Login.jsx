@@ -1,15 +1,22 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store/User";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+
+import useFetchUserProfile from "../hooks/useFetchUserProfile";
+import { getUserDetails } from "../utils/helper";
+import { setUser, setIsLoggedIn } from "../store/User";
+import userRequest from "../api/User/user.request";
+import { SUCCESS } from "../constants";
+
 import Cover from "../assets/images/cover.jpg";
 
 export const Login = () => {
-  // eslint-disable-next-line
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const state = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+
+  useFetchUserProfile();
 
   useEffect(() => {
     if (state.isLoggedIn) {
@@ -17,24 +24,26 @@ export const Login = () => {
     }
   }, [state.isLoggedIn]);
 
-  useEffect(() => {
-    if (state.isLoggedIn && !state.error) {
-      // toast.success("Login Successful!");
-    }
-    if (!state.isLoggedIn && state.error) {
-      // toast.error("Login failed!");
-    }
-  }, [state.isLoggedIn, state.error]);
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(
-      login({
+    try {
+      const res = await userRequest.login({
         userName: e.target.userName.value,
         password: e.target.password.value,
-      }),
-    );
-    // toast.success("Login Successful!");
+      });
+      if (res?.status === SUCCESS && res?.data) {
+        const user = await getUserDetails();
+        if (user && user?._id) {
+          dispatch(setUser(user));
+          dispatch(setIsLoggedIn(true));
+        } else {
+          navigate("/");
+        }
+      } else
+        Swal.fire("Login failed!", "Invalid username or password.", "error");
+    } catch (err) {
+      Swal.fire("Oops...", "Something went wrong!", "error");
+    }
   };
 
   return (
