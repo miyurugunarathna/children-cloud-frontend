@@ -1,7 +1,17 @@
 import React from "react";
+import eventRequest from "../../../api/Event/event.request";
 
-const DeleteEvent = () => {
+const DeleteEvent = ({ eve }) => {
   const [showModal, setShowModal] = React.useState(false);
+
+  const DeleteEvent = () => {
+    // dispatch(deleteUsers(user._id));
+    eventRequest.deleteEvent(eve._id).then((res) => {
+      console.log(res);
+      alert("Deletion Successfull!!!");
+    });
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -65,7 +75,8 @@ const DeleteEvent = () => {
                     <button
                       data-modal-toggle="popup-modal"
                       type="button"
-                      class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                      class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                      onClick={DeleteEvent}>
                       Yes, I'm sure
                     </button>
                     <button

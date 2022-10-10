@@ -99,6 +99,15 @@ const updateAssignedStaff = async (staff, ID) => {
   }
 };
 
+const deleteAssignStaff = async (childID) => {
+  try {
+    const response = await apiInstance.delete(`/api/assign/${childID}`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const childRequest = {
   saveChild,
   updateChild,
@@ -111,6 +120,7 @@ const childRequest = {
   getAssignedKidsForStaff,
   getAllAssignStaffforChild,
   updateAssignedStaff,
+  deleteAssignStaff,
 };
 
 export default childRequest;

@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import medicineRequest from "../../api/Medicine/medicine.request";
+import { getUserDetails } from "../../utils/helper";
 
 const MedicalReportTable = () => {
+  const [medicines, setmedicines] = useState([]);
+  const [parentID, setparentID] = useState("");
+
+  useEffect(() => {
+    // medicineRequest.getMedicinesForParent().then((res) => {
+    // console.log(res);
+    //setmedicines(res.data);
+    //});
+    const getuser = async () => {
+      const user = await getUserDetails();
+      console.log(user);
+      setparentID(user._id);
+    };
+    getuser();
+  }, []);
+
+  useEffect(() => {
+    medicineRequest.getMedicinesForParent(parentID).then((res) => {
+      console.log(res);
+      setmedicines(res.data);
+    });
+  }, [parentID]);
+
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
