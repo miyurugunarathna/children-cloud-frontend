@@ -1,5 +1,6 @@
 import React from "react";
 import MedicalReportTable from "./MedicalReportTable";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const SingleMedicalReport = () => {
   return (
