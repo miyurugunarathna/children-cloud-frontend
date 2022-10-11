@@ -44,7 +44,7 @@ const AddEvents = () => {
         className=" text-black  font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 max-w-[20rem]"
         type="button"
         onClick={() => setShowModal(true)}
-        style={{ marginLeft: "1400px", marginTop: "100px" }}>
+        style={{ marginLeft: "1360px", marginTop: "150px" }}>
         Add Events
       </button>
       {showModal ? (

@@ -20,12 +20,19 @@ const Events = () => {
       <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
         <Header />
         <Sidebar />
-        <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+        <div class="h-full  mt-14 mb-10 md:ml-64">
           {!events.length ? (
-            <div>
-              <div>
-                <h4>No Child Added !</h4>
-                <p>No Childs Were Found.</p>
+            <div style={{ width: "1300px" }}>
+              <div
+                style={{
+                  background: "lightblue",
+                  marginLeft: "150px",
+                  marginTop: "150px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
+                }}>
+                <h4>No Events Added !</h4>
+                <p>No Events Were Found.</p>
               </div>
             </div>
           ) : (

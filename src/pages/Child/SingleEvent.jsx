@@ -4,7 +4,7 @@ const SingleEvent = ({ eve }) => {
   return (
     <div
       class=" overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl"
-      style={{ marginLeft: "250px" }}>
+      style={{ marginLeft: "100px", marginTop: "100px" }}>
       <p style={{ fontSize: "30px", fontWeight: "bold", marginLeft: "400px" }}>
         {" "}
         {eve.title}
