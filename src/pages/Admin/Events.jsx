@@ -22,10 +22,17 @@ const CreateEvents = () => {
         <Header />
         <AddEvents />
         {!events.length ? (
-          <div>
-            <div>
-              <h4>No Child Added !</h4>
-              <p>No Childs Were Found.</p>
+          <div style={{ width: "1680px" }}>
+            <div
+              style={{
+                background: "lightblue",
+                marginLeft: "150px",
+                marginTop: "150px",
+                paddingLeft: "20px",
+                paddingRight: "20px",
+              }}>
+              <h4>No Events Added !</h4>
+              <p>No Events Were Found.</p>
             </div>
           </div>
         ) : (

@@ -28,8 +28,15 @@ const TutionSchedule = () => {
         <Sidebar />
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
           {!childprofile.length ? (
-            <div>
-              <div>
+            <div style={{ width: "1300px" }}>
+              <div
+                style={{
+                  background: "lightblue",
+                  marginLeft: "150px",
+                  marginTop: "150px",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
+                }}>
                 <h4>No Child Added !</h4>
                 <p>No Childs Were Found.</p>
               </div>
