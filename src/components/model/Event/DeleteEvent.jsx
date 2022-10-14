@@ -1,13 +1,14 @@
 import React from "react";
 import eventRequest from "../../../api/Event/event.request";
 
-const DeleteEvent = ({ eve }) => {
+const DeleteEvent = ({ eve, evid, setEvID }) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const DeleteEvent = () => {
     // dispatch(deleteUsers(user._id));
     eventRequest.deleteEvent(eve._id).then((res) => {
       console.log(res);
+      setEvID("idADD");
       alert("Deletion Successfull!!!");
     });
     setShowModal(false);

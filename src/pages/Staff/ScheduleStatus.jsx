@@ -6,6 +6,7 @@ import scheduleRequest from "../../api/Schedule/schedule.request";
 
 const ScheduleStatus = () => {
   const [schedules, setschedules] = useState([]);
+  const [shID, setShID] = useState(null);
 
   useEffect(() => {
     scheduleRequest.getScheduleForStaff().then((res) => {
@@ -13,6 +14,15 @@ const ScheduleStatus = () => {
       setschedules(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    scheduleRequest.getScheduleForStaff().then((res) => {
+      console.log(res.data);
+      setschedules(res.data);
+      setShID(null);
+    });
+  }, [shID]);
+
   return (
     <div>
       <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -21,7 +31,11 @@ const ScheduleStatus = () => {
 
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
           <div className="mt-6">
-            <SingleScheduleStatus schedules={schedules} />
+            <SingleScheduleStatus
+              schedules={schedules}
+              shID={shID}
+              setShID={setShID}
+            />
           </div>
         </div>
       </div>

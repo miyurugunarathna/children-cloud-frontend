@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import medicineRequest from "../../../api/Medicine/medicine.request";
 
-const EditMedicine = ({ chi }) => {
+const EditMedicine = ({ chi, id, setid }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [medicineName, setmedicineName] = useState("");
   const [morning, setmorning] = useState("");
@@ -33,6 +33,7 @@ const EditMedicine = ({ chi }) => {
       )
       .then((res) => {
         console.log(res);
+        setid("idSet");
         alert("Event Added Successfull !!");
       })
       .catch((err) => {

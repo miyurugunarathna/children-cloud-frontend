@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import childRequest from "../../../api/Child/child.request";
 
-const DeleteAssignStaffModel = ({ chi }) => {
+const DeleteAssignStaffModel = ({ chi, sfID, setSfID }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [img, setimg] = useState("");
 
@@ -11,6 +11,7 @@ const DeleteAssignStaffModel = ({ chi }) => {
     // dispatch(deleteUsers(user._id));
     childRequest.deleteAssignStaff(chi._id).then((res) => {
       console.log(res);
+      setSfID("sfID");
       alert("Deletion Successfull!!!");
     });
     setShowModal(false);

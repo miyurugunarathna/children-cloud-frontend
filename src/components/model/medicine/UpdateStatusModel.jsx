@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import medicineRequest from "../../../api/Medicine/medicine.request";
 
-const UpdateStatusModel = ({ chi }) => {
+const UpdateStatusModel = ({ chi, chID, setChID }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [status, setstatus] = useState("");
   const [description, setdescription] = useState("");
@@ -43,7 +43,8 @@ const UpdateStatusModel = ({ chi }) => {
       )
       .then((res) => {
         console.log(res);
-        alert("Event Added Successfull !!");
+        setChID("idADD");
+        alert("Updated  Successfull !!");
       })
       .catch((err) => {
         alert("something whent wrong!!!");

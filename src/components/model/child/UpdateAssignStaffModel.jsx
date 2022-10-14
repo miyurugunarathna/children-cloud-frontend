@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import childRequest from "../../../api/Child/child.request";
 
-const UpdateAssignStaffModel = ({ chi }) => {
+const UpdateAssignStaffModel = ({ chi, sfID, setSfID }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [childs, setchilds] = useState([]);
   const [staffs, setstaffs] = useState([]);
@@ -41,6 +41,7 @@ const UpdateAssignStaffModel = ({ chi }) => {
       .updateAssignedStaff({ staff, status }, chi._id)
       .then((res) => {
         console.log(res);
+        setSfID("idADD");
         alert("Staff Assigned Successfull !!");
       })
       .catch((err) => {

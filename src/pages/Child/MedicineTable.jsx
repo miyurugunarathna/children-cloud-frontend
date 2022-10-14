@@ -4,7 +4,7 @@ import EditMedicine from "../../components/model/medicine/EditMedicine";
 import { useDispatch, useSelector } from "react-redux";
 import medicineRequest from "../../api/Medicine/medicine.request";
 
-const MedicineTable = ({ chi }) => {
+const MedicineTable = ({ chi, id, setid }) => {
   const [medicines, setmedicines] = useState([]);
   const dispatch = useDispatch();
 
@@ -14,6 +14,14 @@ const MedicineTable = ({ chi }) => {
       setmedicines(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    medicineRequest.getMedicines(chi._id).then((res) => {
+      console.log(res.data);
+      setmedicines(res.data);
+      setid(null);
+    });
+  }, [id]);
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
@@ -101,8 +109,8 @@ const MedicineTable = ({ chi }) => {
                             />
                           </svg>
                         </div>
-                        <EditMedicine chi={chi} />
-                        <DeleteMedicine chi={chi} />
+                        <EditMedicine chi={chi} id={id} setid={setid} />
+                        <DeleteMedicine chi={chi} id={id} setid={setid} />
                       </div>
                     </td>
                   </tr>

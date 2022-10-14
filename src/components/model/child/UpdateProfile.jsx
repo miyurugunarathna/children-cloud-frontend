@@ -4,7 +4,7 @@ import childRequest from "../../../api/Child/child.request";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-const UpdateProfile = ({ chi }) => {
+const UpdateProfile = ({ chi, sid, setSid }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(false);
 
@@ -39,6 +39,7 @@ const UpdateProfile = ({ chi }) => {
       .then((res) => {
         console.log(res);
         //alert("Event Added Successfull !!");
+        setSid("idSid");
         Swal.fire(`Bill Added!`, "Click Ok to continue", "success");
       });
 

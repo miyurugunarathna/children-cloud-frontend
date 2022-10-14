@@ -1,13 +1,14 @@
 import React from "react";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
 
-const DeleteSchedule = ({ chi }) => {
+const DeleteSchedule = ({ chi, sid, setSid }) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const DeleteData = () => {
     // dispatch(deleteUsers(user._id));
     scheduleRequest.deleteSchedule(chi._id).then((res) => {
       console.log(res);
+      setSid("idSet");
       alert("Deletion Successfull!!!");
     });
     setShowModal(false);

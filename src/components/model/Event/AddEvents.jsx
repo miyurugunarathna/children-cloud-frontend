@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
 import eventRequest from "../../../api/Event/event.request";
 
-const AddEvents = () => {
+const AddEvents = ({ evid, setEvID }) => {
   const [showModal, setShowModal] = React.useState(false);
   const dispatch = useDispatch();
 
@@ -24,6 +24,7 @@ const AddEvents = () => {
       .saveEvent({ title, description, date, startTime, endTime, tag, image })
       .then((res) => {
         console.log(res);
+        setEvID("idADD");
         alert("Event Added Successfull !!");
       })
       .catch((err) => {

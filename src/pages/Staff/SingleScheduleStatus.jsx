@@ -1,7 +1,7 @@
 import React from "react";
 import ScheduleStatusTable from "./ScheduleStatusTable";
 
-const SingleScheduleStatus = ({ schedules }) => {
+const SingleScheduleStatus = ({ schedules, shID, setShID }) => {
   return (
     <div
       class=" overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl"
@@ -52,7 +52,11 @@ const SingleScheduleStatus = ({ schedules }) => {
           </button>
         </form>
       </div>
-      <ScheduleStatusTable schedules={schedules} />
+      <ScheduleStatusTable
+        schedules={schedules}
+        shID={shID}
+        setShID={setShID}
+      />
     </div>
   );
 };

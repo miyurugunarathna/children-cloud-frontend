@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
 
-const AddScheduleDetails = ({ chi }) => {
+const AddScheduleDetails = ({ chi, sid, setSid }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(false);
 
@@ -37,6 +37,7 @@ const AddScheduleDetails = ({ chi }) => {
       })
       .then((res) => {
         console.log(res);
+        setSid("idSet");
         alert("Event Added Successfull !!");
       })
       .catch((err) => {

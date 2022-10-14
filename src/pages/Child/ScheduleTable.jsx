@@ -4,7 +4,7 @@ import scheduleRequest from "../../api/Schedule/schedule.request";
 import DeleteSchedule from "../../components/model/schedule/DeleteSchedule";
 import UpdateSchedule from "../../components/model/schedule/UpdateSchedule";
 
-const ScheduleTable = ({ chi }) => {
+const ScheduleTable = ({ chi, sid, setSid }) => {
   const [schedules, setschedules] = useState([]);
   const dispatch = useDispatch();
 
@@ -14,6 +14,14 @@ const ScheduleTable = ({ chi }) => {
       setschedules(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    scheduleRequest.getSchedules(chi._id).then((res) => {
+      console.log(res.data);
+      setschedules(res.data);
+      setSid(null);
+    });
+  }, [sid]);
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
@@ -124,8 +132,8 @@ const ScheduleTable = ({ chi }) => {
                           </svg>
                         </div>
 
-                        <UpdateSchedule chi={chi} />
-                        <DeleteSchedule chi={chi} />
+                        <UpdateSchedule chi={chi} sid={sid} setSid={setSid} />
+                        <DeleteSchedule chi={chi} sid={sid} setSid={setSid} />
                       </div>
                     </td>
                   </tr>

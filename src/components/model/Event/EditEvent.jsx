@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import eventRequest from "../../../api/Event/event.request";
 
-const EditEvent = ({ eve }) => {
+const EditEvent = ({ eve, evid, setEvID }) => {
   const [showModal, setShowModal] = React.useState(false);
   //title, description, date, startTime, endTime, tag, image
 
@@ -37,6 +37,7 @@ const EditEvent = ({ eve }) => {
       )
       .then((res) => {
         console.log(res);
+        setEvID("idADD");
         alert("Event Added Successfull !!");
       })
       .catch((err) => {

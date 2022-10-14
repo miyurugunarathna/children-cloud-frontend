@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import medicineRequest from "../../../api/Medicine/medicine.request";
 
-const AddMedicineDetails = ({ chi }) => {
+const AddMedicineDetails = ({ chi, id, setid }) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(false);
 
@@ -32,7 +32,8 @@ const AddMedicineDetails = ({ chi }) => {
         beforAfterMeal,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setid("idSet");
         alert("Event Added Successfull !!");
       })
       .catch((err) => {

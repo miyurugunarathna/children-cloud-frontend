@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
 
-const UpdateScheduleStatus = ({ chi }) => {
+const UpdateScheduleStatus = ({ chi, shID, setShID }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [status, setstatus] = useState("");
   const [description, setdescription] = useState("");
@@ -43,7 +43,8 @@ const UpdateScheduleStatus = ({ chi }) => {
       )
       .then((res) => {
         console.log(res);
-        alert("Event Added Successfull !!");
+        setShID("idAdd");
+        alert("Updated  Successfull !!");
       })
       .catch((err) => {
         alert("something whent wrong!!!");

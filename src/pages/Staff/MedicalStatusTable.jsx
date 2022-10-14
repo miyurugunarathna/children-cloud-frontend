@@ -1,7 +1,7 @@
 import React from "react";
 import UpdateStatusModel from "../../components/model/medicine/UpdateStatusModel";
 
-const MedicalStatusTable = ({ medicines }) => {
+const MedicalStatusTable = ({ medicines, chID, setChID }) => {
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
@@ -88,7 +88,11 @@ const MedicalStatusTable = ({ medicines }) => {
                     </td>
                     <td class="py-3 px-6 ">
                       <div class="flex item-center justify-center">
-                        <UpdateStatusModel chi={chi} />
+                        <UpdateStatusModel
+                          chi={chi}
+                          chID={chID}
+                          setChID={setChID}
+                        />
                       </div>
                     </td>
                   </tr>

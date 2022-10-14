@@ -9,6 +9,7 @@ import SingleChild from "./SingleChild";
 export const ChildProfile = () => {
   const childs = useSelector((state) => state.child);
   const [childprofile, setchilds] = useState([]);
+  const [sid, setSid] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,6 +22,14 @@ export const ChildProfile = () => {
       setchilds(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    childRequest.getChildsOfParent().then((res) => {
+      console.log(res.data);
+      setchilds(res.data);
+    });
+  }, [sid]);
+
   return (
     <div>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -44,7 +53,7 @@ export const ChildProfile = () => {
           ) : (
             childprofile.map((chi) => (
               <div key={chi._id} className="mt-6">
-                <SingleChild chi={chi} />
+                <SingleChild chi={chi} sid={sid} setSid={setSid} />
               </div>
             ))
           )}

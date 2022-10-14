@@ -1,13 +1,14 @@
 import React from "react";
 import medicineRequest from "../../../api/Medicine/medicine.request";
 
-const DeleteMedicine = ({ chi }) => {
+const DeleteMedicine = ({ chi, id, setid }) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const DeleteData = () => {
     // dispatch(deleteUsers(user._id));
     medicineRequest.deleteMedicine(chi._id).then((res) => {
       console.log(res);
+      setid("idSet");
       alert("Deletion Successfull!!!");
     });
     setShowModal(false);

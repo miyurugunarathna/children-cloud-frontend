@@ -3,7 +3,7 @@ import DeleteAssignStaffModel from "../../components/model/child/DeleteAssignSta
 import UpdateAssignStaffModel from "../../components/model/child/UpdateAssignStaffModel";
 import childRequest from "../../api/Child/child.request";
 
-const AssignStaffTable = () => {
+const AssignStaffTable = ({ sfID, setSfID }) => {
   const [assignedStaffs, setStaffs] = useState([]);
 
   useEffect(() => {
@@ -12,6 +12,14 @@ const AssignStaffTable = () => {
       setStaffs(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    childRequest.getAllAssignStaffforChild().then((res) => {
+      console.log(res.data);
+      setStaffs(res.data);
+      setSfID(null);
+    });
+  }, [sfID]);
 
   return (
     <div class="overflow-x-auto" style={{ marginLeft: "300px" }}>
@@ -70,8 +78,16 @@ const AssignStaffTable = () => {
                     </td>
                     <td class="py-3 px-6 ">
                       <div class="flex item-center justify-center">
-                        <UpdateAssignStaffModel chi={chi} />
-                        <DeleteAssignStaffModel chi={chi} />
+                        <UpdateAssignStaffModel
+                          chi={chi}
+                          sfID={sfID}
+                          setSfID={setSfID}
+                        />
+                        <DeleteAssignStaffModel
+                          chi={chi}
+                          sfID={sfID}
+                          setSfID={setSfID}
+                        />
                       </div>
                     </td>
                   </tr>

@@ -9,6 +9,7 @@ import eventRequest from "../../api/Event/event.request";
 const CreateEvents = () => {
   const [events, setevents] = useState([]);
   const dispatch = useDispatch();
+  const [evid, setEvID] = useState(null);
 
   useEffect(() => {
     eventRequest.getEvents().then((res) => {
@@ -16,6 +17,14 @@ const CreateEvents = () => {
       setevents(res.data);
     });
   }, []);
+
+  useEffect(() => {
+    eventRequest.getEvents().then((res) => {
+      console.log(res.data);
+      setevents(res.data);
+      setEvID(null);
+    });
+  }, [evid]);
   return (
     <div>
       <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
@@ -38,7 +47,7 @@ const CreateEvents = () => {
         ) : (
           events.map((eve) => (
             <div key={eve._id} className="mt-6">
-              <SingleEvent eve={eve} />
+              <SingleEvent eve={eve} evid={evid} setEvID={setEvID} />
             </div>
           ))
         )}
