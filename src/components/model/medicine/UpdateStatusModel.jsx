@@ -2,6 +2,7 @@ import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import medicineRequest from "../../../api/Medicine/medicine.request";
+import Swal from "sweetalert2";
 
 const UpdateStatusModel = ({ chi, chID, setChID }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -44,7 +45,7 @@ const UpdateStatusModel = ({ chi, chID, setChID }) => {
       .then((res) => {
         console.log(res);
         setChID("idADD");
-        alert("Updated  Successfull !!");
+        Swal.fire(`Updated Successfully!`, "Click Ok to continue", "success");
       })
       .catch((err) => {
         alert("something whent wrong!!!");
@@ -107,7 +108,8 @@ const UpdateStatusModel = ({ chi, chID, setChID }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setstatus(e.target.value)}>
+                          onChange={(e) => setstatus(e.target.value)}
+                          required>
                           <option selected>Select Status</option>
                           <option value="Pending">Pending</option>
                           <option value="Done">Done</option>
@@ -136,7 +138,8 @@ const UpdateStatusModel = ({ chi, chID, setChID }) => {
                       <div className="flex">
                         <button
                           class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                          type="submit">
+                          type="submit"
+                          disabled={!status}>
                           Submit
                         </button>
 

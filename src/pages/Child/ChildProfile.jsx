@@ -27,6 +27,7 @@ export const ChildProfile = () => {
     childRequest.getChildsOfParent().then((res) => {
       console.log(res.data);
       setchilds(res.data);
+      setSid(null);
     });
   }, [sid]);
 

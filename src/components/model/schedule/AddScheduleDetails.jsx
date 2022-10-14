@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
+import Swal from "sweetalert2";
 
 const AddScheduleDetails = ({ chi, sid, setSid }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,11 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
       .then((res) => {
         console.log(res);
         setSid("idSet");
-        alert("Event Added Successfull !!");
+        Swal.fire(
+          `Schedule Added Successfully!`,
+          "Click Ok to continue",
+          "success",
+        );
       })
       .catch((err) => {
         alert("something whent wrong!!!");
@@ -102,6 +107,7 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={teacherName}
                             onChange={(e) => setteacherName(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -120,6 +126,7 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={subject}
                             onChange={(e) => setsubject(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -133,7 +140,8 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setday(e.target.value)}>
+                          onChange={(e) => setday(e.target.value)}
+                          required>
                           <option value="Select">Select </option>
                           <option value="MonDay">MonDay</option>
                           <option value="TuesDay">TuesDay</option>
@@ -159,6 +167,7 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={startingTime}
                             onChange={(e) => setstartingTime(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -177,6 +186,7 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={endingTime}
                             onChange={(e) => setendingTime(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -195,6 +205,7 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={address}
                             onChange={(e) => setaddress(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -202,7 +213,15 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                       <div className="flex">
                         <button
                           class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                          type="submit">
+                          type="submit"
+                          disabled={
+                            !teacherName ||
+                            !subject ||
+                            !address ||
+                            !startingTime ||
+                            !endingTime ||
+                            !day
+                          }>
                           Submit
                         </button>
 

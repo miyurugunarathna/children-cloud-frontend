@@ -40,7 +40,11 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
         console.log(res);
         //alert("Event Added Successfull !!");
         setSid("idSid");
-        Swal.fire(`Bill Added!`, "Click Ok to continue", "success");
+        Swal.fire(
+          `Profile Updated Successfully!`,
+          "Click Ok to continue",
+          "success",
+        );
       });
 
     clear();
@@ -96,6 +100,7 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                               value={name}
                               onChange={(e) => setname(e.target.value)}
+                              required
                             />
                           </div>
                         </div>
@@ -114,6 +119,7 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                               value={age}
                               onChange={(e) => setage(e.target.value)}
+                              required
                             />
                           </div>
                         </div>
@@ -127,7 +133,8 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setgender(e.target.value)}>
+                          onChange={(e) => setgender(e.target.value)}
+                          required>
                           <option value="Select Gender">select a Gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
@@ -148,6 +155,7 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={dateOfBirth}
                             onChange={(e) => setdob(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -166,6 +174,7 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={school}
                             onChange={(e) => setschool(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -184,6 +193,7 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={hobby}
                             onChange={(e) => sethobby(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -201,6 +211,7 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                             id="img"
                             multiple={false}
                             onDone={({ base64 }) => setimage(base64)}
+                            required
                           />
                           <br />
                         </div>
@@ -209,7 +220,16 @@ const UpdateProfile = ({ chi, sid, setSid }) => {
                       <div className="flex">
                         <button
                           class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                          type="submit">
+                          type="submit"
+                          disabled={
+                            !name ||
+                            !age ||
+                            !gender ||
+                            !dateOfBirth ||
+                            !image ||
+                            !school ||
+                            !hobby
+                          }>
                           Submit
                         </button>
 

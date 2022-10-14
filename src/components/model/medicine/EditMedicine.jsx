@@ -2,6 +2,7 @@ import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import medicineRequest from "../../../api/Medicine/medicine.request";
+import Swal from "sweetalert2";
 
 const EditMedicine = ({ chi, id, setid }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -34,7 +35,11 @@ const EditMedicine = ({ chi, id, setid }) => {
       .then((res) => {
         console.log(res);
         setid("idSet");
-        alert("Event Added Successfull !!");
+        Swal.fire(
+          `Medical Details Updated Successfully!`,
+          "Click Ok to continue",
+          "success",
+        );
       })
       .catch((err) => {
         alert("something whent wrong!!!");
@@ -103,6 +108,7 @@ const EditMedicine = ({ chi, id, setid }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={medicineName}
                             onChange={(e) => setmedicineName(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -116,7 +122,8 @@ const EditMedicine = ({ chi, id, setid }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setmorning(e.target.value)}>
+                          onChange={(e) => setmorning(e.target.value)}
+                          required>
                           <option value="Select">Select </option>
                           <option value="1 table spoon">1 table spoon</option>
                           <option value="2 table spoon">2 table spoon</option>
@@ -135,7 +142,8 @@ const EditMedicine = ({ chi, id, setid }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setevening(e.target.value)}>
+                          onChange={(e) => setevening(e.target.value)}
+                          required>
                           <option value="Select">Select </option>
                           <option value="1 table spoon">1 table spoon</option>
                           <option value="2 table spoon">2 table spoon</option>
@@ -154,7 +162,8 @@ const EditMedicine = ({ chi, id, setid }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setmeal(e.target.value)}>
+                          onChange={(e) => setmeal(e.target.value)}
+                          required>
                           <option value="Select">Select </option>
                           <option value="Before">Before</option>
                           <option value="After">After</option>
@@ -164,7 +173,13 @@ const EditMedicine = ({ chi, id, setid }) => {
                       <div className="flex">
                         <button
                           class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                          type="submit">
+                          type="submit"
+                          disabled={
+                            !medicineName ||
+                            !morning ||
+                            !evening ||
+                            !beforAfterMeal
+                          }>
                           Submit
                         </button>
 

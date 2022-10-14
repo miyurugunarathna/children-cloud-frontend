@@ -29,7 +29,7 @@ const CreateEvents = () => {
     <div>
       <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
         <Header />
-        <AddEvents />
+        <AddEvents evid={evid} setEvID={setEvID} />
         {!events.length ? (
           <div style={{ width: "1680px" }}>
             <div

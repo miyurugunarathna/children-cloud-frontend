@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MedicalStatusTable from "./MedicalStatusTable";
+import medicineRequest from "../../api/Medicine/medicine.request";
 
-const SingleMedicalStatus = ({ medicines }) => {
+const SingleMedicalStatus = ({ medicines, chID, setChID }) => {
   return (
     <div
       class=" overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl"
@@ -30,7 +31,6 @@ const SingleMedicalStatus = ({ medicines }) => {
               id="simple-search"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search"
-              required
             />
           </div>
           <button
@@ -52,7 +52,7 @@ const SingleMedicalStatus = ({ medicines }) => {
           </button>
         </form>
       </div>
-      <MedicalStatusTable medicines={medicines} />
+      <MedicalStatusTable medicines={medicines} chID={chID} setChID={setChID} />
     </div>
   );
 };

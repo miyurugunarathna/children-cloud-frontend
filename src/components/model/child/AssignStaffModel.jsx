@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import childRequest from "../../../api/Child/child.request";
+import Swal from "sweetalert2";
 
 const AssignStaffModel = ({ sfID, setSfID }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -50,7 +51,11 @@ const AssignStaffModel = ({ sfID, setSfID }) => {
       .then((res) => {
         console.log(res);
         setSfID("idADD");
-        alert("Staff Assigned Successfull !!");
+        Swal.fire(
+          `Staff Assigned Successfully!`,
+          "Click Ok to continue",
+          "success",
+        );
       })
       .catch((err) => {
         alert("something whent wrong!!!");
@@ -80,7 +85,7 @@ const AssignStaffModel = ({ sfID, setSfID }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  <h3 className="text-3xl font-semibold">Assign Staff</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}>

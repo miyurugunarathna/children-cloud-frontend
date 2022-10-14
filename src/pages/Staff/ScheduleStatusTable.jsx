@@ -1,7 +1,7 @@
 import React from "react";
 import UpdateScheduleStatus from "../../components/model/schedule/UpdateScheduleStatus";
 
-const ScheduleStatusTable = ({ schedules }) => {
+const ScheduleStatusTable = ({ schedules, shID, setShID }) => {
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
@@ -110,7 +110,11 @@ const ScheduleStatusTable = ({ schedules }) => {
                     </td>
                     <td class="py-3 px-6">
                       <div class="flex item-center justify-center">
-                        <UpdateScheduleStatus chi={chi} />
+                        <UpdateScheduleStatus
+                          chi={chi}
+                          shID={shID}
+                          setShID={setShID}
+                        />
                       </div>
                     </td>
                   </tr>

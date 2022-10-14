@@ -6,6 +6,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 const MedicalReportTable = () => {
   const [medicines, setmedicines] = useState([]);
   const [parentID, setparentID] = useState("");
+  const [wordEntered, setWordEntered] = useState("");
 
   useEffect(() => {
     // medicineRequest.getMedicinesForParent().then((res) => {
@@ -26,6 +27,34 @@ const MedicalReportTable = () => {
       setmedicines(res.data);
     });
   }, [parentID]);
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    console.log(searchWord);
+    setWordEntered(searchWord);
+    const newFilter = medicines.filter((res) => {
+      return (
+        res.childID.toLowerCase().includes(searchWord.toLowerCase()) ||
+        res.medicineName.toLowerCase().includes(searchWord.toLowerCase()) ||
+        res.childName.toLowerCase().includes(searchWord.toLowerCase()) ||
+        res.status.toLowerCase().includes(searchWord.toLowerCase()) ||
+        res.date.toLowerCase().includes(searchWord.toLowerCase()) ||
+        res.staffID.toLowerCase().includes(searchWord.toLowerCase())
+      );
+    });
+
+    if (searchWord === "") {
+      console.log("EMPLTY");
+      if (parentID) {
+        medicineRequest.getMedicinesForParent(parentID).then((res) => {
+          console.log(res);
+          setmedicines(res.data);
+        });
+      }
+    } else {
+      setmedicines(newFilter);
+    }
+  };
 
   return (
     <div>
@@ -63,7 +92,8 @@ const MedicalReportTable = () => {
                 id="simple-search"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search"
-                required
+                value={wordEntered}
+                onChange={handleFilter}
               />
             </div>
             <button
@@ -119,49 +149,49 @@ const MedicalReportTable = () => {
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.childID}</span>
                         </div>
                       </td>
 
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.childName}</span>
                         </div>
                       </td>
 
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.medicineName}</span>
                         </div>
                       </td>
 
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.status}</span>
                         </div>
                       </td>
 
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.date}</span>
                         </div>
                       </td>
 
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.description}</span>
                         </div>
                       </td>
 
                       <td class="py-3 px-6 text-left whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="mr-2"></div>
-                          <span class="font-medium">React Project</span>
+                          <span class="font-medium">{chi.staffID}</span>
                         </div>
                       </td>
                     </tr>

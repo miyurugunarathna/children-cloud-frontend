@@ -2,6 +2,7 @@ import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
+import Swal from "sweetalert2";
 
 const UpdateScheduleStatus = ({ chi, shID, setShID }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -44,7 +45,7 @@ const UpdateScheduleStatus = ({ chi, shID, setShID }) => {
       .then((res) => {
         console.log(res);
         setShID("idAdd");
-        alert("Updated  Successfull !!");
+        Swal.fire(`Updated Successfully!`, "Click Ok to continue", "success");
       })
       .catch((err) => {
         alert("something whent wrong!!!");
@@ -83,7 +84,7 @@ const UpdateScheduleStatus = ({ chi, shID, setShID }) => {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    Update Medicine Status
+                    Update Schedule Status
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -107,7 +108,8 @@ const UpdateScheduleStatus = ({ chi, shID, setShID }) => {
                         <select
                           id="countries"
                           class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          onChange={(e) => setstatus(e.target.value)}>
+                          onChange={(e) => setstatus(e.target.value)}
+                          required>
                           <option selected>Select Status</option>
                           <option value="Pending">Pending</option>
                           <option value="Done">Done</option>

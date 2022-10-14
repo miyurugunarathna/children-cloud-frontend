@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
 import eventRequest from "../../../api/Event/event.request";
+import Swal from "sweetalert2";
 
 const AddEvents = ({ evid, setEvID }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -25,7 +26,11 @@ const AddEvents = ({ evid, setEvID }) => {
       .then((res) => {
         console.log(res);
         setEvID("idADD");
-        alert("Event Added Successfull !!");
+        Swal.fire(
+          `Event Added Successfully!`,
+          "Click Ok to continue",
+          "success",
+        );
       })
       .catch((err) => {
         alert("Some thing went wrong");
@@ -56,7 +61,7 @@ const AddEvents = ({ evid, setEvID }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  <h3 className="text-3xl font-semibold">Add Event</h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}>
@@ -75,7 +80,7 @@ const AddEvents = ({ evid, setEvID }) => {
                           <div class="mb-1">
                             <label
                               for="fName"
-                              class="mb-3 block text-base font-medium text-[#07074D]">
+                              class="mb-1 block text-base font-medium text-[#07074D]">
                               Title
                             </label>
                             <input
@@ -86,6 +91,7 @@ const AddEvents = ({ evid, setEvID }) => {
                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                               value={title}
                               onChange={(e) => settitle(e.target.value)}
+                              required
                             />
                           </div>
                         </div>
@@ -93,7 +99,7 @@ const AddEvents = ({ evid, setEvID }) => {
                       <div class="mb-1">
                         <label
                           for="fName"
-                          class="mb-3 block text-base font-medium text-[#07074D]">
+                          class="mb-1 block text-base font-medium text-[#07074D]">
                           Description
                         </label>
                         <input
@@ -104,6 +110,7 @@ const AddEvents = ({ evid, setEvID }) => {
                           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           value={description}
                           onChange={(e) => setdescription(e.target.value)}
+                          required
                         />
                       </div>
 
@@ -111,7 +118,7 @@ const AddEvents = ({ evid, setEvID }) => {
                         <div class="mb-1">
                           <label
                             for="date"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            class="mb-1 block text-base font-medium text-[#07074D]">
                             Date
                           </label>
                           <input
@@ -121,6 +128,7 @@ const AddEvents = ({ evid, setEvID }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -129,7 +137,7 @@ const AddEvents = ({ evid, setEvID }) => {
                         <div class="mb-3">
                           <label
                             for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            class="mb-1 block text-base font-medium text-[#07074D]">
                             Start Time
                           </label>
                           <input
@@ -139,6 +147,7 @@ const AddEvents = ({ evid, setEvID }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={startTime}
                             onChange={(e) => setStart(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -147,7 +156,7 @@ const AddEvents = ({ evid, setEvID }) => {
                         <div class="mb-3">
                           <label
                             for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            class="mb-1 block text-base font-medium text-[#07074D]">
                             End Time
                           </label>
                           <input
@@ -157,6 +166,7 @@ const AddEvents = ({ evid, setEvID }) => {
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={endTime}
                             onChange={(e) => setEnd(e.target.value)}
+                            required
                           />
                         </div>
                       </div>
@@ -164,7 +174,7 @@ const AddEvents = ({ evid, setEvID }) => {
                       <div class="mb-1">
                         <label
                           for="fName"
-                          class="mb-3 block text-base font-medium text-[#07074D]">
+                          class="mb-1 block text-base font-medium text-[#07074D]">
                           Tag
                         </label>
                         <input
@@ -175,6 +185,7 @@ const AddEvents = ({ evid, setEvID }) => {
                           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           value={tag}
                           onChange={(e) => settag(e.target.value)}
+                          required
                         />
                       </div>
 
@@ -182,7 +193,7 @@ const AddEvents = ({ evid, setEvID }) => {
                         <div class="mb-1">
                           <label
                             for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            class="mb-1 block text-base font-medium text-[#07074D]">
                             Image
                           </label>
                           <br />
@@ -191,6 +202,7 @@ const AddEvents = ({ evid, setEvID }) => {
                             id="img"
                             multiple={false}
                             onDone={({ base64 }) => setimg(base64)}
+                            required
                           />
                           <br />
                         </div>
@@ -199,7 +211,16 @@ const AddEvents = ({ evid, setEvID }) => {
                       <div className="flex">
                         <button
                           class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                          type="submit">
+                          type="submit"
+                          disabled={
+                            !title ||
+                            !date ||
+                            !description ||
+                            !startTime ||
+                            !endTime ||
+                            !tag ||
+                            !image
+                          }>
                           Submit
                         </button>
 
