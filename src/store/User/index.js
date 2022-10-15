@@ -8,6 +8,9 @@ const initialState = {
     userName: null,
     email: null,
     role: null,
+    mobile: null,
+    address: null,
+    url: null,
   },
   isLoggedIn: false,
 };
@@ -20,6 +23,9 @@ const mapUserDetails = (data = {}) => ({
     userName: data?.userName,
     email: data?.email,
     role: data?.role,
+    mobile: data?.mobile,
+    address: data?.address,
+    url: data?.url,
   },
 });
 

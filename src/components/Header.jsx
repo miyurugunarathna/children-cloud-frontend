@@ -75,12 +75,13 @@ const Header = () => {
             </Link>
           </div>
           <div className="hidden lg:flex gap-4 items-center">
-            {navs.map((nav) =>
+            {navs.map((nav, key) =>
               nav.role.includes(role) ? (
                 <NavLink
+                  key={key}
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black no-underline"
+                      ? "text-black font-semibold no-underline"
                       : "text-slate-500 no-underline"
                   }
                   to={nav.url}>
@@ -98,24 +99,26 @@ const Header = () => {
             onClick={toggleMobileNav}
             className={`${
               isMobileNavOpen ? "-rotate-45" : "rotate-0"
-            } text-black block lg:hidden transition duration-500`}
+            } text-black block lg:hidden transition duration-500 cursor-pointer`}
             size={"1.8rem"}
           />
         </div>
       </div>
       <div
         ref={mobNav}
-        className={`${
-          isMobileNavOpen
-            ? `translate-y-[${mobNavHeight}px]`
-            : `-translate-y-[${mobNavHeight}px]`
-        } flex lg:hidden z-0 py-2 absolute mt-16 top-0 w-full bg-white transition duration-500 flex-col items-center border-b border-black/10 rounded-b-xl`}>
-        {navs.map((nav) =>
+        style={{
+          transform: `translateY(${
+            isMobileNavOpen ? 0 : `-${mobNavHeight}px`
+          })`,
+        }}
+        className={`flex lg:hidden z-0 py-2 absolute mt-16 top-0 w-full bg-white transition duration-500 flex-col items-center border-b border-black/10 rounded-b-xl`}>
+        {navs.map((nav, key) =>
           nav.role.includes(role) ? (
             <NavLink
+              key={key}
               className={({ isActive }) =>
                 isActive
-                  ? "text-black p-2 my-1 no-underline"
+                  ? "text-black font-semibold p-2 my-1 no-underline"
                   : "text-slate-500 p-2 my-1 no-underline"
               }
               to={nav.url}>
