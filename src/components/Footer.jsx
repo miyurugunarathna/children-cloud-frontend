@@ -11,6 +11,7 @@ function Footer() {
           <div className="col-md-6 mt-md-0 mt-3">
             <h5 className="text-uppercase">The Children Cloud</h5>
             <p>Your Child Our Responsibility..</p>
+
             <span>
               <Facebook size={30} style={{ margin: "0.5rem" }} />
               <Instagram size={30} style={{ margin: "0.5rem" }} />

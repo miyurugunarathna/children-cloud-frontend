@@ -1,12 +1,15 @@
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import EmployeeReg from "./pages/employeeReg.jsx";
-import EmployeeUpdt from "./pages/employeeUpdate.jsx";
-import ListEmployee from "./pages/listEmployee.jsx";
+import EmployeeReg from "./pages/employee/employeeReg.jsx";
+import EmployeeUpdt from "./pages/employee/employeeUpdate.jsx";
+import ListEmployee from "./pages/employee/listEmployee.jsx";
 import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
+import ListAttendance from "./pages/employee/attendance.jsx";
+import ChildAllocate from "./pages/employee/childAllocate.jsx";
+import { Login, Register, ChildProfile, Babysitters } from "./pages";
 import Events from "./pages/Child/Events";
 import MedicineDetails from "./pages/Child/MedicineDetails";
 import MedicineReport from "./pages/Child/MedicineReport";
@@ -16,7 +19,8 @@ import CreateEvents from "./pages/Admin/Events";
 import AssignedKids from "./pages/Staff/AssignedKids";
 import MedicalStatus from "./pages/Staff/MedicalStatus";
 import ScheduleStatus from "./pages/Staff/ScheduleStatus";
-import { Login, Register, Profile, Babysitters } from "./pages";
+import AttendanceApprove from "./pages/employee/reportAttendance.jsx";
+import AssignedBabysitter from "./pages/Staff/AssignedBabysitter";
 
 function App() {
   return (
@@ -32,6 +36,8 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/attendance" element={<ListAttendance />} />
+        <Route path="/allocate" element={<ChildAllocate />} />
         <Route path="/kidos" element={<ChildProfile />} />
         <Route path="/events" element={<Events />} />
         <Route path="/medicalDetails" element={<MedicineDetails />} />
@@ -44,6 +50,8 @@ function App() {
         <Route path="/addSchedule" element={<ScheduleStatus />} />
         <Route path="/me" element={<Profile />} />
         <Route path="/babysitters" element={<Babysitters />} />
+        <Route path="/report_attendance" element={<AttendanceApprove />} />
+        <Route path="/assignBabysitter" element={<AssignedBabysitter />} />
       </Routes>
     </Router>
   );

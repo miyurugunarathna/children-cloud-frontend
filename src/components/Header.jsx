@@ -32,7 +32,7 @@ const Header = () => {
     },
     {
       name: "Employees",
-      url: "/employees",
+      url: "/list",
       role: [ROLE_ADMIN],
     },
     {
@@ -79,6 +79,21 @@ const Header = () => {
       name: "AssignedKids",
       url: "/assignedKids",
       role: [ROLE_STAFF],
+    },
+    {
+      name: "Child-Allocate",
+      url: "/allocate",
+      role: [ROLE_ADMIN],
+    },
+    {
+      name: "Attendance",
+      url: "/attendance",
+      role: [ROLE_STAFF],
+    },
+    {
+      name: "Attendance-Report",
+      url: "/report_attendance",
+      role: [ROLE_ADMIN],
     },
   ];
 
