@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import StaffSidebar from "../../components/StaffSidebar";
 import SingleAssignedKids from "./SingleAssignedKids";
-import childRequest from "../../api/Child/child.request";
+import childRequest from "../../api/child/child.request";
 
 const AssignedKids = () => {
   const [childs, setchilds] = useState([]);

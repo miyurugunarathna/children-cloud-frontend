@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AssignedKidsTable from "./AssignedKidsTable";
-import childRequest from "../../api/Child/child.request";
+import childRequest from "../../api/child/child.request";
 
 const SingleAssignedKids = ({ childs }) => {
   return (

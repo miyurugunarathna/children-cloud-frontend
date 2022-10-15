@@ -1,7 +1,7 @@
 import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import childRequest from "../../../api/Child/child.request";
+import childRequest from "../../../api/child/child.request";
 import Swal from "sweetalert2";
 
 const UpdateAssignStaffModel = ({ chi, sfID, setSfID }) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
-import childRequest from "../../../api/Child/child.request";
+import childRequest from "../../../api/child/child.request";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 

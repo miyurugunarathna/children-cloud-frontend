@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DeleteAssignStaffModel from "../../components/model/child/DeleteAssignStaffModel";
 import UpdateAssignStaffModel from "../../components/model/child/UpdateAssignStaffModel";
-import childRequest from "../../api/Child/child.request";
+import childRequest from "../../api/child/child.request";
 
 const AssignStaffTable = ({ sfID, setSfID }) => {
   const [assignedStaffs, setStaffs] = useState([]);
