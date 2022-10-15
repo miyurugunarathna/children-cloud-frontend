@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getChildStore } from "../../store/Child";
-import childRequest from "../../api/Child/child.request";
+import childRequest from "../../api/child/child.request";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import SingleMedicineDetails from "./SingleMedicineDetails";
