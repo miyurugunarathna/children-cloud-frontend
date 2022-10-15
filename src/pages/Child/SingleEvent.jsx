@@ -1,12 +1,10 @@
 import React from "react";
-import DeleteEvent from "../../components/model/Event/DeleteEvent";
-import EditEvent from "../../components/model/Event/EditEvent";
 
-const SingleEvent = ({ eve, evid, setEvID }) => {
+const SingleEvent = ({ eve }) => {
   return (
     <div
       class=" overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl"
-      style={{ marginLeft: "250px" }}>
+      style={{ marginLeft: "100px", marginTop: "100px" }}>
       <p style={{ fontSize: "30px", fontWeight: "bold", marginLeft: "400px" }}>
         {" "}
         {eve.title}
@@ -45,13 +43,6 @@ const SingleEvent = ({ eve, evid, setEvID }) => {
         <div>
           <p>About Birth Day</p>
         </div>
-      </div>
-
-      <div
-        class="flex item-center justify-center"
-        style={{ marginLeft: "1200px" }}>
-        <EditEvent eve={eve} evid={evid} setEvID={setEvID} />
-        <DeleteEvent eve={eve} evid={evid} setEvID={setEvID} />
       </div>
     </div>
   );

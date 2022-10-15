@@ -84,7 +84,7 @@ const StaffSidebar = () => {
           </li>
         </ul>
         <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">
-          Copyright @2021
+          ChildrenCloud @2022
         </p>
       </div>
     </div>

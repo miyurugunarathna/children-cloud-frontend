@@ -39,11 +39,31 @@ const getMedicines = async (childID) => {
   }
 };
 
+const getMedicinesForStaff = async () => {
+  try {
+    const response = await apiInstance.get(`/api/medicine/`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+const getMedicinesForParent = async (id) => {
+  try {
+    const response = await apiInstance.get(`/api/medicine/parent/${id}`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const medicineRequest = {
   saveMedicine,
   updateMedicine,
   deleteMedicine,
   getMedicines,
+  getMedicinesForStaff,
+  getMedicinesForParent,
 };
 
 export default medicineRequest;

@@ -1,10 +1,64 @@
 import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
 import FileBase from "react-file-base64";
+import childRequest from "../../../api/Child/child.request";
+import Swal from "sweetalert2";
 
-const UpdateAssignStaffModel = () => {
+const UpdateAssignStaffModel = ({ chi, sfID, setSfID }) => {
   const [showModal, setShowModal] = React.useState(false);
-  const [img, setimg] = useState("");
+  const [childs, setchilds] = useState([]);
+  const [staffs, setstaffs] = useState([]);
+  const [childID, setchildID] = useState("");
+  const [name, setname] = useState("");
+  const [age, setage] = useState("");
+  const [staff, setstaff] = useState("");
+  const [status, setstatus] = useState("");
+
+  useEffect(() => {
+    childRequest.getAllChilds().then((res) => {
+      console.log(res.data);
+      setchilds(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    if ({ chi }) {
+      setchildID(chi.childID);
+      setstaff(chi.staff);
+      setstatus(chi.status);
+    }
+  }, [chi]);
+
+  useEffect(() => {
+    childRequest.getAllStaffs().then((res) => {
+      console.log(res.data);
+      setstaffs(res.data);
+    });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    childRequest
+      .updateAssignedStaff({ staff, status }, chi._id)
+      .then((res) => {
+        console.log(res);
+        setSfID("idADD");
+        Swal.fire(
+          `Staff Assign Updated Successfully!`,
+          "Click Ok to continue",
+          "success",
+        );
+      })
+      .catch((err) => {
+        alert("something whent wrong!!!");
+      });
+
+    clear();
+    setShowModal(false);
+  };
+  const clear = () => {
+    //style={{marginLeft: "1400px" , marginBottom: "10px"}}
+  };
   return (
     <>
       <div
@@ -31,7 +85,9 @@ const UpdateAssignStaffModel = () => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">Modal Title</h3>
+                  <h3 className="text-3xl font-semibold">
+                    Update Assign Staff
+                  </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}>
@@ -44,110 +100,69 @@ const UpdateAssignStaffModel = () => {
 
                 <div class="flex items-center justify-center p-12">
                   <div class="mx-auto w-full max-w-[550px]">
-                    <form action="https://formbold.com/s/FORM_ID" method="POST">
-                      <div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 " style={{ width: "500px" }}>
-                          <div class="mb-1">
-                            <label
-                              for="fName"
-                              class="mb-3 block text-base font-medium text-[#07074D]">
-                              Name
-                            </label>
-                            <input
-                              type="text"
-                              name="fName"
-                              id="fName"
-                              placeholder="First Name"
-                              class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-1">
-                        <label
-                          for="guest"
-                          class="mb-3 block text-base font-medium text-[#07074D]">
-                          Gender
-                        </label>
-                        <select
-                          id="countries"
-                          class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                          <option selected>Choose a country</option>
-                          <option value="US">United States</option>
-                          <option value="CA">Canada</option>
-                          <option value="FR">France</option>
-                          <option value="DE">Germany</option>
-                        </select>
-                      </div>
-
-                      <div class="w-full">
+                    <form onSubmit={handleSubmit}>
+                      <div class="w-full px-3 " style={{ width: "500px" }}>
                         <div class="mb-1">
                           <label
-                            for="date"
+                            for="guest"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            Date
+                            Child ID
                           </label>
-                          <input
-                            type="date"
-                            name="date"
-                            id="date"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
+                          <label
+                            for="guest"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            {childID}
+                          </label>
                         </div>
-                      </div>
 
-                      <div class="w-full">
                         <div class="mb-1">
                           <label
-                            for="school"
+                            for="guest"
                             class="mb-3 block text-base font-medium text-[#07074D]">
-                            School
+                            Staff ID
                           </label>
-                          <input
-                            type="text"
-                            name="school"
-                            id="school"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
+                          <select
+                            id="countries"
+                            class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={(e) => setstaff(e.target.value)}>
+                            <option selected>Select Staff ID</option>
+                            {!staffs.length ? (
+                              <option value="none">
+                                No Staff ID's Available
+                              </option>
+                            ) : (
+                              staffs.map((staff) => (
+                                <option value={staff._id} key={staff._id}>
+                                  {staff._id}
+                                </option>
+                              ))
+                            )}
+                          </select>
+                        </div>
+                        <div class="mb-5">
+                          <label
+                            for="guest"
+                            class="mb-3 block text-base font-medium text-[#07074D]">
+                            Status
+                          </label>
+                          <select
+                            id="countries"
+                            class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={(e) => setstatus(e.target.value)}>
+                            <option selected>Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Done">Done</option>
+                            <option value="Failed">Failed</option>
+                          </select>
                         </div>
                       </div>
 
-                      <div class="w-full">
-                        <div class="mb-1">
-                          <label
-                            for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
-                            Hobby
-                          </label>
-                          <input
-                            type="text"
-                            name="hobby"
-                            id="hobby"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="w-full">
-                        <div class="mb-1">
-                          <label
-                            for="hobby"
-                            class="mb-3 block text-base font-medium text-[#07074D]">
-                            Image
-                          </label>
-                          <br />
-                          <FileBase
-                            type="file"
-                            id="img"
-                            multiple={false}
-                            onDone={({ base64 }) => setimg(base64)}
-                          />
-                          <br />
-                        </div>
-                      </div>
+                      <br />
 
                       <div className="flex">
-                        <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        <button
+                          class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                          type="submit">
                           Submit
                         </button>
 

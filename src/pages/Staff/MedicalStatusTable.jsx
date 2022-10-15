@@ -1,27 +1,7 @@
-import React, { useState, useEffect } from "react";
-import DeleteMedicine from "../../components/model/medicine/DeleteMedicine";
-import EditMedicine from "../../components/model/medicine/EditMedicine";
-import { useDispatch, useSelector } from "react-redux";
-import medicineRequest from "../../api/Medicine/medicine.request";
+import React from "react";
+import UpdateStatusModel from "../../components/model/medicine/UpdateStatusModel";
 
-const MedicineTable = ({ chi, id, setid }) => {
-  const [medicines, setmedicines] = useState([]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    medicineRequest.getMedicines(chi._id).then((res) => {
-      console.log(res.data);
-      setmedicines(res.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    medicineRequest.getMedicines(chi._id).then((res) => {
-      console.log(res.data);
-      setmedicines(res.data);
-      setid(null);
-    });
-  }, [id]);
+const MedicalStatusTable = ({ medicines, chID, setChID }) => {
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
@@ -34,23 +14,24 @@ const MedicineTable = ({ chi, id, setid }) => {
                 <th class="py-3 px-6 text-center">MedicineName</th>
                 <th class="py-3 px-6 text-center">Morning</th>
                 <th class="py-3 px-6 text-center">Evening</th>
-                <th class="py-3 px-6 text-center">beforeAfterMeal</th>
-                <th class="py-3 px-6 text-center">Actions</th>
+                <th class="py-3 px-6 text-center">BeforeAfterMeal</th>
+                <th class="py-3 px-6 text-center">Date</th>
+                <th class="py-3 px-6 text-center">Description</th>
+                <th class="py-3 px-6 text-center">Status</th>
+                <th class="py-3 px-6 text-center">Action</th>
               </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
               {!medicines.length ? (
                 <div>
                   <div>
-                    <h4>No Medical Details Added !</h4>
-                    <p>No Medical Details Were Found.</p>
+                    <h4>No Schedule Details Added !</h4>
+                    <p>No Schedule Details Were Found.</p>
                   </div>
                 </div>
               ) : (
                 medicines.map((chi) => (
-                  <tr
-                    class="border-b border-gray-200 hover:bg-gray-100"
-                    key={chi._id}>
+                  <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="mr-2"></div>
@@ -87,30 +68,31 @@ const MedicineTable = ({ chi, id, setid }) => {
                         <span class="font-medium">{chi.beforAfterMeal}</span>
                       </div>
                     </td>
+
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.date}</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.description}</span>
+                      </div>
+                    </td>
+                    <td class="py-3 px-6 text-center">
+                      <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                        {chi.status}
+                      </span>
+                    </td>
                     <td class="py-3 px-6 ">
                       <div class="flex item-center justify-center">
-                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                            />
-                          </svg>
-                        </div>
-                        <EditMedicine chi={chi} id={id} setid={setid} />
-                        <DeleteMedicine chi={chi} id={id} setid={setid} />
+                        <UpdateStatusModel
+                          chi={chi}
+                          chID={chID}
+                          setChID={setChID}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -124,4 +106,4 @@ const MedicineTable = ({ chi, id, setid }) => {
   );
 };
 
-export default MedicineTable;
+export default MedicalStatusTable;

@@ -90,7 +90,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="relative z-10 w-full mx-auto border-b border-black/15">
+      <div className="fixed z-10 w-full mx-auto border-b border-black/15">
         <div className="bg-white w-full max-w-6xl mx-auto flex justify-between gap-8 px-8 sm:px-16 items-center h-16 font-semibold text-md">
           <div className="flex gap-10">
             <Link

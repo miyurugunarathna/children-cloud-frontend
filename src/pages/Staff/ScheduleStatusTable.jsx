@@ -1,27 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import scheduleRequest from "../../api/Schedule/schedule.request";
-import DeleteSchedule from "../../components/model/schedule/DeleteSchedule";
-import UpdateSchedule from "../../components/model/schedule/UpdateSchedule";
+import React from "react";
+import UpdateScheduleStatus from "../../components/model/schedule/UpdateScheduleStatus";
 
-const ScheduleTable = ({ chi, sid, setSid }) => {
-  const [schedules, setschedules] = useState([]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    scheduleRequest.getSchedules(chi._id).then((res) => {
-      console.log(res.data);
-      setschedules(res.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    scheduleRequest.getSchedules(chi._id).then((res) => {
-      console.log(res.data);
-      setschedules(res.data);
-      setSid(null);
-    });
-  }, [sid]);
+const ScheduleStatusTable = ({ schedules, shID, setShID }) => {
   return (
     <div class="overflow-x-auto ml-10">
       <div class="w-full lg:w-5/6">
@@ -31,12 +11,15 @@ const ScheduleTable = ({ chi, sid, setSid }) => {
               <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left">ChildID</th>
                 <th class="py-3 px-6 text-left">ChildName</th>
-                <th class="py-3 px-6 text-center">TeachersName</th>
+                <th class="py-3 px-6 text-center">TeacherName</th>
                 <th class="py-3 px-6 text-center">Subject</th>
-                <th class="py-3 px-6 text-center">Address</th>
                 <th class="py-3 px-6 text-center">Day</th>
                 <th class="py-3 px-6 text-center">StartingTime</th>
                 <th class="py-3 px-6 text-center">EndingTime</th>
+                <th class="py-3 px-6 text-center">Address</th>
+                <th class="py-3 px-6 text-center">Date</th>
+                <th class="py-3 px-6 text-center">Description</th>
+                <th class="py-3 px-6 text-center">Status</th>
                 <th class="py-3 px-6 text-center">Actions</th>
               </tr>
             </thead>
@@ -50,9 +33,7 @@ const ScheduleTable = ({ chi, sid, setSid }) => {
                 </div>
               ) : (
                 schedules.map((chi) => (
-                  <tr
-                    class="border-b border-gray-200 hover:bg-gray-100"
-                    key={chi._id}>
+                  <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="mr-2"></div>
@@ -66,7 +47,6 @@ const ScheduleTable = ({ chi, sid, setSid }) => {
                         <span class="font-medium">{chi.childName}</span>
                       </div>
                     </td>
-
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                       <div class="flex items-center">
                         <div class="mr-2"></div>
@@ -78,13 +58,6 @@ const ScheduleTable = ({ chi, sid, setSid }) => {
                       <div class="flex items-center">
                         <div class="mr-2"></div>
                         <span class="font-medium">{chi.subject}</span>
-                      </div>
-                    </td>
-
-                    <td class="py-3 px-6 text-left whitespace-nowrap">
-                      <div class="flex items-center">
-                        <div class="mr-2"></div>
-                        <span class="font-medium">{chi.address}</span>
                       </div>
                     </td>
 
@@ -109,31 +82,39 @@ const ScheduleTable = ({ chi, sid, setSid }) => {
                       </div>
                     </td>
 
-                    <td class="py-3 px-6 ">
-                      <div class="flex item-center justify-center">
-                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                            />
-                          </svg>
-                        </div>
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.address}</span>
+                      </div>
+                    </td>
 
-                        <UpdateSchedule chi={chi} sid={sid} setSid={setSid} />
-                        <DeleteSchedule chi={chi} sid={sid} setSid={setSid} />
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.date}</span>
+                      </div>
+                    </td>
+
+                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="mr-2"></div>
+                        <span class="font-medium">{chi.description}</span>
+                      </div>
+                    </td>
+
+                    <td class="py-3 px-6 text-center">
+                      <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                        {chi.status}
+                      </span>
+                    </td>
+                    <td class="py-3 px-6">
+                      <div class="flex item-center justify-center">
+                        <UpdateScheduleStatus
+                          chi={chi}
+                          shID={shID}
+                          setShID={setShID}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -147,4 +128,4 @@ const ScheduleTable = ({ chi, sid, setSid }) => {
   );
 };
 
-export default ScheduleTable;
+export default ScheduleStatusTable;

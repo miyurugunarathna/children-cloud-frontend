@@ -39,11 +39,21 @@ const getSchedules = async (childID) => {
   }
 };
 
+const getScheduleForStaff = async () => {
+  try {
+    const response = await apiInstance.get(`/api/schedule/`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const scheduleRequest = {
   saveSchedule,
   updateSchedule,
   deleteSchedule,
   getSchedules,
+  getScheduleForStaff,
 };
 
 export default scheduleRequest;

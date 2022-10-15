@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UpdateProfile from "../../components/model/child/UpdateProfile";
 
-const SingleChild = ({ chi }) => {
+const SingleChild = ({ chi, sid, setSid }) => {
   return (
     <div class=" overflow-hidden flex flex-col justify-center space-y-2  rounded-xl max-w-[90rem] p-4 mb-4   ml-10 shadow-2xl">
       <div style={{ display: "flex" }}>
@@ -31,7 +31,7 @@ const SingleChild = ({ chi }) => {
           />
         </div>
       </div>
-      <UpdateProfile />
+      <UpdateProfile chi={chi} sid={sid} setSid={setSid} />
     </div>
   );
 };

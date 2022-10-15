@@ -1,7 +1,18 @@
 import React from "react";
+import medicineRequest from "../../../api/Medicine/medicine.request";
 
-const DeleteMedicine = () => {
+const DeleteMedicine = ({ chi, id, setid }) => {
   const [showModal, setShowModal] = React.useState(false);
+
+  const DeleteData = () => {
+    // dispatch(deleteUsers(user._id));
+    medicineRequest.deleteMedicine(chi._id).then((res) => {
+      console.log(res);
+      setid("idSet");
+      alert("Deletion Successfull!!!");
+    });
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -65,7 +76,8 @@ const DeleteMedicine = () => {
                     <button
                       data-modal-toggle="popup-modal"
                       type="button"
-                      class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                      class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                      onClick={DeleteData}>
                       Yes, I'm sure
                     </button>
                     <button

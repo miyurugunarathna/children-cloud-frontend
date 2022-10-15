@@ -1,10 +1,10 @@
+import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import FileBase from "react-file-base64";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
 import Swal from "sweetalert2";
 
-const AddScheduleDetails = ({ chi, sid, setSid }) => {
-  const dispatch = useDispatch();
+const UpdateSchedule = ({ chi, sid, setSid }) => {
   const [showModal, setShowModal] = React.useState(false);
 
   const [subject, setsubject] = useState("");
@@ -13,34 +13,37 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
   const [endingTime, setendingTime] = useState("");
   const [day, setday] = useState("");
   const [teacherName, setteacherName] = useState("");
-  const [childName, setchildName] = useState("");
-  const [childID, setchildID] = useState("");
 
   useEffect(() => {
-    if (chi) {
-      setchildID(chi._id);
-      setchildName(chi.name);
+    if ({ chi }) {
+      setsubject(chi.subject);
+      setaddress(chi.address);
+      setstartingTime(chi.startingTime);
+      setendingTime(chi.endingTime);
+      setday(chi.day);
+      setteacherName(chi.teacherName);
     }
   }, [chi]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     scheduleRequest
-      .saveSchedule({
-        childID,
-        childName,
-        subject,
-        address,
-        startingTime,
-        endingTime,
-        day,
-        teacherName,
-      })
+      .updateSchedule(
+        {
+          subject,
+          address,
+          startingTime,
+          endingTime,
+          day,
+          teacherName,
+        },
+        chi._id,
+      )
       .then((res) => {
         console.log(res);
         setSid("idSet");
         Swal.fire(
-          `Schedule Added Successfully!`,
+          `schedule Updated Successfully!`,
           "Click Ok to continue",
           "success",
         );
@@ -55,27 +58,34 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
   const clear = () => {
     //style={{marginLeft: "1400px" , marginBottom: "10px"}}
   };
-
-  //max-w-3xl  max-w-[200rem]
   return (
     <>
-      <button
-        className=" text-black  font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 max-w-[20rem]"
-        type="button"
-        onClick={() => setShowModal(true)}
-        style={{ marginLeft: "1000px" }}>
-        Add Schedule
-      </button>
+      <div
+        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+        onClick={() => setShowModal(true)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          />
+        </svg>
+      </div>
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
-            <div className="relative w-auto my-5  min-w-500 mx-auto ">
+            <div>
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t min-w-500">
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    Add Schedule Details
+                    Update Schedule Details
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -88,7 +98,7 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
                 {/*body*/}
 
                 <div class="flex items-center justify-center p-12">
-                  <div class="mx-auto w-full max-w-[550px]  ">
+                  <div class="w-full px-3 " style={{ width: "500px" }}>
                     <form onSubmit={handleSubmit}>
                       <div
                         class="w-full px-3 "
@@ -237,10 +247,11 @@ const AddScheduleDetails = ({ chi, sid, setSid }) => {
               </div>
             </div>
           </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>
   );
 };
 
-export default AddScheduleDetails;
+export default UpdateSchedule;

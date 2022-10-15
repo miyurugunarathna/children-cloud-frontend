@@ -1,14 +1,14 @@
 import React from "react";
-import eventRequest from "../../../api/Event/event.request";
+import scheduleRequest from "../../../api/Schedule/schedule.request";
 
-const DeleteEvent = ({ eve, evid, setEvID }) => {
+const DeleteSchedule = ({ chi, sid, setSid }) => {
   const [showModal, setShowModal] = React.useState(false);
 
-  const DeleteEvent = () => {
+  const DeleteData = () => {
     // dispatch(deleteUsers(user._id));
-    eventRequest.deleteEvent(eve._id).then((res) => {
+    scheduleRequest.deleteSchedule(chi._id).then((res) => {
       console.log(res);
-      setEvID("idADD");
+      setSid("idSet");
       alert("Deletion Successfull!!!");
     });
     setShowModal(false);
@@ -77,7 +77,7 @@ const DeleteEvent = ({ eve, evid, setEvID }) => {
                       data-modal-toggle="popup-modal"
                       type="button"
                       class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                      onClick={DeleteEvent}>
+                      onClick={DeleteData}>
                       Yes, I'm sure
                     </button>
                     <button
@@ -99,4 +99,4 @@ const DeleteEvent = ({ eve, evid, setEvID }) => {
   );
 };
 
-export default DeleteEvent;
+export default DeleteSchedule;
