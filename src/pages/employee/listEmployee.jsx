@@ -18,7 +18,7 @@ export default class listEmployee extends Component {
   }
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/employee/")
+      .post("http://localhost:5000/api/employee/")
       .then((res) => {
         if (res.data && res.data?.data) {
           console.log(res.data.data);
@@ -53,7 +53,7 @@ export default class listEmployee extends Component {
 
           <button className="btn btn-primary">
             <a
-              href="/employeeReg.jsx"
+              href="http://127.0.0.1:5173/employee"
               className="text-decoration-none text-white">
               Add Employee
             </a>
@@ -83,6 +83,7 @@ export default class listEmployee extends Component {
                 <th scope="col">Employee ID</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">NIC</th>
+                <th scope="col">Type</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>

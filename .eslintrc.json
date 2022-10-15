@@ -20,6 +20,10 @@
     "react/react-in-jsx-scope": ["off"],
     "react/function-component-definition": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "no-lonely-if": "off",
+    "import/prefer-default-export": "off",
+    "consistent-return": "off"
   }
 }

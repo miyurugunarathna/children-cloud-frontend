@@ -41,9 +41,9 @@ export default class tableEmployee extends Component {
     });
   }
   eventClick = () => {
-    this.props.history.push(
-      "http://127.0.0.1:5173/update/" + this.props.obj._id,
-    );
+    // this.props.history.push(
+    //   "http://127.0.0.1:5173/update/" + this.props.obj._id,
+    // );
   };
   render() {
     return (
@@ -51,6 +51,7 @@ export default class tableEmployee extends Component {
         <td>{this.props.obj.empID}</td>
         <td>{this.props.obj.fullName}</td>
         <td>{this.props.obj.nic}</td>
+        <td>{this.props.obj.type}</td>
 
         <td>
           <a

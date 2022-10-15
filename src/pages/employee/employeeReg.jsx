@@ -97,6 +97,8 @@ function employeeReg() {
                               id="floatingInput"
                               name="fullName"
                               placeholder="employee name"
+                              pattern="[A-Za-z]+"
+                              title="Characters can only be A-Z and a-z."
                               required
                               onChange={(event) => {
                                 setFullName(event.target.value);

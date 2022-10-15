@@ -7,10 +7,22 @@ import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
-import { Login, Register } from "./pages";
-import ListAttendance from "./pages/employee/attendanceList.jsx";
+
+import ListAttendance from "./pages/employee/attendance.jsx";
 import { Table } from "react-bootstrap";
 import ChildAllocate from "./pages/employee/childAllocate.jsx";
+import { Login, Register, ChildProfile } from "./pages";
+import Events from "./pages/Child/Events";
+import MedicineDetails from "./pages/Child/MedicineDetails";
+import MedicineReport from "./pages/Child/MedicineReport";
+import TutionSchedule from "./pages/Child/TutionSchedule";
+import AssignStaff from "./pages/Admin/AssignStaff";
+import CreateEvents from "./pages/Admin/Events";
+import AssignedKids from "./pages/Staff/AssignedKids";
+import MedicalStatus from "./pages/Staff/MedicalStatus";
+import ScheduleStatus from "./pages/Staff/ScheduleStatus";
+import AttendanceApprove from "./pages/employee/reportAttendance.jsx";
+import AssignedBabysitter from "./pages/Staff/AssignedBabysitter";
 
 function App() {
   return (
@@ -28,6 +40,18 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/attendance" element={<ListAttendance />} />
         <Route path="/allocate" element={<ChildAllocate />} />
+        <Route path="/kidos" element={<ChildProfile />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/medicalDetails" element={<MedicineDetails />} />
+        <Route path="/medicalReport" element={<MedicineReport />} />
+        <Route path="/tution" element={<TutionSchedule />} />
+        <Route path="/assignStaff" element={<AssignStaff />} />
+        <Route path="/createEvents" element={<CreateEvents />} />
+        <Route path="/assignedKids" element={<AssignedKids />} />
+        <Route path="/addMedical" element={<MedicalStatus />} />
+        <Route path="/addSchedule" element={<ScheduleStatus />} />
+        <Route path="/report_attendance" element={<AttendanceApprove />} />
+        <Route path="/assignBabysitter" element={<AssignedBabysitter />} />
       </Routes>
     </Router>
   );

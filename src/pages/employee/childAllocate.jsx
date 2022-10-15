@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import { Button, Modal, Form } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import AsyncSelect from "react-select/async";
+import { json } from "react-router-dom";
 
 const Child = () => {
   const [items, setItems] = useState([]);
@@ -36,10 +37,14 @@ const Child = () => {
   };
 
   const fetchData = () => {
-    return axios.get("http://localhost:5000/api/employee/").then((result) => {
-      const res = result.data.data;
-      return res;
-    });
+    return axios
+      .post("http://localhost:5000/api/employee/", {
+        filter: { type: "BabySitter" },
+      })
+      .then((result) => {
+        const res = result.data.data;
+        return res;
+      });
   };
 
   const fetchChildren = () => {
@@ -48,6 +53,40 @@ const Child = () => {
       return res;
     });
   };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/api/babySitter/add", {
+        BabySitter: selectedValue?.empID,
+        child01: selectedChild1?.name,
+        child02: selectedChild2?.name,
+        child03: selectedChild3?.name,
+      });
+      console.log(res);
+      // setBabySitter("");
+      // setChild01("");
+      // setChild02("");
+      // setChild03("");
+      Swal.fire({
+        title: "Success!",
+        text: "Children allocated successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(function () {
+        location.reload();
+      });
+    } catch (err) {
+      Swal.fire({
+        title: "Allert!",
+        text: "Please Enter Details",
+        icon: "info",
+        confirmButtonText: "OK",
+      }).then(function () {
+        location.reload();
+      });
+    }
+  }
 
   return (
     <div className="App">
@@ -69,9 +108,9 @@ const Child = () => {
                     <br />
                     <Card
                       style={{ width: "50rem" }}
-                      className="card bg-secondary mb-3">
+                      className="card bg-light mb-3">
                       <Card.Body>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                           <Form.Label className="mb-2">
                             Select BabySitter
                           </Form.Label>
@@ -187,15 +226,7 @@ const Child = () => {
                           <th>Child 03</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>{}</td>
-                          <td>{}</td>
-                          <td>{}</td>
-                          <td>{}</td>
-                          <td>{}</td>
-                        </tr>
-                      </tbody>
+                      <tbody>{}</tbody>
                     </Table>
                   </div>
                   <br />
