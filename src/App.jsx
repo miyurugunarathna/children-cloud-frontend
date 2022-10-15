@@ -7,9 +7,7 @@ import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
-
 import ListAttendance from "./pages/employee/attendance.jsx";
-import { Table } from "react-bootstrap";
 import ChildAllocate from "./pages/employee/childAllocate.jsx";
 import { Login, Register, ChildProfile } from "./pages";
 import Events from "./pages/Child/Events";
