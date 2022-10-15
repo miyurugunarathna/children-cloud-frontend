@@ -7,7 +7,6 @@ import BillItem from "./pages/Bill/billItem.jsx";
 import BillItemUpdate from "./pages/Bill/updateBillItem.jsx";
 import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
-import { Login, Register, ChildProfile } from "./pages";
 import Events from "./pages/Child/Events";
 import MedicineDetails from "./pages/Child/MedicineDetails";
 import MedicineReport from "./pages/Child/MedicineReport";
@@ -17,6 +16,7 @@ import CreateEvents from "./pages/Admin/Events";
 import AssignedKids from "./pages/Staff/AssignedKids";
 import MedicalStatus from "./pages/Staff/MedicalStatus";
 import ScheduleStatus from "./pages/Staff/ScheduleStatus";
+import { Login, Register, Profile, Babysitters } from "./pages";
 
 function App() {
   return (
@@ -42,6 +42,8 @@ function App() {
         <Route path="/assignedKids" element={<AssignedKids />} />
         <Route path="/addMedical" element={<MedicalStatus />} />
         <Route path="/addSchedule" element={<ScheduleStatus />} />
+        <Route path="/me" element={<Profile />} />
+        <Route path="/babysitters" element={<Babysitters />} />
       </Routes>
     </Router>
   );

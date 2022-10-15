@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import childRequest from "../../api/Child/child.request";
+import childRequest from "../../api/child/child.request";
 
 export const getChildStore = createAsyncThunk(
   "child/getchilds",

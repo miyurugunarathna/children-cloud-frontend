@@ -16,6 +16,14 @@ const getAllUsers = async () => {
     return err.response;
   }
 };
+const updateUser = async (user, userID) => {
+  try {
+    const response = await apiInstance.put(`api/user/${userID}`, user);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
 
 const login = async (loginCredentials) => {
   try {
@@ -71,6 +79,7 @@ const userRequest = {
   logout,
   authHeader,
   viewProfile,
+  updateUser,
 };
 
 export default userRequest;
