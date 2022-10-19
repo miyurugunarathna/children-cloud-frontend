@@ -1,5 +1,6 @@
 import React from "react";
 import eventRequest from "../../../api/Event/event.request";
+import Swal from "sweetalert2";
 
 const DeleteEvent = ({ eve, evid, setEvID }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -9,7 +10,7 @@ const DeleteEvent = ({ eve, evid, setEvID }) => {
     eventRequest.deleteEvent(eve._id).then((res) => {
       console.log(res);
       setEvID("idADD");
-      alert("Deletion Successfull!!!");
+      Swal.fire("Delete!", "Event Deleted Successfully", "error");
     });
     setShowModal(false);
   };

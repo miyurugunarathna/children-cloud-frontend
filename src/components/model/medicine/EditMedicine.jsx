@@ -42,7 +42,7 @@ const EditMedicine = ({ chi, id, setid }) => {
         );
       })
       .catch((err) => {
-        alert("something whent wrong!!!");
+        Swal.fire("Error!", "Some thing went wrong", "error");
       });
 
     clear();

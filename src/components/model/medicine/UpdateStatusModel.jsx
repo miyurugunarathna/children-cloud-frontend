@@ -48,7 +48,7 @@ const UpdateStatusModel = ({ chi, chID, setChID }) => {
         Swal.fire(`Updated Successfully!`, "Click Ok to continue", "success");
       })
       .catch((err) => {
-        alert("something whent wrong!!!");
+        Swal.fire("Error!", "Some thing went wrong", "error");
       });
 
     clear();

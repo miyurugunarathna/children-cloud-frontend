@@ -1,5 +1,6 @@
 import React from "react";
 import scheduleRequest from "../../../api/Schedule/schedule.request";
+import Swal from "sweetalert2";
 
 const DeleteSchedule = ({ chi, sid, setSid }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -9,7 +10,7 @@ const DeleteSchedule = ({ chi, sid, setSid }) => {
     scheduleRequest.deleteSchedule(chi._id).then((res) => {
       console.log(res);
       setSid("idSet");
-      alert("Deletion Successfull!!!");
+      Swal.fire("Delete!", "Schedule Deleted Successfully", "error");
     });
     setShowModal(false);
   };

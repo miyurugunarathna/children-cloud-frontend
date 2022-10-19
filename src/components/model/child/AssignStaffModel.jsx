@@ -58,7 +58,7 @@ const AssignStaffModel = ({ sfID, setSfID }) => {
         );
       })
       .catch((err) => {
-        alert("something whent wrong!!!");
+        Swal.fire("Error!", "Some thing Went Wrong", "error");
       });
 
     clear();

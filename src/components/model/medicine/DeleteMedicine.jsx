@@ -1,5 +1,6 @@
 import React from "react";
 import medicineRequest from "../../../api/Medicine/medicine.request";
+import Swal from "sweetalert2";
 
 const DeleteMedicine = ({ chi, id, setid }) => {
   const [showModal, setShowModal] = React.useState(false);
@@ -9,7 +10,7 @@ const DeleteMedicine = ({ chi, id, setid }) => {
     medicineRequest.deleteMedicine(chi._id).then((res) => {
       console.log(res);
       setid("idSet");
-      alert("Deletion Successfull!!!");
+      Swal.fire("Delete!", "Medicine Deleted Successfully", "error");
     });
     setShowModal(false);
   };

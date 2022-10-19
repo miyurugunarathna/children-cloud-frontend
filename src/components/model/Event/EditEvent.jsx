@@ -46,7 +46,7 @@ const EditEvent = ({ eve, evid, setEvID }) => {
         );
       })
       .catch((err) => {
-        alert("Some thing went wrong");
+        Swal.fire("Error!", "Some thing went wrong", "error");
       });
 
     clear();
