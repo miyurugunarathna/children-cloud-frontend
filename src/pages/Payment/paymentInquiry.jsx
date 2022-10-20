@@ -18,55 +18,66 @@ const App = (props) => {
   });
 
   //destructure values from state
-  const { childId, billId, paymentId, contactNumber,type, emailAddress, description } = state;
+  const {
+    childId,
+    billId,
+    paymentId,
+    contactNumber,
+    type,
+    emailAddress,
+    description,
+  } = state;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.table({
-      childId, 
-      billId, 
-      paymentId, 
+      childId,
+      billId,
+      paymentId,
       type,
-      contactNumber, 
-      emailAddress, 
+      contactNumber,
+      emailAddress,
       description,
     });
     axios
-      .post(`http://localhost:5000/api/paymentInq/add`, 
-      {
-      childId, 
-      billId, 
-      paymentId, 
-      type,
-      contactNumber, 
-      emailAddress, 
-      description,
+      .post(`http://localhost:5000/api/paymentInq/add`, {
+        childId,
+        billId,
+        paymentId,
+        type,
+        contactNumber,
+        emailAddress,
+        description,
       })
       .then((response) => {
         console.log(response);
-        const { 
-          childId, 
-          billId, 
-          paymentId, 
+        const {
+          childId,
+          billId,
+          paymentId,
           type,
-          contactNumber, 
-          emailAddress, 
-          description, 
+          contactNumber,
+          emailAddress,
+          description,
         } = response.data.data;
 
         //empty state
         setState({
           ...state,
-          childId, 
-          billId, 
-          paymentId, 
+          childId,
+          billId,
+          paymentId,
           type,
-          contactNumber, 
-          emailAddress, 
+          contactNumber,
+          emailAddress,
           description,
         });
         //show success alert
-        Swal.fire(`Payment Inquiry is Sent!`, "Click Ok to continue", "success");
+        Swal.fire(
+          `Payment Inquiry is Sent!`,
+          "Click Ok to continue",
+          "success",
+        );
       })
       .catch((error) => {
         console.log(error.Response);
@@ -155,7 +166,7 @@ const App = (props) => {
                         <option value="true">Other</option>
                       </select>
                     </div>
-                    <br/>
+                    <br />
 
                     <div className="form-billItem">
                       <label className="text-muted">Contact Number</label>
