@@ -415,7 +415,7 @@ const Payment = () => {
                         <td>{payment._id}</td>
                         <td>{payment.paymentAmount}</td>
                         <td>{payment.billId}</td>
-                        <td>{payment.status}</td>
+                        <td>{payment.paymentStatus}</td>
 
                         <td>
                           &nbsp;&nbsp;&nbsp;

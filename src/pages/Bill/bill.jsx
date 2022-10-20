@@ -14,6 +14,8 @@ const Bill = () => {
   const [billName, setBillName] = useState("");
   const [item, setItem] = useState([]);
   const [totalBill, setTotalBill] = useState("");
+  const [childIdNow, setChildIdNow] = useState("");
+  const [currentBillItem, setCurrentBillItem] = useState([]);
 
   const [state, setState] = useState({
     itemName: "",
@@ -66,10 +68,12 @@ const Bill = () => {
     axios
       .get(`http://localhost:5000/api/item/child/${childId}`)
       .then((response) => {
+        setChildIdNow(childId);
         setBillItem(response.data.data);
         console.log("BILL ITEMS" + billItem);
         Swal.fire(`Bill Generated!`, "Click Ok to continue", "success");
-        billMap(response.data);
+        billMap(response.data.data);
+        setCurrentBillItem(response.data.data);
       })
       .catch((error) => console.log(error));
   };
@@ -98,7 +102,7 @@ const Bill = () => {
           .then((response) => {
             console.log(response);
             Swal.fire(`Bill Added!`, "Click Ok to continue", "success");
-
+            fetchBill();
             // empty state
             setState({
               ...state,
@@ -135,8 +139,8 @@ const Bill = () => {
               .toLowerCase()
               .includes(searchWord.toLowerCase()) ||
             response.childId.toLowerCase().includes(searchWord.toLowerCase()) ||
-            response.quantity.toString().includes(searchWord.toLowerCase()) ||
-            response.unitPrice.toString().includes(searchWord.toLowerCase())
+            response.totalBill.toString().includes(searchWord.toLowerCase()) ||
+            response.status.toString().includes(searchWord.toLowerCase())
           );
         });
 
@@ -194,10 +198,18 @@ const Bill = () => {
           </Card.Body>
         </Card>
         <br />
-        <a className="" href="/bill">
-          {" "}
-          <button style={{ borderRadius: "25px" }}> Bill Items </button>{" "}
-        </a>
+        <div>
+          <a href="/bill">
+            <button
+              style={{ borderRadius: "25px", width: "100%" }}
+              className="btn btn-primary btn-block">
+              {" "}
+              Add Bill Items{" "}
+            </button>
+          </a>
+        </div>
+        <br />
+        <br />
         <div className="row">
           <div class="col">
             <div>
@@ -303,21 +315,71 @@ const Bill = () => {
                   <br />
 
                   {totalBill ? (
-                    <h4>
-                      <label className="text-muted">
-                        Total Bill: Rs. {totalBill}
-                      </label>
-                    </h4>
+                    <div>
+                      <h4>
+                        <label className="text-muted">
+                          Child ID: {childIdNow}
+                        </label>
+                        <br /> <br />
+                        <label className="text-muted">
+                          Total Bill: Rs. {totalBill}
+                        </label>
+                      </h4>
+                      <table
+                        id="table"
+                        class="table"
+                        responsive
+                        className="table table-hover"
+                        style={{ marginTop: "40px", marginLeft: "20px" }}>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Total Price (Rs.)</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {currentBillItem.map((currentBillItem, i) => (
+                            <tr key={i}>
+                              <th scope="row">{i + 1}</th>
+
+                              <td>{currentBillItem.itemName}</td>
+                              <td>{currentBillItem.quantity.toString()}</td>
+                              <td>{currentBillItem.unitPrice.toString()}</td>
+                              <td>
+                                {(
+                                  currentBillItem.unitPrice *
+                                  currentBillItem.quantity
+                                ).toString()}
+                              </td>
+                              <td>
+                                &nbsp;&nbsp;&nbsp;
+                                <a
+                                  className=""
+                                  href="#"
+                                  onClick={() => deleteBill(bill._id)}>
+                                  <button style={{ borderRadius: "25px" }}>
+                                    Delete
+                                  </button>
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   ) : (
                     <h4>Please Proceed!</h4>
                   )}
                 </div>
               </form>
+              <br />
               {totalBill ? (
                 <button
                   onClick={() => handleSubmit()}
                   className="btn btn-primary btn-block">
-                  Add the Bill
+                  Save the Bill
                 </button>
               ) : (
                 <h4></h4>
