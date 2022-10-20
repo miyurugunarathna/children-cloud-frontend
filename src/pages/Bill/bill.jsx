@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import Card from "react-bootstrap/Card";
 
 const Bill = () => {
   const [bill, setBill] = useState([]);
@@ -36,9 +37,8 @@ const Bill = () => {
       .get(`http://localhost:5000/api/bill/`)
       .then((response) => {
         if (response) {
-          setBill(response);
+          setBill(response.data.data);
           console.log(response);
-          console.log(bill);
         } else if (response == []) {
           console.log(response);
           console.log("NULL RESULT");
@@ -47,19 +47,8 @@ const Bill = () => {
       .catch((error) => console.log(error));
   };
 
-  const fetchBillItem = () => {
-    axios
-      .get(`http://localhost:5000/api/item/child/${childId}`)
-      .then((response) => {
-        setBillItem(response.data);
-        console.log(billItem);
-        Swal.fire(`Bill Generated!`, "Click Ok to continue", "success");
-        billMap(response.data);
-      })
-      .catch((error) => console.log(error));
-  };
-
   const billMap = (response) => {
+    console.log("BILL MAP EXECUTE");
     let total = 0;
     response.map((billItem, i) => {
       let key = i;
@@ -70,6 +59,19 @@ const Bill = () => {
     });
     setTotalBill(total);
     setBillName(childId + new Date());
+  };
+
+  const fetchBillItem = () => {
+    console.log("fetchBillItem EXECUTE");
+    axios
+      .get(`http://localhost:5000/api/item/child/${childId}`)
+      .then((response) => {
+        setBillItem(response.data.data);
+        console.log("BILL ITEMS" + billItem);
+        Swal.fire(`Bill Generated!`, "Click Ok to continue", "success");
+        billMap(response.data);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = () => {
@@ -124,7 +126,7 @@ const Bill = () => {
     console.log(searchWord);
     setWordEntered(searchWord);
     axios
-      .get(`http://localhost:5000/api/item/`)
+      .get(`http://localhost:5000/api/bill/`)
       .then((response) => {
         console.log(response);
         const newFilter = billItem.filter((response) => {
@@ -181,12 +183,21 @@ const Bill = () => {
       <Header />
       <div className="container">
         <br />
-        <center>
-          <h1>Child Cloud - Bill</h1>
-          <br />
-        </center>
+        <Card
+          style={{ width: "100%", height: "5rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <center>
+              <h1>Generate Bills</h1>
+              <br />
+            </center>
+          </Card.Body>
+        </Card>
         <br />
-
+        <a className="" href="/bill">
+          {" "}
+          <button style={{ borderRadius: "25px" }}> Bill Items </button>{" "}
+        </a>
         <div className="row">
           <div class="col">
             <div>
@@ -236,7 +247,7 @@ const Bill = () => {
                       <th>Status</th>
                     </tr>
                   </thead>
-                  {/* <tbody>
+                  <tbody>
                     {bill.map((bill, i) => (
                       <tr key={i}>
                         <th scope="row">{i + 1}</th>
@@ -258,7 +269,7 @@ const Bill = () => {
                         </td>
                       </tr>
                     ))}
-                  </tbody> */}
+                  </tbody>
                 </table>
               </div>
               <br />

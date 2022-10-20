@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import Card from "react-bootstrap/Card";
 
 const BillItem = () => {
   const [billItem, setBillItem] = useState([{}]);
@@ -150,10 +151,16 @@ const BillItem = () => {
       <Header />
       <div className="container">
         <br />
-        <center>
-          <h1>Child Cloud - Child Item Adding</h1>
-          <br />
-        </center>
+        <Card
+          style={{ width: "100%", height: "5rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <center>
+              <h1>Add Items to Bill</h1>
+              <br />
+            </center>
+          </Card.Body>
+        </Card>
         <br />
 
         <div className="row">

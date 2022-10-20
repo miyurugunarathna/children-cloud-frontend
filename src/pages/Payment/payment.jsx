@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import Card from "react-bootstrap/Card";
 
 const Payment = () => {
   const [bill, setBill] = useState([]);
@@ -37,7 +38,7 @@ const Payment = () => {
     axios
       .get(`http://localhost:5000/api/bill/`)
       .then((response) => {
-        setBill(response.data);
+        setBill(response.data.data);
         console.log(bill);
       })
       .catch((error) => console.log(error));
@@ -47,7 +48,7 @@ const Payment = () => {
     axios
       .get(`http://localhost:5000/api/payment/`)
       .then((response) => {
-        setPayment(response.data);
+        setPayment(response.data.data);
         console.log(payment);
       })
       .catch((error) => console.log(error));
@@ -259,10 +260,17 @@ const Payment = () => {
       <Header />
       <div className="container">
         <br />
-        <center>
-          <h1>Child Cloud - Payment</h1>
-          <br />
-        </center>
+        <Card
+          style={{ width: "100%", height: "5rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <center>
+              <h1>Payment</h1>
+              <br />
+            </center>
+          </Card.Body>
+        </Card>
+
         <br />
 
         <div className="row">
