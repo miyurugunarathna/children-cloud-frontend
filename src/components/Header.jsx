@@ -46,6 +46,11 @@ const Header = () => {
       role: [ROLE_PARENT],
     },
     {
+      name: "Payment Inquery",
+      url: "/payment-inquiry",
+      role: [ROLE_PARENT],
+    },
+    {
       name: "Babysitters",
       url: "/babysitters",
       role: [ROLE_PARENT],
