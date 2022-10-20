@@ -103,10 +103,11 @@ const App = (props) => {
         <div className="card-body">
           {" "}
           <br />
+          <center>
           <h1 align="center">Send Payment Inquiry</h1>
           <div className="row">
             <div class="col">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} style={{width: "75%"}}>
                 <div>
                   <div>
                     <div className="form-billItem">
@@ -241,6 +242,7 @@ const App = (props) => {
               </div>
             </div>
           </div>
+          </center>
         </div>
       </div>
     </div>
