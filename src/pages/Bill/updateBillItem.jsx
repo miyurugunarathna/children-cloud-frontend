@@ -38,7 +38,7 @@ const App = (props) => {
       .then((response) => {
         console.log(response);
         const { itemName, childId, quantity, unitPrice, status } =
-          response.data;
+          response.data.data;
 
         //empty state
         setState({
@@ -69,7 +69,7 @@ const App = (props) => {
       .then((response) => {
         console.log(response);
         const { itemName, childId, quantity, unitPrice, status } =
-          response.data;
+          response.data.data;
 
         setState({
           ...state,
@@ -181,8 +181,8 @@ const App = (props) => {
                         <option value="null" selected>
                           Select an Option
                         </option>
-                        <option value="pending">Pending</option>
-                        <option value="paid">Paid</option>
+                        <option value="false">Pending</option>
+                        <option value="true">Paid</option>
                       </select>
                     </div>
 

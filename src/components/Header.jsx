@@ -52,8 +52,13 @@ const Header = () => {
     },
     {
       name: "Payments",
-      url: "/payments",
-      role: [ROLE_PARENT, ROLE_ADMIN],
+      url: "/payment",
+      role: [ROLE_STAFF, ROLE_ADMIN],
+    },
+    {
+      name: "Bills",
+      url: "/bill-cal",
+      role: [ROLE_STAFF, ROLE_ADMIN],
     },
     {
       name: "Staff Home",

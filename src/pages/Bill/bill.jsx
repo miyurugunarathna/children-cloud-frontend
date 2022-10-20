@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import Card from "react-bootstrap/Card";
 
 const Bill = () => {
   const [bill, setBill] = useState([]);
@@ -13,6 +14,8 @@ const Bill = () => {
   const [billName, setBillName] = useState("");
   const [item, setItem] = useState([]);
   const [totalBill, setTotalBill] = useState("");
+  const [childIdNow, setChildIdNow] = useState("");
+  const [currentBillItem, setCurrentBillItem] = useState([]);
 
   const [state, setState] = useState({
     itemName: "",
@@ -35,25 +38,19 @@ const Bill = () => {
     axios
       .get(`http://localhost:5000/api/bill/`)
       .then((response) => {
-        setBill(response.data);
-        console.log(bill);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const fetchBillItem = () => {
-    axios
-      .get(`http://localhost:5000/api/item/child/${childId}`)
-      .then((response) => {
-        setBillItem(response.data);
-        console.log(billItem);
-        Swal.fire(`Bill Generated!`, "Click Ok to continue", "success");
-        billMap(response.data);
+        if (response) {
+          setBill(response.data.data);
+          console.log(response);
+        } else if (response == []) {
+          console.log(response);
+          console.log("NULL RESULT");
+        }
       })
       .catch((error) => console.log(error));
   };
 
   const billMap = (response) => {
+    console.log("BILL MAP EXECUTE");
     let total = 0;
     response.map((billItem, i) => {
       let key = i;
@@ -64,6 +61,21 @@ const Bill = () => {
     });
     setTotalBill(total);
     setBillName(childId + new Date());
+  };
+
+  const fetchBillItem = () => {
+    console.log("fetchBillItem EXECUTE");
+    axios
+      .get(`http://localhost:5000/api/item/child/${childId}`)
+      .then((response) => {
+        setChildIdNow(childId);
+        setBillItem(response.data.data);
+        console.log("BILL ITEMS" + billItem);
+        Swal.fire(`Bill Generated!`, "Click Ok to continue", "success");
+        billMap(response.data.data);
+        setCurrentBillItem(response.data.data);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = () => {
@@ -90,7 +102,7 @@ const Bill = () => {
           .then((response) => {
             console.log(response);
             Swal.fire(`Bill Added!`, "Click Ok to continue", "success");
-
+            fetchBill();
             // empty state
             setState({
               ...state,
@@ -118,7 +130,7 @@ const Bill = () => {
     console.log(searchWord);
     setWordEntered(searchWord);
     axios
-      .get(`http://localhost:5000/api/item/`)
+      .get(`http://localhost:5000/api/bill/`)
       .then((response) => {
         console.log(response);
         const newFilter = billItem.filter((response) => {
@@ -127,8 +139,8 @@ const Bill = () => {
               .toLowerCase()
               .includes(searchWord.toLowerCase()) ||
             response.childId.toLowerCase().includes(searchWord.toLowerCase()) ||
-            response.quantity.toString().includes(searchWord.toLowerCase()) ||
-            response.unitPrice.toString().includes(searchWord.toLowerCase())
+            response.totalBill.toString().includes(searchWord.toLowerCase()) ||
+            response.status.toString().includes(searchWord.toLowerCase())
           );
         });
 
@@ -175,12 +187,29 @@ const Bill = () => {
       <Header />
       <div className="container">
         <br />
-        <center>
-          <h1>Child Cloud - Bill</h1>
-          <br />
-        </center>
+        <Card
+          style={{ width: "100%", height: "5rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <center>
+              <h1>Generate Bills</h1>
+              <br />
+            </center>
+          </Card.Body>
+        </Card>
         <br />
-
+        <div>
+          <a href="/bill">
+            <button
+              style={{ borderRadius: "25px", width: "100%" }}
+              className="btn btn-primary btn-block">
+              {" "}
+              Add Bill Items{" "}
+            </button>
+          </a>
+        </div>
+        <br />
+        <br />
         <div className="row">
           <div class="col">
             <div>
@@ -286,21 +315,71 @@ const Bill = () => {
                   <br />
 
                   {totalBill ? (
-                    <h4>
-                      <label className="text-muted">
-                        Total Bill: Rs. {totalBill}
-                      </label>
-                    </h4>
+                    <div>
+                      <h4>
+                        <label className="text-muted">
+                          Child ID: {childIdNow}
+                        </label>
+                        <br /> <br />
+                        <label className="text-muted">
+                          Total Bill: Rs. {totalBill}
+                        </label>
+                      </h4>
+                      <table
+                        id="table"
+                        class="table"
+                        responsive
+                        className="table table-hover"
+                        style={{ marginTop: "40px", marginLeft: "20px" }}>
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Total Price (Rs.)</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {currentBillItem.map((currentBillItem, i) => (
+                            <tr key={i}>
+                              <th scope="row">{i + 1}</th>
+
+                              <td>{currentBillItem.itemName}</td>
+                              <td>{currentBillItem.quantity.toString()}</td>
+                              <td>{currentBillItem.unitPrice.toString()}</td>
+                              <td>
+                                {(
+                                  currentBillItem.unitPrice *
+                                  currentBillItem.quantity
+                                ).toString()}
+                              </td>
+                              <td>
+                                &nbsp;&nbsp;&nbsp;
+                                <a
+                                  className=""
+                                  href="#"
+                                  onClick={() => deleteBill(bill._id)}>
+                                  <button style={{ borderRadius: "25px" }}>
+                                    Delete
+                                  </button>
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   ) : (
                     <h4>Please Proceed!</h4>
                   )}
                 </div>
               </form>
+              <br />
               {totalBill ? (
                 <button
                   onClick={() => handleSubmit()}
                   className="btn btn-primary btn-block">
-                  Add the Bill
+                  Save the Bill
                 </button>
               ) : (
                 <h4></h4>
