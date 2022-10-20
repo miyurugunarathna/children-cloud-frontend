@@ -47,7 +47,7 @@ const Header = () => {
     },
     {
       name: "Payment Inquery",
-      url: "/payment-inquery",
+      url: "/payment-inquiry",
       role: [ROLE_PARENT],
     },
     {

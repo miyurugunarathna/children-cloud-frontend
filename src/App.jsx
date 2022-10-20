@@ -21,6 +21,7 @@ import MedicalStatus from "./pages/Staff/MedicalStatus";
 import ScheduleStatus from "./pages/Staff/ScheduleStatus";
 import AttendanceApprove from "./pages/employee/reportAttendance.jsx";
 import AssignedBabysitter from "./pages/Staff/AssignedBabysitter";
+import PaymentInq from "./pages/Payment/paymentInquiry.jsx";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/babysitters" element={<Babysitters />} />
         <Route path="/report_attendance" element={<AttendanceApprove />} />
         <Route path="/assignBabysitter" element={<AssignedBabysitter />} />
+        <Route path="/payment-inquiry" element={<PaymentInq />} />
       </Routes>
     </Router>
   );
