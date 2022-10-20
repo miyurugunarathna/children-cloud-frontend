@@ -35,8 +35,14 @@ const Bill = () => {
     axios
       .get(`http://localhost:5000/api/bill/`)
       .then((response) => {
-        setBill(response.data);
-        console.log(bill);
+        if (response) {
+          setBill(response);
+          console.log(response);
+          console.log(bill);
+        } else if (response == []) {
+          console.log(response);
+          console.log("NULL RESULT");
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -230,7 +236,7 @@ const Bill = () => {
                       <th>Status</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  {/* <tbody>
                     {bill.map((bill, i) => (
                       <tr key={i}>
                         <th scope="row">{i + 1}</th>
@@ -252,7 +258,7 @@ const Bill = () => {
                         </td>
                       </tr>
                     ))}
-                  </tbody>
+                  </tbody> */}
                 </table>
               </div>
               <br />

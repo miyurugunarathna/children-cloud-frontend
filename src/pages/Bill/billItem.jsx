@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const BillItem = () => {
-  const [billItem, setBillItem] = useState([]);
+  const [billItem, setBillItem] = useState([{}]);
   const [wordEntered, setWordEntered] = useState("");
 
   const [state, setState] = useState({
@@ -30,8 +30,8 @@ const BillItem = () => {
     axios
       .get(`http://localhost:5000/api/item/`)
       .then((response) => {
-        // console.log(response.data)
-        setBillItem(response.data);
+        console.log(response.data.data);
+        setBillItem(response.data.data);
         console.log(billItem);
       })
       .catch((error) => console.log(error));
@@ -227,8 +227,8 @@ const BillItem = () => {
                     <option value="null" selected>
                       Select an Option
                     </option>
-                    <option value="pending">Pending</option>
-                    <option value="paid">Paid</option>
+                    <option value="false">Pending</option>
+                    <option value="true">Paid</option>
                   </select>
                 </div>
 
