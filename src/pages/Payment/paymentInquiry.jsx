@@ -104,9 +104,10 @@ const App = (props) => {
           {" "}
           <br />
           <h1 align="center">Send Payment Inquiry</h1>
+          <br/>
           <div className="row">
             <div class="col">
-              <form onSubmit={handleSubmit} style={{ width: "75%" }}>
+              <form onSubmit={handleSubmit} style={{ width: "75%", marginLeft: "15%" }}>
                 <div>
                   <div>
                     <div className="form-billItem">
