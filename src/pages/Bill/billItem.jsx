@@ -4,9 +4,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import Card from "react-bootstrap/Card";
 
 const BillItem = () => {
-  const [billItem, setBillItem] = useState([]);
+  const [billItem, setBillItem] = useState([{}]);
   const [wordEntered, setWordEntered] = useState("");
 
   const [state, setState] = useState({
@@ -30,8 +31,8 @@ const BillItem = () => {
     axios
       .get(`http://localhost:5000/api/item/`)
       .then((response) => {
-        // console.log(response.data)
-        setBillItem(response.data);
+        console.log(response.data.data);
+        setBillItem(response.data.data);
         console.log(billItem);
       })
       .catch((error) => console.log(error));
@@ -150,10 +151,16 @@ const BillItem = () => {
       <Header />
       <div className="container">
         <br />
-        <center>
-          <h1>Child Cloud - Child Item Adding</h1>
-          <br />
-        </center>
+        <Card
+          style={{ width: "100%", height: "5rem" }}
+          className="card text-white bg-success mb-2">
+          <Card.Body>
+            <center>
+              <h1>Add Items to Bill</h1>
+              <br />
+            </center>
+          </Card.Body>
+        </Card>
         <br />
 
         <div className="row">
@@ -227,8 +234,8 @@ const BillItem = () => {
                     <option value="null" selected>
                       Select an Option
                     </option>
-                    <option value="pending">Pending</option>
-                    <option value="paid">Paid</option>
+                    <option value="false">Pending</option>
+                    <option value="true">Paid</option>
                   </select>
                 </div>
 

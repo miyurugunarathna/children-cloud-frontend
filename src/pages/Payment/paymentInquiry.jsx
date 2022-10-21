@@ -8,87 +8,86 @@ const App = (props) => {
   const { id } = useParams();
 
   const [state, setState] = useState({
-    itemName: "",
     childId: "",
-    quantity: "",
-    unitPrice: "",
-    status: "",
+    billId: "",
+    paymentId: "",
+    type: "",
+    contactNumber: "",
+    emailAddress: "",
+    description: "",
   });
 
   //destructure values from state
-  const { itemName, childId, quantity, unitPrice, status } = state;
+  const {
+    childId,
+    billId,
+    paymentId,
+    contactNumber,
+    type,
+    emailAddress,
+    description,
+  } = state;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.table({
-      itemName,
       childId,
-      quantity,
-      unitPrice,
-      status,
+      billId,
+      paymentId,
+      type,
+      contactNumber,
+      emailAddress,
+      description,
     });
     axios
-      .put(`http://localhost:5000/api/item/${id}`, {
-        itemName,
+      .post(`http://localhost:5000/api/paymentInq/add`, {
         childId,
-        quantity,
-        unitPrice,
-        status,
+        billId,
+        paymentId,
+        type,
+        contactNumber,
+        emailAddress,
+        description,
       })
       .then((response) => {
         console.log(response);
-        const { itemName, childId, quantity, unitPrice, status } =
-          response.data.data;
+        const {
+          childId,
+          billId,
+          paymentId,
+          type,
+          contactNumber,
+          emailAddress,
+          description,
+        } = response.data.data;
 
         //empty state
         setState({
           ...state,
-          itemName,
           childId,
-          quantity,
-          unitPrice,
-          status,
+          billId,
+          paymentId,
+          type,
+          contactNumber,
+          emailAddress,
+          description,
         });
         //show success alert
-        Swal.fire(`Bill Item is Updated`, "Click Ok to continue", "success");
+        Swal.fire(
+          `Payment Inquiry is Sent!`,
+          "Click Ok to continue",
+          "success",
+        );
       })
       .catch((error) => {
         console.log(error.Response);
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: `Item could not be updated!`,
+          text: `Item could not send the Inquiry!`,
           footer: "Please try again",
         });
       });
-  };
-
-  const fetchItem = () => {
-    axios
-      .get(`http://localhost:5000/api/item/${id}`)
-      .then((response) => {
-        console.log(response);
-        const { itemName, childId, quantity, unitPrice, status } =
-          response.data.data;
-
-        setState({
-          ...state,
-          itemName,
-          childId,
-          quantity,
-          unitPrice,
-          status,
-        });
-
-        console.table({
-          itemName,
-          childId,
-          quantity,
-          unitPrice,
-          status,
-        });
-      })
-      .catch((error) => console.log(error));
   };
 
   function handleChange(name) {
@@ -97,10 +96,6 @@ const App = (props) => {
     };
   }
 
-  useEffect(() => {
-    fetchItem();
-  }, []);
-
   return (
     <div>
       <Header />
@@ -108,26 +103,15 @@ const App = (props) => {
         <div className="card-body">
           {" "}
           <br />
-          <h1 align="center">Update Bill Item</h1>
+          <h1 align="center">Send Payment Inquiry</h1>
+          <br />
           <div className="row">
             <div class="col">
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={handleSubmit}
+                style={{ width: "75%", marginLeft: "15%" }}>
                 <div>
                   <div>
-                    <div className="form-billItem">
-                      <label className="text-muted">Item Name</label>
-                      <input
-                        onChange={handleChange("itemName")}
-                        value={itemName}
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Item Name"
-                        required
-                      />
-                    </div>
-
-                    <br />
-
                     <div className="form-billItem">
                       <label className="text-muted">Child Id</label>
                       <input
@@ -143,13 +127,13 @@ const App = (props) => {
                     <br />
 
                     <div className="form-billItem">
-                      <label className="text-muted">Quantity</label>
+                      <label className="text-muted">Bill Id</label>
                       <input
-                        onChange={handleChange("quantity")}
-                        value={quantity}
+                        onChange={handleChange("billId")}
+                        value={billId}
                         type="text"
                         className="form-control"
-                        placeholder="Enter Quantity"
+                        placeholder="Enter Bill Id"
                         required
                       />
                     </div>
@@ -157,45 +141,88 @@ const App = (props) => {
                     <br />
 
                     <div className="form-billItem">
-                      <label className="text-muted">Unit Price (Rs.)</label>
+                      <label className="text-muted">Payment Id</label>
                       <input
-                        onChange={handleChange("unitPrice")}
-                        value={unitPrice}
+                        onChange={handleChange("paymentId")}
+                        value={paymentId}
                         type="text"
                         className="form-control"
-                        placeholder="Enter Unit Price (Rs.)"
+                        placeholder="Enter Payment Id"
                         required
                       />
                     </div>
 
                     <br />
-
                     <div className="form-billItem">
-                      <label className="text-muted">Status</label>
+                      <label className="text-muted">Type</label>
                       <select
                         id="studentType"
-                        value={status}
-                        onChange={handleChange("status")}
+                        value={type}
+                        onChange={handleChange("type")}
                         className="form-control"
                         required>
                         <option value="null" selected>
                           Select an Option
                         </option>
-                        <option value="false">Pending</option>
-                        <option value="true">Paid</option>
+                        <option value="false">Payment Issue</option>
+                        <option value="true">Bill Issue</option>
+                        <option value="true">Other</option>
                       </select>
                     </div>
+                    <br />
+
+                    <div className="form-billItem">
+                      <label className="text-muted">Contact Number</label>
+                      <input
+                        onChange={handleChange("contactNumber")}
+                        value={contactNumber}
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Contact Number"
+                        required
+                      />
+                    </div>
+
+                    <br />
+
+                    <div className="form-billItem">
+                      <label className="text-muted">Email Address</label>
+                      <input
+                        onChange={handleChange("emailAddress")}
+                        value={emailAddress}
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Email Address"
+                        required
+                      />
+                    </div>
+
+                    <br />
+
+                    <div className="form-billItem">
+                      <label className="text-muted">Description</label>
+                      <input
+                        onChange={handleChange("description")}
+                        value={description}
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Description"
+                        required
+                      />
+                    </div>
+
+                    <br />
 
                     <br />
                     <div>
                       <button
                         style={{ borderRadius: "25px" }}
                         className="btn btn-primary btn-lg btn-block">
-                        Update Item
+                        Send Inquiry
                       </button>{" "}
                       &nbsp;&nbsp;&nbsp;
                       <a
-                        href={`/bill`}
+                        href={`/kidos`}
                         style={{
                           backgroundColor: "#f44336",
                           borderRadius: "25px",
