@@ -6,7 +6,7 @@ import "jspdf-autotable";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import Card from "react-bootstrap/Card";
-import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 export default class listEmployee extends Component {
@@ -43,21 +43,25 @@ export default class listEmployee extends Component {
         <Header />
         <Card
           style={{ width: "100%", height: "3rem" }}
-          className="card text-white bg-success mb-2">
+          className="card text-white bg-info mb-2">
           <Card.Body>
             <h5>Employee Management</h5>
+            <Button
+              variant="outline-primary"
+              href="http://127.0.0.1:5173/employee"
+              className="mr-1">
+              Add Employee
+            </Button>
+            <Button
+              variant="outline-secondary"
+              href="http://127.0.0.1:5173/report_attendance">
+              Attendance
+            </Button>
           </Card.Body>
         </Card>
         <div className="container">
           <br />
-
-          <button className="btn btn-primary">
-            <a
-              href="http://127.0.0.1:5173/employee"
-              className="text-decoration-none text-white">
-              Add Employee
-            </a>
-          </button>
+          <br />
           <div style={{ marginTop: "-38px", marginLeft: "230px" }}>
             <ReactHTMLTableToExcel
               className="btn btn-outline-success"
@@ -77,7 +81,13 @@ export default class listEmployee extends Component {
               name="searchQuery"></input>
           </div>
 
-          <Table id="table" className="table">
+          <Table
+            className="table"
+            id="table"
+            striped
+            bordered
+            hover
+            variant="light">
             <thead>
               <tr>
                 <th scope="col">Employee ID</th>
@@ -89,6 +99,7 @@ export default class listEmployee extends Component {
             </thead>
             <tbody>{this.DataTable()}</tbody>
           </Table>
+
           <p>
             <b>Employee count: {this.state.employees.length}</b>
           </p>

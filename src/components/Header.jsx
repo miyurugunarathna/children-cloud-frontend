@@ -101,9 +101,9 @@ const Header = () => {
       role: [ROLE_STAFF],
     },
     {
-      name: "Attendance-Report",
-      url: "/report_attendance",
-      role: [ROLE_ADMIN],
+      name: "Our Staff",
+      url: "/ourstaff",
+      role: [ROLE_PARENT],
     },
   ];
 
@@ -115,8 +115,10 @@ const Header = () => {
 
   return (
     <>
-      <div className="relative z-50 w-full mx-auto border-b border-black/15">
-        <div className="bg-white w-full max-w-7xl mx-auto flex justify-between gap-8 px-8 sm:px-16 items-center h-16 font-semibold text-md">
+
+      <div className="relative z-10 w-full mx-auto border-b border-black/15">
+        <div className="bg-white w-full max-w-6xl mx-auto flex justify-between gap-8 px-8 sm:px-16 items-center h-16 font-semibold text-md">
+
           <div className="flex gap-10">
             <Link
               className="no-underline font-bold text-2xl text-black tracking-tighter"

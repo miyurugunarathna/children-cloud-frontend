@@ -6,8 +6,8 @@ import Header from "../../components/Header";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import Card from "react-bootstrap/Card";
 
-const Payment = () => {
-  const [bill, setBill] = useState([]);
+const PaymentInqView = () => {
+  const [inquiry, setInq] = useState([]);
   const [payment, setPayment] = useState([]);
   const [billItem, setBillItem] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
@@ -17,113 +17,20 @@ const Payment = () => {
   const [item, setItem] = useState([]);
   const [totalBill, setTotalBill] = useState("");
 
-  const [state, setState] = useState({
-    itemName: "",
-    childId: "",
-    quantity: "",
-    unitPrice: "",
-    status: "",
-  });
-
-  //destructure values from state
-  const { itemName, childId, quantity, unitPrice, status } = state;
-
   function handleChange(name) {
     return function (event) {
       setState({ ...state, [name]: event.target.value });
     };
   }
 
-  const fetchBill = () => {
+  const fetchInquiry = () => {
     axios
       .get(`http://localhost:5000/api/paymentInq/`)
       .then((response) => {
-        setBill(response.data.data);
-        console.log(bill);
+        setInq(response.data.data);
+        console.log(inquiry);
       })
       .catch((error) => console.log(error));
-  };
-
-  const fetchPayment = () => {
-    axios
-      .get(`http://localhost:5000/api/payment/`)
-      .then((response) => {
-        setPayment(response.data.data);
-        console.log(payment);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const fetchBillItem = () => {
-    axios
-      .get(`http://localhost:5000/api/item/child/${childId}`)
-      .then((response) => {
-        setBillItem(response.data);
-        console.log(billItem);
-        Swal.fire(`Bill Generated!`, "Click Ok to continue", "success");
-        billMap(response.data);
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const billMap = (response) => {
-    let total = 0;
-    response.map((billItem, i) => {
-      let key = i;
-      console.log("KEY: " + key);
-      console.log(billItem.childId);
-      item.push(billItem._id);
-      total += billItem.unitPrice * billItem.quantity;
-    });
-    setTotalBill(total);
-    setBillName(childId + new Date());
-  };
-
-  const handleSubmit = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to Add this Bill?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      console.log("FIRED");
-      if (result.isConfirmed) {
-        console.log("CONFIRMED");
-        axios
-          .post(`http://localhost:5000/api/bill/add`, {
-            billName,
-            childId,
-            item,
-            totalBill,
-            status: false,
-          })
-          .then((response) => {
-            console.log(response);
-            Swal.fire(`Bill Added!`, "Click Ok to continue", "success");
-
-            // empty state
-            setState({
-              ...state,
-              billName: "",
-              childId: "",
-              item: [],
-              totalBill: "",
-              status: false,
-            });
-          })
-          .catch((error) => {
-            console.log(error.Response);
-            Swal.fire({
-              icon: "error",
-              title: `Please check again!`,
-              footer: "Please try again",
-            });
-          });
-      }
-    });
   };
 
   const handlePayment = (billId, name, type, amount) => {
@@ -180,7 +87,7 @@ const Payment = () => {
     console.log(searchWord);
     setWordEntered(searchWord);
     axios
-      .get(`http://localhost:5000/api/bill/`)
+      .get(`http://localhost:5000/api/paymentInq/`)
       .then((response) => {
         console.log(response);
         const newFilter = billItem.filter((response) => {
@@ -208,7 +115,7 @@ const Payment = () => {
     console.log(searchWord);
     setWordEntered2(searchWord);
     axios
-      .get(`http://localhost:5000/api/payment/`)
+      .get(`http://localhost:5000/api/paymentInq/`)
       .then((response) => {
         console.log(response);
         const newFilter = payment.filter((response) => {
@@ -229,30 +136,28 @@ const Payment = () => {
       .catch((error) => console.log(error));
   };
 
-  const deleteBill = (billId) => {
+  const deleteInq = (inqId) => {
     axios
-      .delete(`http://localhost:5000/api/bill/${billId}`)
+      .delete(`http://localhost:5000/api/paymentInq/${inqId}`)
       .then((response) => {
-        Swal.fire(`Bill is Deleted`, "success");
-        fetchBill();
+        Swal.fire(`Inquiry is Deleted`, "success");
+        fetchInquiry();
       })
       .catch((error) => console.log(error));
   };
 
-  const deletePayment = (payId) => {
+  const markResolved = (inqId) => {
     axios
-      .delete(`http://localhost:5000/api/payment/${payId}`)
+      .delete(`http://localhost:5000/api/paymentInq/${inqId}`)
       .then((response) => {
-        Swal.fire(`Payment is Deleted`, "success");
-        fetchBill();
-        fetchPayment();
+        Swal.fire(`Marked as Resolved`, "success");
+        fetchInquiry();
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    fetchBill();
-    fetchPayment();
+    fetchInquiry();
   }, []);
 
   return (
@@ -265,7 +170,7 @@ const Payment = () => {
           className="card text-white bg-success mb-2">
           <Card.Body>
             <center>
-              <h1>Payment</h1>
+              <h1>Inquiry</h1>
               <br />
             </center>
           </Card.Body>
@@ -277,8 +182,9 @@ const Payment = () => {
           <div class="col">
             <div>
               <center>
-                <h3>Pending Bills</h3>
+                <h3>Pending Inquiry</h3>
                 <br />
+
                 <form style={{ width: "100%" }}>
                   <div className="row">
                     <div className="col" style={{ width: "100%" }}>
@@ -318,18 +224,26 @@ const Payment = () => {
                     <tr>
                       <th>#</th>
                       <th>Child Id</th>
-                      <th>Total Price (Rs.)</th>
-                      <th>Status</th>
+                      <th>Payment Id</th>
+                      <th>Bill Id</th>
+                      <th>Type</th>
+                      <th>Contact No.</th>
+                      <th>Email Address</th>
+                      <th>Description</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {bill.map((bill, i) => (
+                    {inquiry.map((inquiry, i) => (
                       <tr key={i}>
                         <th scope="row">{i + 1}</th>
 
-                        <td>{bill.childId}</td>
-                        <td>{bill.totalBill}</td>
-                        <td>{bill.status.toString()}</td>
+                        <td>{inquiry.childId}</td>
+                        <td>{inquiry.paymentId}</td>
+                        <td>{inquiry.billId}</td>
+                        <td>{inquiry.type}</td>
+                        <td>{inquiry.contactNumber}</td>
+                        <td>{inquiry.emailAddress}</td>
+                        <td>{inquiry.description}</td>
 
                         <td>
                           &nbsp;&nbsp;&nbsp;
@@ -345,84 +259,12 @@ const Payment = () => {
                               )
                             }>
                             <button style={{ borderRadius: "25px" }}>
-                              Settle Payment
+                              Resolved
                             </button>
                           </a>
                         </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <br />
-            </div>
-          </div>
-
-          <div class="col">
-            <div>
-              <center>
-                <h3>Payment History</h3>
-                <br />
-                <form style={{ width: "100%" }}>
-                  <div className="row">
-                    <div className="col" style={{ width: "100%" }}>
-                      <input
-                        className="form-control"
-                        type="search"
-                        placeholder="Search"
-                        value={wordEntered2}
-                        onChange={handleFilterPayment}
-                      />
-                    </div>
-                    <div className="col" style={{ width: "70%" }}>
-                      <ReactHTMLTableToExcel
-                        className="btn btn-outline-success"
-                        table="table"
-                        filename="Students Excel"
-                        sheet="Sheet"
-                        buttonText="Download Excel Sheet"
-                      />
-                    </div>
-                  </div>
-                  <br />
-                </form>
-              </center>
-            </div>
-            <div>
-              <div
-                className="scrollable-div"
-                style={{ marginLeft: "10px", width: "95%" }}>
-                <table
-                  id="table"
-                  class="table"
-                  responsive
-                  className="table table-hover"
-                  style={{ marginTop: "40px", marginLeft: "20px" }}>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Payment ID</th>
-                      <th>Total(Rs.)</th>
-                      <th>Bill ID</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {payment.map((payment, i) => (
-                      <tr key={i}>
-                        <th scope="row">{i + 1}</th>
-
-                        <td>{payment._id}</td>
-                        <td>{payment.paymentAmount}</td>
-                        <td>{payment.billId}</td>
-                        <td>{payment.paymentStatus}</td>
-
                         <td>
-                          &nbsp;&nbsp;&nbsp;
-                          <a
-                            className=""
-                            href="#"
-                            onClick={() => deletePayment(payment._id)}>
+                          <a onClick={() => deleteInq(inquiry._id)}>
                             <button style={{ borderRadius: "25px" }}>
                               Delete
                             </button>
@@ -442,4 +284,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default PaymentInqView;
