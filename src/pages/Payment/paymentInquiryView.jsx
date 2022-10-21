@@ -136,9 +136,9 @@ const PaymentInqView = () => {
       .catch((error) => console.log(error));
   };
 
-  const deleteInq = (billId) => {
+  const deleteInq = (inqId) => {
     axios
-      .delete(`http://localhost:5000/api/paymentInq/delete/${inqId}`)
+      .delete(`http://localhost:5000/api/paymentInq/${inqId}`)
       .then((response) => {
         Swal.fire(`Inquiry is Deleted`, "success");
         fetchInquiry();
@@ -227,6 +227,9 @@ const PaymentInqView = () => {
                       <th>Payment Id</th>
                       <th>Bill Id</th>
                       <th>Type</th>
+                      <th>Contact No.</th>
+                      <th>Email Address</th>
+                      <th>Description</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -238,6 +241,9 @@ const PaymentInqView = () => {
                         <td>{inquiry.paymentId}</td>
                         <td>{inquiry.billId}</td>
                         <td>{inquiry.type}</td>
+                        <td>{inquiry.contactNumber}</td>
+                        <td>{inquiry.emailAddress}</td>
+                        <td>{inquiry.description}</td>
 
                         <td>
                           &nbsp;&nbsp;&nbsp;
@@ -254,6 +260,13 @@ const PaymentInqView = () => {
                             }>
                             <button style={{ borderRadius: "25px" }}>
                               Resolved
+                            </button>
+                          </a>
+                        </td>
+                        <td>
+                          <a onClick={() => deleteInq(inquiry._id)}>
+                            <button style={{ borderRadius: "25px" }}>
+                              Delete
                             </button>
                           </a>
                         </td>
