@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import FileBase64 from "react-file-base64";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -60,7 +60,7 @@ function employeeReg() {
       <Header />
       <Card
         style={{ width: "100%", height: "4rem" }}
-        className="card text-white bg-success mb-2">
+        className="card text-white bg-info mb-2">
         <Card.Body>
           <h4>Employee Management</h4>
         </Card.Body>
@@ -188,11 +188,9 @@ function employeeReg() {
 
                           <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Upload Employee Photograph</Form.Label>
-                            <Form.Control
-                              type="file"
-                              onChange={(event) => {
-                                setImage(event.target.value);
-                              }}
+                            <FileBase64
+                              multiple={false}
+                              onDone={({ base64 }) => setImage(base64)}
                             />
                           </Form.Group>
                           <Form.Select
