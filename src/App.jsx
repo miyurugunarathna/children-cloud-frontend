@@ -9,7 +9,14 @@ import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
 import ListAttendance from "./pages/employee/attendance.jsx";
 import ChildAllocate from "./pages/employee/childAllocate.jsx";
-import { Login, Register, ChildProfile, Babysitters, Profile } from "./pages";
+import {
+  Login,
+  Register,
+  ChildProfile,
+  Babysitters,
+  Profile,
+  Parents,
+} from "./pages";
 import Events from "./pages/Child/Events";
 import MedicineDetails from "./pages/Child/MedicineDetails";
 import MedicineReport from "./pages/Child/MedicineReport";
@@ -60,6 +67,7 @@ function App() {
         <Route path="/ourstaff" element={<OurStaff />} />
         <Route path="/updateallocation" element={<UpdateAllocation />} />
         <Route path="/payment-inquiry" element={<PaymentInq />} />
+        <Route path="/parents" element={<Parents />} />
         <Route path="/payment-inquiry-view" element={<PaymentInqView />} />
       </Routes>
     </Router>

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import { Modal } from "../components";
 
-export const Profile = () => {
+export const Parents = () => {
   const user = useSelector((state) => state.user?.user);
   const [showModal, setShowModal] = useState(false);
 
@@ -17,7 +17,7 @@ export const Profile = () => {
         <div className="my-4">
           <h1 className="text-4xl">Profile</h1>
         </div>
-        <div className="border border-black/20 min-h-[400px] max-w-lg w-full rounded flex flex-col justify-center gap-16 items-center p-4">
+        {/* <div className="border border-black/20 min-h-[400px] max-w-lg w-full rounded flex flex-col justify-center gap-16 items-center p-4">
           <div className="flex flex-col items-center">
             <div className="flex items-center justify-center w-24 h-24 rounded-full bg-slate-100 outline-dashed outline-black/40 outline-1 outline-offset-8 mb-3">
               {user?.url ? (
@@ -56,6 +56,19 @@ export const Profile = () => {
                 Edit
               </button>
             </div>
+          </div>
+        </div> */}
+        <div className="flex flex-col">
+          <div className="border border-black/20 max-w-lg w-full rounded flex flex-col justify-center gap-16 items-center p-4">
+            <div>
+              <img
+                className="rounded-full object-cover"
+                src={user?.url}
+                alt="M"
+              />
+            </div>
+            <div></div>
+            <div></div>
           </div>
         </div>
       </div>
