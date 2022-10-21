@@ -272,7 +272,18 @@ const Payment = () => {
         </Card>
 
         <br />
-
+        <div>
+          <a href="/payment-inquiry-view">
+            <button
+              style={{ borderRadius: "25px", width: "100%" }}
+              className="btn btn-primary btn-block">
+              {" "}
+              Payment Inquires{" "}
+            </button>
+          </a>
+        </div>
+        <br />
+        <br />
         <div className="row">
           <div class="col">
             <div>
