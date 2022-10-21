@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import Swal from "sweetalert2";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const App = (props) => {
   const { id } = useParams();
@@ -19,68 +19,78 @@ const App = (props) => {
     dob: "",
     recruitDate: "",
     type: "",
+    image: "",
   });
 
-  function handleChange(name) {
-    return function (event) {
-      setState({ ...state, [name]: event.target.value });
-    };
-  }
-
-  const fetchEmp = () => {
-    console.log("working");
-    axios
-      .get(`http://localhost:5000/api/employee/`)
-      .then((response) => {
-        setEmp(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const fetchEmp = () => {
+  //   console.log("working");
+  //   axios
+  //     .post(`http://localhost:5000/api/employee/`)
+  //     .then((response) => {
+  //       //setEmp(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   useEffect(() => {
-    fetchEmp();
     axios
       .get(`http://localhost:5000/api/employee/${id}`)
       .then((response) => {
         console.log("user", response);
         console.log("data", response.data);
-        const {
-          empID,
-          fullName,
-          address,
-          nic,
-          phoneNo,
-          dob,
-          recruitDate,
-          type,
-        } = response.data.data;
-        setState({
-          ...state,
-          empID,
-          fullName,
-          address,
-          nic,
-          phoneNo,
-          dob,
-          recruitDate,
-          type,
-        });
+
+        if (
+          response?.data &&
+          response.data?.status === 200 &&
+          response.data?.data
+        ) {
+          const {
+            empID,
+            fullName,
+            address,
+            nic,
+            phoneNo,
+            dob,
+            recruitDate,
+            type,
+            image,
+          } = response.data.data;
+          setState({
+            ...state,
+            empID,
+            fullName,
+            address,
+            nic,
+            phoneNo,
+            dob,
+            recruitDate,
+            type,
+            image,
+          });
+        }
       })
       .catch((error) => console.log("Error loading update employee: " + error));
   }, []);
 
-  function handleChange(name) {
-    return function (event) {
-      console.log(event.target.value);
-      setState({ ...state, [name]: event.target.value });
-    };
-  }
+  // function handleChange(name) {
+  //   return function (event) {
+  //     console.log(event.target.value);
+  //     setState({ ...state, [name]: event.target.value });
+  //   };
+  // }
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setState((values) => ({ ...values, [name]: value }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.table({
+    console.log(state);
+    const {
       empID,
       fullName,
       address,
@@ -89,7 +99,8 @@ const App = (props) => {
       dob,
       recruitDate,
       type,
-    });
+      image,
+    } = state;
     axios
       .put(`http://localhost:5000/api/employee/${id}`, {
         empID,
@@ -100,6 +111,7 @@ const App = (props) => {
         dob,
         recruitDate,
         type,
+        image,
       })
       .then((response) => {
         console.log(response);
@@ -112,6 +124,7 @@ const App = (props) => {
           dob,
           recruitDate,
           type,
+          image,
         } = response.data;
 
         setState({
@@ -124,11 +137,12 @@ const App = (props) => {
           dob,
           recruitDate,
           type,
+          image,
         });
 
         Swal.fire(`Submission Updated`, "Click Ok to continue", "success");
         //  setTimeout(() => {
-        //    window.location.href = "http://127.0.0.1:5173/list";
+        window.location.href = "http://127.0.0.1:5173/list";
         //  }, 1000);
       })
       .catch((error) => {
@@ -142,6 +156,8 @@ const App = (props) => {
         });
       });
   };
+
+  //image uploading
 
   return (
     <div>
@@ -163,8 +179,8 @@ const App = (props) => {
                           //id="floatingInput"
                           name="empID"
                           placeholder="emp1012"
-                          onChange={handleChange.bind("empID")}
-                          value={state.empID}
+                          onChange={handleChange}
+                          value={state.empID || ""}
                         />
                         <label>Employee ID</label>
                       </div>
@@ -178,7 +194,7 @@ const App = (props) => {
                           //pattern="[A-Za-z]+"
                           //title="Characters can only be A-Z and a-z."
                           placeholder="employee name"
-                          onChange={handleChange.bind("fullName")}
+                          onChange={handleChange}
                           value={state.fullName}
                         />
                         <label>Employee Full Name</label>
@@ -193,7 +209,7 @@ const App = (props) => {
                           placeholder="address"
                           pattern="[A-Za-z]+"
                           title="Characters can only be A-Z and a-z."
-                          onChange={handleChange.bind("address")}
+                          onChange={handleChange}
                           value={state.address}
                         />
                         <label>Address</label>
@@ -206,7 +222,7 @@ const App = (props) => {
                           // id="floatingInput"
                           name="phoneNo"
                           placeholder="071xxxxxxxx"
-                          onChange={handleChange.bind("phoneNo")}
+                          onChange={handleChange}
                           value={state.phoneNo}
                         />
                         <label>Phone Number</label>
@@ -219,7 +235,7 @@ const App = (props) => {
                           // id="floatingPassword"
                           name="dob"
                           placeholder="dob"
-                          onChange={handleChange.bind("dob")}
+                          onChange={handleChange}
                           value={state.dob}
                         />
                         <label>Date Of Birth</label>
@@ -232,7 +248,7 @@ const App = (props) => {
                           // id="floatingPassword"
                           name="recruiteDate"
                           placeholder="recruiteDate"
-                          onChange={handleChange.bind("recruitDate")}
+                          onChange={handleChange}
                           value={state.recruitDate}
                         />
                         <label>Recruite Date</label>
@@ -263,6 +279,17 @@ const App = (props) => {
                       </div>
                     </form>
                   </div>
+                  <img
+                    alt="Card image cap"
+                    src={state.image}
+                    style={{
+                      maxHeight: "270px",
+                      maxWidth: "270px",
+                      marginRight: "0px",
+                      marginLeft: "900px",
+                      marginTop: "-500px",
+                    }}
+                  />
                 </div>
               </div>
             </div>
