@@ -4,3 +4,4 @@ export * from "./Home";
 export * from "./Child/ChildProfile";
 export * from "./Profile";
 export * from "./Babysitters";
+export * from "./Parents";
