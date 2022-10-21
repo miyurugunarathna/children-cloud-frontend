@@ -47,7 +47,7 @@ export default class assignedKids extends Component {
         <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
           <Card
             style={{ width: "100%", height: "3rem" }}
-            className="card text-white bg-success mb-2">
+            className="card text-white bg-info mb-2">
             <Card.Body>
               <h5>My Kids</h5>
             </Card.Body>

@@ -93,7 +93,7 @@ const Child = () => {
       <Header />
       <Card
         style={{ width: "100%", height: "4rem" }}
-        className="card text-white bg-success mb-2">
+        className="card text-white bg-info mb-2">
         <Card.Body>
           <h4>Child Allocation</h4>
         </Card.Body>
@@ -201,34 +201,22 @@ const Child = () => {
                             </div>
                           </div>
                         </form>
+                        <div className="d-grid">
+                          <Button
+                            className="btn btn-sm btn-warning btn-login text-uppercase fw-bold mb-5"
+                            href={"http://127.0.0.1:5173/updateallocation"}>
+                            Update Allocations
+                          </Button>
+                          <div className="text-center">
+                            <p className="p1"></p>
+                          </div>
+                        </div>
                       </Card.Body>
                     </Card>
                   </div>
                 </div>
                 <br />
                 <div>
-                  <div
-                    className="scrollable-div"
-                    style={{ marginLeft: "380px", width: "100%" }}>
-                    <Table
-                      id="table"
-                      className="table"
-                      striped
-                      bordered
-                      hover
-                      variant="light">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>BabySitter ID</th>
-                          <th>Child 01</th>
-                          <th>Child 02</th>
-                          <th>Child 03</th>
-                        </tr>
-                      </thead>
-                      <tbody>{}</tbody>
-                    </Table>
-                  </div>
                   <br />
                 </div>
               </div>

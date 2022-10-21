@@ -1,7 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -46,7 +45,7 @@ function myAttendance() {
       <Header />
       <Card
         style={{ width: "100%", height: "4rem" }}
-        className="card text-white bg-success mb-2">
+        className="card text-white bg-info mb-2">
         <Card.Body>
           <h4>My Attendance</h4>
         </Card.Body>

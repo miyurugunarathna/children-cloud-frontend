@@ -9,7 +9,7 @@ import Bill from "./pages/Bill/bill.jsx";
 import Payment from "./pages/Payment/payment.jsx";
 import ListAttendance from "./pages/employee/attendance.jsx";
 import ChildAllocate from "./pages/employee/childAllocate.jsx";
-import { Login, Register, ChildProfile, Babysitters } from "./pages";
+import { Login, Register, ChildProfile, Babysitters, Profile } from "./pages";
 import Events from "./pages/Child/Events";
 import MedicineDetails from "./pages/Child/MedicineDetails";
 import MedicineReport from "./pages/Child/MedicineReport";
@@ -21,6 +21,8 @@ import MedicalStatus from "./pages/Staff/MedicalStatus";
 import ScheduleStatus from "./pages/Staff/ScheduleStatus";
 import AttendanceApprove from "./pages/employee/reportAttendance.jsx";
 import AssignedBabysitter from "./pages/Staff/AssignedBabysitter";
+import OurStaff from "./pages/employee/ourStaff.jsx";
+import UpdateAllocation from "./pages/employee/updateAllocation";
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
         <Route path="/babysitters" element={<Babysitters />} />
         <Route path="/report_attendance" element={<AttendanceApprove />} />
         <Route path="/assignBabysitter" element={<AssignedBabysitter />} />
+        <Route path="/ourstaff" element={<OurStaff />} />
+        <Route path="/updateallocation" element={<UpdateAllocation />} />
       </Routes>
     </Router>
   );

@@ -4,6 +4,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
 import moment from "moment";
+import Modal from "react-bootstrap/Modal";
 
 export default class tableEmployee extends Component {
   constructor(props) {
@@ -24,22 +25,24 @@ export default class tableEmployee extends Component {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post("http://localhost:5000/api/attendance/")
+          .put(
+            `http://localhost:5000/api/attendance/status/634a2eda3451d5427c446e35`,
+          )
           .then((res) => {
-            Swal.fire({
-              title: "Success!",
-              text: "Submission Type Deleted Successfully",
-              icon: "Danger",
-              confirmButtonText: "Close",
-            }).then(function () {
-              location.reload();
-            });
+            // Swal.fire({
+            //   title: "Success!",
+            //   text: "Submission Type Deleted Successfully",
+            //   icon: "Danger",
+            //   confirmButtonText: "Close",
+            // }).then(function () {
+            //   location.reload();
+            // });
           })
           .catch((error) => {
             console.log(error);
           });
       }
-      this.props.history.push("http://127.0.0.1:5173/");
+      //this.props.history.push("http://127.0.0.1:5173/");
     });
   }
   eventClick = () => {
@@ -47,19 +50,25 @@ export default class tableEmployee extends Component {
     //   "http://127.0.0.1:5173/update/" + this.props.obj._id,
     // );
   };
+
   render() {
     return (
       <tr>
         <td>{this.props.obj.EmpID}</td>
         <td>{this.props.obj.Status}</td>
         <td>{moment.utc(this.props.obj.time).format("DD/MM/YYYY")}</td>
+        <td>{this.props.obj.Approved}</td>
         <td>
-          &nbsp;
-          <a
-            className="btn btn-success text-decoration-none text-white"
+          <Button
+            variant="outline-primary"
+            className="mr-1"
             onClick={this.Approved}>
-            <i className="far fa-trash-alt"></i>&nbsp;Approve
-          </a>
+            Approve
+          </Button>
+
+          <Button variant="outline-danger" onClick={""}>
+            View
+          </Button>
         </td>
       </tr>
     );
