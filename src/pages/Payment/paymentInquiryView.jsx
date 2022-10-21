@@ -184,7 +184,7 @@ const PaymentInqView = () => {
               <center>
                 <h3>Pending Inquiry</h3>
                 <br />
-                
+
                 <form style={{ width: "100%" }}>
                   <div className="row">
                     <div className="col" style={{ width: "100%" }}>

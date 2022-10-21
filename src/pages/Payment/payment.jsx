@@ -282,7 +282,8 @@ const Payment = () => {
             </button>
           </a>
         </div>
-        <br/><br/>
+        <br />
+        <br />
         <div className="row">
           <div class="col">
             <div>
