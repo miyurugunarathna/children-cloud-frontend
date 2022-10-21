@@ -23,6 +23,7 @@ import AttendanceApprove from "./pages/employee/reportAttendance.jsx";
 import AssignedBabysitter from "./pages/Staff/AssignedBabysitter";
 import PaymentInq from "./pages/Payment/paymentInquiry.jsx";
 import PaymentInqView from "./pages/Payment/paymentInquiryView.jsx";
+import SalaryGroup from "./pages/Salary/salaryGroup.jsx";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
         <Route path="/assignBabysitter" element={<AssignedBabysitter />} />
         <Route path="/payment-inquiry" element={<PaymentInq />} />
         <Route path="/payment-inquiry-view" element={<PaymentInqView />} />
+        <Route path="/salary-group" element={<SalaryGroup />} />
       </Routes>
     </Router>
   );
