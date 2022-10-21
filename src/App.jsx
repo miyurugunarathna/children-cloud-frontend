@@ -28,7 +28,11 @@ import MedicalStatus from "./pages/Staff/MedicalStatus";
 import ScheduleStatus from "./pages/Staff/ScheduleStatus";
 import AttendanceApprove from "./pages/employee/reportAttendance.jsx";
 import AssignedBabysitter from "./pages/Staff/AssignedBabysitter";
+import OurStaff from "./pages/employee/ourStaff.jsx";
+import UpdateAllocation from "./pages/employee/updateAllocation";
 import PaymentInq from "./pages/Payment/paymentInquiry.jsx";
+import PaymentInqView from "./pages/Payment/paymentInquiryView.jsx";
+
 
 function App() {
   return (
@@ -60,8 +64,11 @@ function App() {
         <Route path="/babysitters" element={<Babysitters />} />
         <Route path="/report_attendance" element={<AttendanceApprove />} />
         <Route path="/assignBabysitter" element={<AssignedBabysitter />} />
+        <Route path="/ourstaff" element={<OurStaff />} />
+        <Route path="/updateallocation" element={<UpdateAllocation />} />
         <Route path="/payment-inquiry" element={<PaymentInq />} />
         <Route path="/parents" element={<Parents />} />
+        <Route path="/payment-inquiry-view" element={<PaymentInqView />} />
       </Routes>
     </Router>
   );

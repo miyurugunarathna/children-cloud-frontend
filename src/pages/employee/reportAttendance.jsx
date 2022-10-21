@@ -43,7 +43,7 @@ export default class reportAttendance extends Component {
         <Header />
         <Card
           style={{ width: "100%", height: "3rem" }}
-          className="card text-white bg-success mb-2">
+          className="card text-white bg-info mb-2">
           <Card.Body>
             <h5>Attendance Report</h5>
           </Card.Body>
@@ -70,12 +70,19 @@ export default class reportAttendance extends Component {
               name="searchQuery"></input>
           </div>
 
-          <Table id="table" className="table">
+          <Table
+            id="table"
+            className="table"
+            striped
+            bordered
+            hover
+            variant="light">
             <thead>
               <tr>
                 <th scope="col">Employee</th>
                 <th scope="col">Status</th>
                 <th scope="col">Date</th>
+                <th scope="col">Approve status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>

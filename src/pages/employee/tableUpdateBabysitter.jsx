@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
-export default class tableEmployee extends Component {
+export default class tableUpdateBabysitter extends Component {
   constructor(props) {
     super(props);
-    this.deleteEmployee = this.deleteEmployee.bind(this);
+    this.deleteBabysitter = this.deleteBabysitter.bind(this);
     // this.deletepm= this.deletepm.bind(this);
   }
 
-  deleteEmployee() {
+  deleteBabysitter() {
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want to delete this Employee?",
@@ -22,11 +22,11 @@ export default class tableEmployee extends Component {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete("http://localhost:5000/api/employee/" + this.props.obj._id)
+          .delete("http://localhost:5000/api/babySitter/" + this.props.obj._id)
           .then((res) => {
             Swal.fire({
               title: "Success!",
-              text: "Submission Type Deleted Successfully",
+              text: "Chils allocation Deleted Successfully",
               icon: "Danger",
               confirmButtonText: "Close",
             }).then(function () {
@@ -37,7 +37,7 @@ export default class tableEmployee extends Component {
             console.log(error);
           });
       }
-      this.props.history.push("http://127.0.0.1:5173/list");
+      this.props.history.push("http://127.0.0.1:5173/updateallocation");
     });
   }
   eventClick = () => {
@@ -48,20 +48,19 @@ export default class tableEmployee extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.obj.empID}</td>
-        <td>{this.props.obj.fullName}</td>
-        <td>{this.props.obj.nic}</td>
-        <td>{this.props.obj.type}</td>
-
+        <td>{this.props.obj.BabySitter}</td>
+        <td>{this.props.obj.child01}</td>
+        <td>{this.props.obj.child02}</td>
+        <td>{this.props.obj.child03}</td>
         <td>
           <Button
             variant="outline-primary"
             className="mr-1"
-            href={"http://127.0.0.1:5173/update/" + this.props.obj._id}>
+            href={"#" + this.props.obj._id}>
             Edit
           </Button>
 
-          <Button variant="outline-danger" onClick={this.deleteEmployee}>
+          <Button variant="outline-danger" onClick={this.deleteBabysitter}>
             Delete
           </Button>
         </td>
