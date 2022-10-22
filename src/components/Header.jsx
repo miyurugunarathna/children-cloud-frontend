@@ -46,14 +46,24 @@ const Header = () => {
       role: [ROLE_PARENT],
     },
     {
+      name: "Payment Inquery",
+      url: "/payment-inquiry",
+      role: [ROLE_PARENT],
+    },
+    {
       name: "Babysitters",
       url: "/babysitters",
       role: [ROLE_PARENT],
     },
     {
       name: "Payments",
-      url: "/payments",
-      role: [ROLE_PARENT, ROLE_ADMIN],
+      url: "/payment",
+      role: [ROLE_STAFF, ROLE_ADMIN],
+    },
+    {
+      name: "Bills",
+      url: "/bill-cal",
+      role: [ROLE_STAFF, ROLE_ADMIN],
     },
     {
       name: "Staff Home",
@@ -105,8 +115,10 @@ const Header = () => {
 
   return (
     <>
+
       <div className="relative z-10 w-full mx-auto border-b border-black/15">
         <div className="bg-white w-full max-w-6xl mx-auto flex justify-between gap-8 px-8 sm:px-16 items-center h-16 font-semibold text-md">
+
           <div className="flex gap-10">
             <Link
               className="no-underline font-bold text-2xl text-black tracking-tighter"
@@ -114,15 +126,15 @@ const Header = () => {
               The Children Cloud
             </Link>
           </div>
-          <div className="hidden lg:flex gap-4 items-center">
+          <div className="hidden lg:flex gap-3 items-center">
             {navs.map((nav, key) =>
               nav.role.includes(role) ? (
                 <NavLink
                   key={key}
                   className={({ isActive }) =>
                     isActive
-                      ? "text-black font-semibold no-underline"
-                      : "text-slate-500 no-underline"
+                      ? "text-black font-semibold text-sm no-underline"
+                      : "text-slate-500 text-sm no-underline"
                   }
                   to={nav.url}>
                   {nav.name}
@@ -151,7 +163,7 @@ const Header = () => {
             isMobileNavOpen ? 0 : `-${mobNavHeight}px`
           })`,
         }}
-        className={`flex lg:hidden z-0 py-2 absolute mt-16 top-0 w-full bg-white transition duration-500 flex-col items-center border-b border-black/10 rounded-b-xl`}>
+        className={`flex z-40 py-2 absolute mt-16 top-0 w-full bg-white transition duration-500 flex-col items-center border-b border-black/10 rounded-b-xl`}>
         {navs.map((nav, key) =>
           nav.role.includes(role) ? (
             <NavLink

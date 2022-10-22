@@ -20,7 +20,16 @@ export const Login = () => {
 
   useEffect(() => {
     if (state.isLoggedIn) {
-      navigate("/list");
+      switch (String(state.user?.role).toLowerCase()) {
+        case "admin":
+          navigate("/list");
+          break;
+        case "staff":
+          navigate("/assignedKids");
+          break;
+        default:
+          navigate("/kidos");
+      }
     }
   }, [state.isLoggedIn]);
 
