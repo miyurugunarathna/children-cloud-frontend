@@ -1,7 +1,7 @@
 import React, { useState, Component } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
-import TableAttendance from "./tableAttendance.jsx";
+import { tableEmployee as TableAttendance } from "./tableAttendance.jsx";
 import "jspdf-autotable";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
@@ -21,7 +21,6 @@ export default class reportAttendance extends Component {
       .get("http://localhost:5000/api/attendance/")
       .then((res) => {
         if (res.data && res.data?.data) {
-          console.log(res.data.data);
           this.setState({
             attendances: res.data.data,
           });
