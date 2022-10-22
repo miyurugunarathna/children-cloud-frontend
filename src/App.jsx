@@ -33,7 +33,6 @@ import UpdateAllocation from "./pages/employee/updateAllocation";
 import PaymentInq from "./pages/Payment/paymentInquiry.jsx";
 import PaymentInqView from "./pages/Payment/paymentInquiryView.jsx";
 
-
 function App() {
   return (
     <Router>
