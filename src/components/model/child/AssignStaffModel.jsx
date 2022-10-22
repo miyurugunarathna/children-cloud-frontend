@@ -49,13 +49,16 @@ const AssignStaffModel = ({ sfID, setSfID }) => {
         status,
       })
       .then((res) => {
-        console.log(res);
-        setSfID("idADD");
-        Swal.fire(
-          `Staff Assigned Successfully!`,
-          "Click Ok to continue",
-          "success",
-        );
+        if (res.data == "Child already been Assigned.") {
+          Swal.fire(`Already Assigned`, "Child Already Assigned", "error");
+        } else {
+          setSfID("idADD");
+          Swal.fire(
+            `Staff Assigned Successfully!`,
+            "Click Ok to continue",
+            "success",
+          );
+        }
       })
       .catch((err) => {
         alert("something whent wrong!!!");
