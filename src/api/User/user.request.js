@@ -71,6 +71,15 @@ const getOneUser = async (userID) => {
   }
 };
 
+const deleteUser = async (userID) => {
+  try {
+    const response = await apiInstance.delete(`api/user/${userID}`);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 const userRequest = {
   getAllUsers,
   getOneUser,
@@ -80,6 +89,7 @@ const userRequest = {
   authHeader,
   viewProfile,
   updateUser,
+  deleteUser,
 };
 
 export default userRequest;

@@ -8,7 +8,7 @@ import { storage } from "../firebase";
 import { setUser } from "../store/User";
 import { SUCCESS } from "../constants";
 
-export const Modal = ({ isVisible, toggle }) => {
+export const Modal = ({ isVisible, toggle, data = null, onUpdate }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
   const [userData, setUserData] = useState({
@@ -22,9 +22,13 @@ export const Modal = ({ isVisible, toggle }) => {
 
   const updateUserData = async (e) => {
     e.preventDefault();
-    const response = await userRequest.updateUser(userData, user?.id);
+    const response = await userRequest.updateUser(
+      userData,
+      data?._id || user?.id,
+    );
     if (response?.status === SUCCESS && response?.data) {
-      dispatch(setUser(response.data));
+      if (!data) dispatch(setUser(response.data));
+      if (data) onUpdate();
       toggle();
     } else {
       Swal.fire("Something went wrong!", "Please, try again later.", "error");
@@ -70,15 +74,26 @@ export const Modal = ({ isVisible, toggle }) => {
   };
 
   useEffect(() => {
-    setUserData({
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      email: user?.email,
-      mobile: user?.mobile,
-      address: user?.address,
-      url: user?.url,
-    });
-  }, [user]);
+    if (data) {
+      setUserData({
+        firstName: data?.firstName,
+        lastName: data?.lastName,
+        email: data?.email,
+        mobile: data?.mobile,
+        address: data?.address,
+        url: data?.url,
+      });
+    } else {
+      setUserData({
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        email: user?.email,
+        mobile: user?.mobile,
+        address: user?.address,
+        url: user?.url,
+      });
+    }
+  }, [data, user]);
 
   return (
     <div
