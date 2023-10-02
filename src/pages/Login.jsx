@@ -10,6 +10,7 @@ import userRequest from "../api/User/user.request";
 import { SUCCESS } from "../constants";
 
 import Cover from "../assets/images/cover.jpg";
+import Google from "../assets/images/google.png";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,10 @@ export const Login = () => {
     }
   };
 
+  const google = () => {
+    window.open("http://localhost:5000/api/auth/google", "_self");
+  };
+
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl">
@@ -95,6 +100,20 @@ export const Login = () => {
               <button className="mt-8 py-2 rounded text-white btn btn-active btn-primary w-full bg-black">
                 Log in
               </button>
+
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                }}
+                className="rounded btn btn-active btn-primary  text-white"
+                onClick={google}>
+                <img src={Google} className="w-10" />
+                <span style={{ paddingLeft: "50px", paddingTop: "8px" }}>
+                  Login with Google
+                </span>
+              </div>
 
               <p className="mt-4 text-center text-sm">
                 Don't have an account?

@@ -23,6 +23,7 @@
     "@mui/system": "^5.10.4",
     "@mui/x-data-grid": "^5.17.2",
     "@reduxjs/toolkit": "^1.8.4",
+    "all": "^0.0.0",
     "axios": "^0.27.2",
     "babel-plugin-react-html-attrs": "^3.0.5",
     "base-64": "^1.0.0",
